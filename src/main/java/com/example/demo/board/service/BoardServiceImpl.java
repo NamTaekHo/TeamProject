@@ -1,0 +1,81 @@
+package com.example.demo.board.service;
+
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Service;
+
+import com.example.demo.board.dto.BoardDTO;
+import com.example.demo.board.entity.Board;
+import com.example.demo.board.repository.BoardRepository;
+
+@Service
+public class BoardServiceImpl implements BoardService {
+
+	// 사용 리파지토리 선언
+	@Autowired
+	private BoardRepository repository;
+
+	@Override
+	public int register(BoardDTO dto) {
+		Board entity = dtoToEntity(dto); // 컨트롤러에서 전달받은 dto를 엔티티로 변환
+		repository.save(entity); // 리파티토리에 엔티티를 전달하여 저장
+
+		return entity.getBoardNo(); // 새로 등록된 게시물의 번호를 반환
+	}
+
+	@Override
+	public Page<BoardDTO> getList(int page) {
+		int pageNum = (page == 0) ? 0 : page - 1; //page는 index처럼 0부터 시작.
+		Pageable pageable = PageRequest.of(pageNum, 10, Sort.by("no").descending());
+		Page<Board> entityPage = repository.findAll(pageable);
+		Page<BoardDTO> dtoPage = entityPage.map(entity -> entityToDto(entity));
+		
+		return dtoPage;
+
+	}
+
+	@Override
+	public BoardDTO read(int no) {
+		Optional<Board> result = repository.findById(no);
+
+		if (result.isPresent()) {
+			Board board = result.get();
+			return entityToDto(board);
+		} else {
+			return null;
+		}
+	}
+
+	@Override
+	public void modify(BoardDTO dto) {
+		// 업데이트 가능 항목은 '제목', '내용'
+		Optional<Board> result = repository.findById(dto.getBoardNo());
+		if (result.isPresent()) {
+			Board entity = result.get();
+
+			entity.setTitle(dto.getTitle());
+			entity.setContent(dto.getContent());
+
+			repository.save(entity);
+		}
+
+	}
+
+	@Override
+	public int remove(int no) {
+		Optional<Board> result = repository.findById(no);
+
+		if (result.isPresent()) {
+			repository.deleteById(no);
+			return 1; // 성공
+		} else {
+			return 0; // 실패
+		}
+	}
+
+}
