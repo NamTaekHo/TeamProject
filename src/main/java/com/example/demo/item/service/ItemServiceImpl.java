@@ -5,6 +5,10 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 
@@ -23,7 +27,7 @@ public class ItemServiceImpl implements ItemService{
 		Item entity = dtoToEntity(dto);
 		repository.save(entity);		
 
-		return entity.getItmeNo();
+		return entity.getItemNo();
 	}
 
 	@Override
@@ -37,9 +41,9 @@ public class ItemServiceImpl implements ItemService{
 	}
 
 	@Override
-	public ItemDTO read(int no) {
+	public ItemDTO read(int itemNo) {
 		
-		Optional<Item> result = repository.findById(no);
+		Optional<Item> result = repository.findById(itemNo);
         if(result.isPresent()) {
         	Item board =  result.get();
         	return entityToDto(board);
@@ -65,8 +69,18 @@ public class ItemServiceImpl implements ItemService{
 	}
 
 	@Override
-	public void remove(int no) {
-		repository.deleteById(no);
+	public void remove(int itemNo) {
+		repository.deleteById(itemNo);
+	}
+
+	@Override
+	public Page<ItemDTO> getList(int pageNumber) {
+		int pageNum = (pageNumber == 0) ? 0 : pageNumber-1;
+		Pageable pageable = PageRequest.of(pageNum, 10, Sort.by("itemNo").descending());
+		Page<Item> entityPage= repository.findAll(pageable);
+		Page<ItemDTO> dtoPage = entityPage.map(entity -> entityToDto(entity));
+		
+		return dtoPage;
 	}
 
 }

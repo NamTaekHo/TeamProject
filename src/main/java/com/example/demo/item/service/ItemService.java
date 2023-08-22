@@ -2,6 +2,8 @@ package com.example.demo.item.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+
 import com.example.demo.item.dto.ItemDTO;
 import com.example.demo.item.entity.Item;
 
@@ -11,15 +13,17 @@ public interface ItemService {
 	
 	List<ItemDTO> getList();
 	
-	ItemDTO read(int no);
+	ItemDTO read(int itemNo);
 	
 	void modify(ItemDTO dto);
 	
-	void remove(int no);
+	void remove(int itemNo);
+	
+	Page<ItemDTO> getList(int pageNumber);
 	
 	default Item dtoToEntity(ItemDTO dto) {
 		Item entity = Item.builder()
-				.itmeNo(dto.getItemNo())
+				.itemNo(dto.getItemNo())
 				.itemName(dto.getItemName())
 				.price(dto.getPrice())
 				.image(dto.getImage())
@@ -30,7 +34,7 @@ public interface ItemService {
 	
 	default ItemDTO entityToDto(Item entity) {
 		ItemDTO dto = ItemDTO.builder()
-				.itemNo(entity.getItmeNo())
+				.itemNo(entity.getItemNo())
 				.itemName(entity.getItemName())
 				.price(entity.getPrice())
 				.image(entity.getImage())
@@ -39,5 +43,7 @@ public interface ItemService {
 		return dto;
 		
 	}
+
+	
 
 }
