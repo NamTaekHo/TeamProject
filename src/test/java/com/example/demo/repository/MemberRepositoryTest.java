@@ -54,8 +54,8 @@ public class MemberRepositoryTest {
 		List<Member> list = new ArrayList<>();
 		
 		list.add(m);
-		list.add(m2);
-		list.add(m3);
+//		list.add(m2);
+//		list.add(m3);
 		
 		memberRepository.saveAll(list);
 		
