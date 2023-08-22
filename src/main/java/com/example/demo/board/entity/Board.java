@@ -14,6 +14,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+// id컬럼에 나중에 머지하고 외래키 @manytoone 걸어야함
 @Entity
 @Getter
 @Setter

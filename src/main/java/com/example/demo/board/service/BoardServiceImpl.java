@@ -31,7 +31,7 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public Page<BoardDTO> getList(int page) {
 		int pageNum = (page == 0) ? 0 : page - 1; //page는 index처럼 0부터 시작.
-		Pageable pageable = PageRequest.of(pageNum, 10, Sort.by("no").descending());
+		Pageable pageable = PageRequest.of(pageNum, 10, Sort.by("boardNo").descending());
 		Page<Board> entityPage = repository.findAll(pageable);
 		Page<BoardDTO> dtoPage = entityPage.map(entity -> entityToDto(entity));
 		

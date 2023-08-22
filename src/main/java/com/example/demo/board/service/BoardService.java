@@ -26,7 +26,8 @@ public interface BoardService {
 	default Board dtoToEntity(BoardDTO dto) { // default키워드를 사용하여 일반메소드 추가
 //		Member member = Member.builder().id(dto.getWriter()).build(); // 작성자 객체 생성
 		
-		Board entity = Board.builder() // builder를 사용하면 필요한 값만 넣어서 인스턴스를 생성할수 있음
+		Board entity = Board.builder()
+				.boardNo(dto.getBoardNo())
 				.id(dto.getId())
 				.title(dto.getTitle())
 				.content(dto.getContent())
@@ -38,6 +39,7 @@ public interface BoardService {
 	default BoardDTO entityToDto(Board entity) {
 
 			BoardDTO dto = BoardDTO.builder()
+					.boardNo(entity.getBoardNo())
 					.id(entity.getId())
 					.title(entity.getTitle())
 					.content(entity.getContent())
