@@ -1,10 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<th:block th:replace="~{/layout/basic :: setContent(~{this::content} )}"> <!-- 템플릿 조각 전달 -->
-	<th:block th:fragment="content"> <!-- 템플릿 만들기 -->
-		<h1>Board List Page</h1>
+<th:block th:replace="~{/layout/basic :: setContent(~{this::content} )}">
+
+	<th:block th:fragment="content">
+
+		<h1>Board List Page
+			<span>
+				<a th:href="@{/board/register}">
+					<button type="button" class="btn btn-outline-primary">질문 등록</button>
+					
+				</a>
+			</span>
+		</h1>
+
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th scope="col">글번호</th>
+					<th scope="col">제목</th>
+					<th scope="col">아이디</th>
+					<th scope="col">등록일</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="dto : ${list}">
+					<th scope="row">
+						<a th:href="@{/board/read(boardNo = ${dto.boardNo}, page= ${list.number + 1})}">
+							[[${dto.boardNo}]]
+						</a>
+					</th>
+					<td>[[${dto.title}]]</td>
+					<td>[[${dto.id}]]</td>
+					<td>[[${#temporals.format(dto.regDate, 'yyyy/MM/dd')}]]</td>
+				</tr>
+			</tbody>
+</table>
+
+
+
 		
-		
+
+
 	</th:block>
 </th:block>
