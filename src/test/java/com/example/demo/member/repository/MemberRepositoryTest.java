@@ -1,4 +1,4 @@
-package com.example.demo.repository;
+package com.example.demo.member.repository;
 
 import java.util.ArrayList;
 import java.util.List;

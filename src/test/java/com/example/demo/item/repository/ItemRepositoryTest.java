@@ -1,5 +1,6 @@
 package com.example.demo.item.repository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,8 +20,21 @@ public class ItemRepositoryTest {
 	
 	@Test
 	public void 상품등록() {
-		Item item = new Item(1, "브라운재킷", 49000, "ㅁㅁ", "가을철 가벼운 브라운 재킷");
-		repository.save(item);
+		List<Item> list = new ArrayList<>();
+		
+		Item item0 = new Item(0, "브라운재", 49000, "ㅁㅁ", "가을철");
+		Item item1 = new Item(0, "브라운킷", 4, "ㅁㅁ", "가을철 가벼");
+		Item item2 = new Item(0, "브라재킷", 49, "ㅁㅁ", "가을철 가벼운 브");
+		Item item3 = new Item(0, "운재킷", 490, "ㅁㅁ", "가을철 가벼운 브라운");
+		Item item4 = new Item(0, "재킷", 4900, "ㅁㅁ", "가을철 가벼운 브라운 재");
+		
+		list.add(item0);
+		list.add(item1);
+		list.add(item2);
+		list.add(item3);
+		list.add(item4);
+		
+		repository.saveAll(list);
 	}
 
 	@Test
