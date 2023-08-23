@@ -29,10 +29,10 @@ public class ItemRepositoryTest {
 		Item item4 = new Item(0, "재킷", 4900, "ㅁㅁ", "가을철 가벼운 브라운 재");
 		
 		list.add(item0);
-//		list.add(item1);
-//		list.add(item2);
-//		list.add(item3);
-//		list.add(item4);
+		list.add(item1);
+		list.add(item2);
+		list.add(item3);
+		list.add(item4);
 		
 		repository.saveAll(list);
 	}
