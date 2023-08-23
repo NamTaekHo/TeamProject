@@ -21,7 +21,7 @@ public class BoardServiceTest {
 	public void 게시물등록() {
 		for(int i = 1; i<=30; i++) {
 			BoardDTO dto = BoardDTO.builder()
-					.id("taco")
+					.id("aaa")
 					.content("내용"+i)
 					.title("제목"+i)
 					.build();
@@ -47,7 +47,7 @@ public class BoardServiceTest {
 	@Test
 	public void 게시물수정() {
 		BoardDTO dto = service.read(1);
-		dto.setContent("내용수정");
+		dto.setContent("내용수정2");
 		service.modify(dto);
 	}
 	

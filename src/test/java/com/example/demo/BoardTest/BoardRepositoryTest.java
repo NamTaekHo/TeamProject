@@ -10,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.example.demo.board.entity.Board;
 import com.example.demo.board.repository.BoardRepository;
+import com.example.demo.member.entity.Member;
 
 @SpringBootTest
 public class BoardRepositoryTest {
@@ -20,9 +21,8 @@ public class BoardRepositoryTest {
 	@Test
 	public void 데이터등록() {
 		List<Board> list = new ArrayList<>();
-		list.add(new Board(0, "ta", "제목", "내용1"));
-		list.add(new Board(0, "tae", "제목2", "내용2"));
-		list.add(new Board(0, "taek", "제목3", "내용3"));
+		Member member = Member.builder().id("aaa").build();
+		list.add(new Board(0, "aaaa", "aaaa", member));
 		repository.saveAll(list);
 		
 	}
@@ -42,15 +42,15 @@ public class BoardRepositoryTest {
 		System.out.println(list);
 	}
 	
-	@Test
-	public void 데이터수정() {
-		Optional<Board> result = repository.findById(2);
-		if(result.isPresent()) {
-			Board board = result.get();
-			board.setId("taekho");
-			repository.save(board);
-		}
-	}
+//	@Test
+//	public void 데이터수정() {
+//		Optional<Board> result = repository.findById(2);
+//		if(result.isPresent()) {
+//			Board board = result.get();
+//			board.setId("taekho");
+//			repository.save(board);
+//		}
+//	}
 	
 	@Test
 	public void 데이터삭제() {
