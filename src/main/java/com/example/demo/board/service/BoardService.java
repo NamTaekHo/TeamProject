@@ -39,6 +39,7 @@ public interface BoardService {
    // 엔티티를 dto로 변환하는 메소드
    default BoardDTO entityToDto(Board entity) {
 
+<<<<<<< HEAD
          BoardDTO dto = BoardDTO.builder()
                .boardNo(entity.getBoardNo())
                .id(entity.getId().getId())
@@ -47,6 +48,16 @@ public interface BoardService {
                .regDate(entity.getRegDate())
                .modDate(entity.getModDate())
                .build();
+=======
+			BoardDTO dto = BoardDTO.builder()
+					.boardNo(entity.getBoardNo())
+					.id(entity.getId())
+					.title(entity.getTitle())
+					.content(entity.getContent())
+					.regDate(entity.getRegDate())
+					.modDate(entity.getModDate())
+					.build();
+>>>>>>> refs/remotes/origin/feature/templates
 
          return dto;
       }
