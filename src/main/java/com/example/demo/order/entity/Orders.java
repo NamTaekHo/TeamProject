@@ -1,5 +1,6 @@
 package com.example.demo.order.entity;
 
+import com.example.demo.config.BaseEntity;
 import com.example.demo.item.entity.Item;
 import com.example.demo.member.entity.Member;
 
@@ -23,7 +24,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Orders {
+public class Orders extends BaseEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
