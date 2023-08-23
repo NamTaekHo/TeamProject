@@ -17,7 +17,7 @@ public interface ItemService {
 	
 	void modify(ItemDTO dto);
 	
-	void remove(int itemNo);
+	int remove(int itemNo); //void -> int 로 수정
 	
 	Page<ItemDTO> getList(int pageNumber);
 	

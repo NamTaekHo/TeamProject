@@ -21,7 +21,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Controller
-@RequestMapping
+@RequestMapping("/item")
 public class ItemController {
 	
 	@Autowired
@@ -38,7 +38,7 @@ public class ItemController {
 	@Operation(summary = "상품목록조회", description = "모든 상품정보를 조회합니다.")
 	@GetMapping
 	public ResponseEntity<List<ItemDTO>> getList(){
-		log.info("상품을 등록합니다.");
+		log.info("상품 목록을 조회합니다.");
 		List<ItemDTO> list = service.getList();
 		return new ResponseEntity<>(list, HttpStatus.OK);
 	}

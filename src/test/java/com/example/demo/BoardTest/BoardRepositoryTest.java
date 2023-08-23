@@ -47,7 +47,7 @@ public class BoardRepositoryTest {
 		Optional<Board> result = repository.findById(2);
 		if(result.isPresent()) {
 			Board board = result.get();
-			board.setId("taekho");
+			board.setId("taekho");			
 			repository.save(board);
 		}
 	}

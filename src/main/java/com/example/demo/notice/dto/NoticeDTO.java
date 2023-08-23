@@ -1,4 +1,4 @@
-package com.example.demo.item.dto;
+package com.example.demo.notice.dto;
 
 import java.time.LocalDateTime;
 
@@ -15,16 +15,14 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ItemDTO {
+public class NoticeDTO {
 	
-	private int itemNo;
-	private String itemName;
-	private int price;
-	private String image;
-	private String description;
+	private int no;
+	private String title;
+	private String writer;
+	private String content;	
 	private LocalDateTime regDate;
 	private LocalDateTime modDate;
-	
 	
 
 }

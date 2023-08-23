@@ -28,7 +28,18 @@ public class ItemServiceImpl implements ItemService{
 		repository.save(entity);		
 
 		return entity.getItemNo();
-	}
+	}	
+	
+	
+	@Override
+	public Page<ItemDTO> getList(int pageNumber) {
+		int pageNum = (pageNumber == 0) ? 0 : pageNumber-1;
+		Pageable pageable = PageRequest.of(pageNum, 10, Sort.by("itemNo").descending());
+		Page<Item> entityPage= repository.findAll(pageable);
+		Page<ItemDTO> dtoPage = entityPage.map(entity -> entityToDto(entity));
+		
+		return dtoPage;
+	}	
 
 	@Override
 	public List<ItemDTO> getList() {
@@ -68,19 +79,18 @@ public class ItemServiceImpl implements ItemService{
 		
 	}
 
-	@Override
-	public void remove(int itemNo) {
-		repository.deleteById(itemNo);
+	@Override // 8월23일 방어코드 수정
+	public int remove(int itemNo) {
+		Optional<Item> result = repository.findById(itemNo);
+		if(result.isPresent()) {
+			repository.deleteById(itemNo);
+			return 1;
+		} else {
+			return 0;
+		}
+		
 	}
 
-	@Override
-	public Page<ItemDTO> getList(int pageNumber) {
-		int pageNum = (pageNumber == 0) ? 0 : pageNumber-1;
-		Pageable pageable = PageRequest.of(pageNum, 10, Sort.by("itemNo").descending());
-		Page<Item> entityPage= repository.findAll(pageable);
-		Page<ItemDTO> dtoPage = entityPage.map(entity -> entityToDto(entity));
-		
-		return dtoPage;
-	}
+	
 
 }
