@@ -43,6 +43,8 @@ public interface BoardService {
 					.id(entity.getId())
 					.title(entity.getTitle())
 					.content(entity.getContent())
+					.regDate(entity.getRegDate())
+					.modDate(entity.getModDate())
 					.build();
 
 			return dto;

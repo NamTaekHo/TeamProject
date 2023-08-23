@@ -37,6 +37,27 @@
 			</tbody>
 </table>
 
+<ul class="pagination h-100 justify-content-center align-items-center">
+
+			<th:block th:each="page : ${#numbers.sequence(1, list.totalPages)}">
+				<li th:class=" 'page-item ' + ${(list.number + 1) == page?'active':''} ">
+					<a class="page-link" th:href="@{/board/boardList(page = ${page})}">
+						[[${page}]]
+					</a>
+				</li>
+			</th:block>
+
+		</ul>
+
+		<script th:inline="javascript">
+			$(document).ready(function(){
+			  var msg = [[${msg}]]
+			  if(msg != null){
+				  alert(msg + "번 글이 등록되었습니다.");
+			  }
+			});
+		</script>
+
 
 
 		
