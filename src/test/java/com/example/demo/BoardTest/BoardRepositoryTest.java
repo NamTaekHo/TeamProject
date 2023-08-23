@@ -42,27 +42,17 @@ public class BoardRepositoryTest {
 		System.out.println(list);
 	}
 	
-<<<<<<< HEAD
-	@Test
-	public void 데이터수정() {
-		Optional<Board> result = repository.findById(2);
-		if(result.isPresent()) {
-			Board board = result.get();
-			board.setId("taekho");			
-			repository.save(board);
-		}
-	}
-=======
+//
 //	@Test
 //	public void 데이터수정() {
 //		Optional<Board> result = repository.findById(2);
 //		if(result.isPresent()) {
 //			Board board = result.get();
-//			board.setId("taekho");
+//			board.setId("aaa");		
 //			repository.save(board);
 //		}
 //	}
->>>>>>> refs/remotes/origin/feature/order
+
 	
 	@Test
 	public void 데이터삭제() {
