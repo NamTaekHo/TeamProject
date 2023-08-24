@@ -3,6 +3,7 @@ package com.example.demo.order.dto;
 import java.time.LocalDateTime;
 
 import com.example.demo.item.entity.Item;
+import com.example.demo.member.entity.Member;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
