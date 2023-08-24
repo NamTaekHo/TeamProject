@@ -34,7 +34,7 @@
         </div>
         
         <!-- 댓글 -->
-        <div class="card shadow mb-4" style="margin-top:10px">
+        <!-- <div class="card shadow mb-4" style="margin-top:10px">
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">댓글보기</h6>
             </div>
@@ -44,9 +44,9 @@
                 <textarea class="form-control" id="commentContent" rows="3"></textarea>
                 <button type="button" class="btn btn-secondary" onclick="registerComment()">댓글등록</button>
             </div>
-        </div>
+        </div> -->
 
-        <a th:href="@{/board/modify(no = ${dto.boardNo})}">
+        <a th:href="@{/board/modify(boardNo = ${dto.boardNo})}">
         	<button type="button" class="btn btn-primary">수정</button>
         </a>
 
@@ -55,15 +55,7 @@
             <button type="button" class="btn btn-info">목록으로</button>
         </a>
 
-        <!-- <script>
-            $(document).ready(function(){
-                showComment();
-            })
-
-            function showComment(){
-                var board = {"boardNo":"[[${dto.boardNo}]]", "title":"dto.title", ""}
-            }
-        </script> -->
+        
 
     </th:block>
 

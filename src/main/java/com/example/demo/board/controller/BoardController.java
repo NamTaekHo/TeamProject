@@ -50,9 +50,25 @@ public class BoardController {
 		model.addAttribute("page", page);
 	}
 	
-//	//게시물 수정페이지
-//	@GetMapping("/modify")
-//	public void 
+	//게시물 수정페이지
+	@GetMapping("/modify")
+	public void modify(int boardNo, Model model){
+		BoardDTO dto = service.read(boardNo);
+		model.addAttribute("dto", dto);
+	}
+	
+	@PostMapping("/modify")
+	public String modifyPost(BoardDTO dto, RedirectAttributes redirectAttributes) {
+		service.modify(dto);
+		redirectAttributes.addAttribute("boardNo", dto.getBoardNo());
+		return "redirect:/board/read";
+	}
+	
+	@PostMapping("/remove")
+	public String removePost(int boardNo) {
+		service.remove(boardNo);
+		return "redirect:/board/boardList";
+	}
 
 }
 

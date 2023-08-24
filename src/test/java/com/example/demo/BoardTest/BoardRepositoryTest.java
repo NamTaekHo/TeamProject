@@ -11,6 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.example.demo.board.entity.Board;
 import com.example.demo.board.repository.BoardRepository;
 import com.example.demo.member.entity.Member;
+import com.example.demo.member.repository.MemberRepository;
 
 @SpringBootTest
 public class BoardRepositoryTest {
@@ -18,11 +19,17 @@ public class BoardRepositoryTest {
 	@Autowired
 	BoardRepository repository;
 	
+	@Autowired
+	MemberRepository memberRepository;
+	
 	@Test
 	public void 데이터등록() {
 		List<Board> list = new ArrayList<>();
-		Member member = Member.builder().id("aaa").build();
-		list.add(new Board(0, "aaaa", "aaaa", member));
+		Member member = Member.builder().id("bbb").build();
+		for(int i = 0; i<30; i++) {
+			list.add(new Board(0, "bbb", "b", member));
+		}
+		
 		repository.saveAll(list);
 		
 	}
