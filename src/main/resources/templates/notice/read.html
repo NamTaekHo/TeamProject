@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<th:block th:replace="~{/layout/basic :: setContent(~{this::content} )}">
+
+    <th:block th:fragment="content">
+
+        <h1 class="mt-4">공 지 사 항</h1>       
+
+        <div class="form-group">
+            <label >공지제목</label>
+            <input type="text" class="form-control" th:value="${dto.title}" readonly >
+        </div><br>
+        <div class="form-group">
+            <label >공지내용</label>
+            <textarea class="form-control" rows="5" readonly>[[${dto.content}]]</textarea>
+        </div><br>
+        <div class="form-group">
+            <label >등록일</label>
+            <input type="text" class="form-control" th:value="${#temporals.format(dto.regDate, 'yyyy/MM/dd HH:mm:ss')}" readonly>
+        </div><br>
+        <div class="form-group">
+            <label >수정일</label>
+            <input type="text" class="form-control" th:value="${#temporals.format(dto.modDate, 'yyyy/MM/dd HH:mm:ss')}" readonly>
+        </div>
+        <br>
+        <br>
+
+        <a th:href="@{/notice/modify(no = ${dto.no})}">
+        	<button type="button" class="btn btn-primary">공지 수정하기</button>
+        </a>
+
+        <!-- 목록페이지 링크 수정 -->
+        <a th:href="@{/notice/noticeList(page=${page})}">
+            <button type="button" class="btn btn-info">목록으로</button>
+        </a><br><br>
+
+    </th:block>
+
+</th:block>

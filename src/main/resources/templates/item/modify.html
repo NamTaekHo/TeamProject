@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<th:block th:replace="~{/layout/basic :: setContent(~{this::content} )}">
+
+    <th:block th:fragment="content">
+              <!-- 상품이름      가격     상품 상세설명-->
+        <h1 class="mt-4">Item Modify Page</h1>
+
+        <form>
+        
+       <div class="form-group">
+            <label >상품번호</label>
+            <input type="text" class="form-control" name="itemNo" th:value="${dto.itemNo}" readonly >
+        </div><br>
+        <div class="form-group">
+            <label >상품이름</label>
+            <input type="text" class="form-control" name="itemName" th:value="${dto.itemName}" >
+        </div><br>
+        
+        <div class="form-group">
+            <label >가격</label>
+            <input type="text" class="form-control" name="price" th:value="${dto.price}" >
+        </div><br>
+        
+        <div class="form-group">
+            <label >상품 상세설명</label>
+            <textarea class="form-control" rows="5" name="description">[[${dto.description}]]</textarea>
+        </div><br>
+        <div class="form-group">
+				<label>첨부파일</label>
+				<input type="file" class="form-control" name="image"/>
+		</div><br>
+        
+        <div class="form-group">
+            <label >등록일</label>
+            <input type="text" class="form-control" th:value="${#temporals.format(dto.regDate, 'yyyy/MM/dd HH:mm:ss')}" readonly>
+        </div><br>
+        <div class="form-group">
+            <label >수정일</label>
+            <input type="text" class="form-control" th:value="${#temporals.format(dto.modDate, 'yyyy/MM/dd HH:mm:ss')}" readonly>
+        </div><br><br>
+
+        </form>
+
+        <button type="button" class="btn btn-primary modifyBtn">수정</button>
+
+        <button type="button" class="btn btn-info listBtn">목록으로</button>
+
+        <button type="button" class="btn btn-danger removeBtn">삭제</button>
+        <br><br>
+
+        <script th:inline="javascript">
+
+            //$() 함수는 태그이름이나 CSS선택자로 HTML 태그를 가져온다
+        	var form = $("form"); //form 태그 객체 가져오기
+
+            $(".modifyBtn").click(function() {
+                if(!confirm("상품 정보를 수정하시겠습니까?")){
+                    return ;
+                }
+
+                form
+                    .attr("action", "/item/modify")
+                    .attr("method","post")
+                    .submit();
+                    
+            });
+
+            $(".listBtn").click(function() {
+                form
+                    .attr("action", "/item/itemList")
+                    .attr("method","get")
+              		.submit();
+            })
+
+            $(".removeBtn").click(function(){
+				
+				
+				if(!confirm("상품을 삭제하시겠습니까?")){
+                    return ;
+                }
+				
+				
+            	form
+                    .attr("action", "/item/remove")
+                    .attr("method","post")
+                    .submit();
+            });
+
+        </script>
+
+
+    </th:block>
+
+</th:block>

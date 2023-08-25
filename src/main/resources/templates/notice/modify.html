@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<th:block th:replace="~{/layout/basic :: setContent(~{this::content} )}">
+
+    <th:block th:fragment="content">
+              
+        <h1 class="mt-4">공지사항 수정 페이지</h1>
+
+        <form>
+        
+       <div class="form-group">
+            <label >공지번호</label>
+            <input type="text" class="form-control" name="no" th:value="${dto.no}" readonly >
+        </div><br>
+        <div class="form-group">
+            <label >공지제목</label>
+            <input type="text" class="form-control" name="title" th:value="${dto.title}" >
+        </div><br>
+        <div class="form-group">
+            <label >공지내용</label>
+            <textarea class="form-control" rows="5" name="content">[[${dto.content}]]</textarea>
+        </div><br>
+        
+        <div class="form-group">
+            <label >등록일</label>
+            <input type="text" class="form-control" th:value="${#temporals.format(dto.regDate, 'yyyy/MM/dd HH:mm:ss')}" readonly>
+        </div><br>
+        <div class="form-group">
+            <label >수정일</label>
+            <input type="text" class="form-control" th:value="${#temporals.format(dto.modDate, 'yyyy/MM/dd HH:mm:ss')}" readonly>
+        </div><br><br>
+
+        </form>
+
+        <button type="button" class="btn btn-primary modifyBtn">수정</button>
+
+        <button type="button" class="btn btn-info listBtn">목록으로</button>
+
+        <button type="button" class="btn btn-danger removeBtn">삭제</button>
+        <br><br>
+
+        <script th:inline="javascript">
+
+            //$() 함수는 태그이름이나 CSS선택자로 HTML 태그를 가져온다
+        	var form = $("form"); //form 태그 객체 가져오기
+
+            $(".modifyBtn").click(function() {
+                if(!confirm("공지를 수정하시겠습니까?")){
+                    return ;
+                }
+
+                form
+                    .attr("action", "/notice/modify")
+                    .attr("method","post")
+                    .submit();
+                    
+            });
+
+            $(".listBtn").click(function() {
+                form
+                    .attr("action", "/notice/noticeList")
+                    .attr("method","get")
+              		.submit();
+            })
+
+            $(".removeBtn").click(function(){
+				
+				
+				if(!confirm("공지를 삭제하시겠습니까?")){
+                    return ;
+                }
+				
+				
+            	form
+                    .attr("action", "/notice/remove")
+                    .attr("method","post")
+                    .submit();
+            });
+
+        </script>
+
+
+    </th:block>
+
+</th:block>
