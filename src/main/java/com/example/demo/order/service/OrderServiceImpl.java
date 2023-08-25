@@ -7,11 +7,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Service;
 
 import com.example.demo.order.dto.OrdersDTO;
 import com.example.demo.order.entity.Orders;
 import com.example.demo.order.repository.OrderRepository;
 
+@Service
 public class OrderServiceImpl implements OrderService {
 
 	@Autowired
@@ -20,7 +22,7 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public Page<OrdersDTO> getList(int page) {
 		int pageNum = (page == 0) ? 0 : page - 1;
-		Pageable pageable = PageRequest.of(pageNum, 10, Sort.by("regDate"));
+		Pageable pageable = PageRequest.of(pageNum, 10, Sort.by("orderNo"));
 		Page<Orders> entityPage = repository.findAll(pageable);
 		Page<OrdersDTO> dtoPage = entityPage.map(entity -> entityToDto(entity));
 
@@ -71,7 +73,7 @@ public class OrderServiceImpl implements OrderService {
 		
 		if(result.isPresent()) {
 			Orders entity = result.get();
-			repository.save(entity);
+			repository.delete(entity);
 		}
 	}
 

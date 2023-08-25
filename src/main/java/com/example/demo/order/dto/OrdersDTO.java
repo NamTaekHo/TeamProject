@@ -34,12 +34,12 @@ public class OrdersDTO {
 	
 	private String shipAddress;
 	
-	private double discount;// 할인율을 뷰단에 보낼변수
-	
-	private String itemName;//DB로부터 꺼내올 값
-	
-	private int level;//DB로부터 꺼내올 값
-	
-	private int price;//DB로부터 꺼내올 값
+//	private double discount;// 할인율을 뷰단에 보낼변수
+//	
+//	private String itemName;//DB로부터 꺼내올 값
+//	
+//	private int level;//DB로부터 꺼내올 값
+//	
+//	private int price;//DB로부터 꺼내올 값
 
 }

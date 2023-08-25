@@ -24,7 +24,7 @@ public class orderRepositoryTest {
 	@Test
 	public void 데이터등록() {
 		List<Orders> list = new ArrayList<>();
-		Member member1 = Member.builder().id("aaa").build();
+		Member member1 = Member.builder().id("10aa").build();
 		Member member2 = Member.builder().id("bbb").build();
 		Member member3 = Member.builder().id("ccc").build();
 		
@@ -37,11 +37,11 @@ public class orderRepositoryTest {
 		list.add(new Orders(0, item1, member1, null, null, null));
 		list.add(new Orders(0, item2, member1, null, null, null));
 		list.add(new Orders(0, item2, member1, null, null, null));
-		list.add(new Orders(0, item3, member3, null, null, null));
-		list.add(new Orders(0, item3, member3, null, null, null));
-		list.add(new Orders(0, item4, member2, null, null, null));
-		list.add(new Orders(0, item4, member2, null, null, null));
-		list.add(new Orders(0, item5, member2, null, null, null));
+//		list.add(new Orders(0, item3, member3, null, null, null));
+//		list.add(new Orders(0, item3, member3, null, null, null));
+//		list.add(new Orders(0, item4, member2, null, null, null));
+//		list.add(new Orders(0, item4, member2, null, null, null));
+//		list.add(new Orders(0, item5, member2, null, null, null));
 		
 		
 		orderRepository.saveAll(list);
