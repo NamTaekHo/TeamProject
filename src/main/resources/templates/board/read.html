@@ -34,7 +34,7 @@
         </div>
         
         <!-- 댓글 -->
-        <!-- <div class="card shadow mb-4" style="margin-top:10px">
+        <div class="card shadow mb-4" style="margin-top:10px">
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">댓글보기</h6>
             </div>
@@ -42,9 +42,64 @@
             </div>
             <div class="card-body">
                 <textarea class="form-control" id="commentContent" rows="3"></textarea>
-                <button type="button" class="btn btn-secondary" onclick="registerComment()">댓글등록</button>
+                <button type="button" class="btn btn-secondary" onclick="register()">댓글등록</button>
             </div>
-        </div> -->
+        </div>
+
+        <script>
+            $(document).ready(function(){
+                getList();
+            })
+
+            function getList(){
+                
+                var board = [[${dto}]]; //
+                let comment_div = $('#commentdiv');
+
+                $.ajax({
+                    type: "GET",
+                    url: "/comment/boardList?boardNo="+board.boardNo,
+                    success: function(response){
+                        if(response.success){
+                            comment_div.empty();
+                            let list = response.getList([[${boardNo}]])
+                            for(i in list){
+                                let comment = list[i];
+                                let id_span = '<span class="fw-bold strong mar">'+comment.id+'</span>';
+     		    			 let content_span = '<span class="mar"> '+comment.content+' </span>';
+     		    			 let href = '/comment/remove?commentNo='+comment.commentNo;
+     		    			 let delete_btn = '<a href="javascript:remove('+comment.commentNo+')">삭제</a>';
+     		    			 let comment_html = writer_span + content_span + delete_btn + '</br>';
+     		    			 comment_div.append(comment_html);
+                            }
+                        }
+                    }
+                })
+            }
+
+            function register(){
+                //컨트롤러에서 전달받은 dto를 객체로 처리
+                var board = [[${dto}]]
+                let commentContent = document.getElementById("commentContent");
+                let commentDto = {
+                    commentNo:0,
+                    boardNo:board.boardNo,
+                    content:commentContent.value
+                }
+                $.ajax({
+                    type:"POST",
+                    url:"/comment/register",
+                    data:commentDto,
+                    success:function(response){
+                        if(response.success){
+                            commentContent.value = null;
+                            getList();
+                        }
+                    }
+                })
+            }
+        </script>
+        <!-- 댓글끝 -->
 
         <a th:href="@{/board/modify(boardNo = ${dto.boardNo})}">
         	<button type="button" class="btn btn-primary">수정</button>

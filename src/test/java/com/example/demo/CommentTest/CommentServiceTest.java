@@ -26,7 +26,7 @@ public class CommentServiceTest {
 	
 	@Test
 	public void 댓글등록() {
-		CommentDTO dto = new CommentDTO(0, 29, "aaa", "댓글내용38", null, null);
+		CommentDTO dto = new CommentDTO(0, 29, "aaa", "댓글내용88", null, null);
 		commentService.register(dto);
 		
 	}
