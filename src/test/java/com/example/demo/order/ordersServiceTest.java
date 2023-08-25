@@ -45,12 +45,12 @@ public class ordersServiceTest {
 	
 	@Test
 	public void 데이터수정() {
-		OrdersDTO dto = service.read(10);
-		dto.setReceiverName("둘리");
-		dto.setReceiverPhone("010-1324-5236");
-		dto.setShipAddress("인천광역시 남구 구월동 223-11");
+		OrdersDTO dtoo = service.read(10);
+		dtoo.setReceiverName("둘리");
+		dtoo.setReceiverPhone("010-1324-5236");
+		dtoo.setShipAddress("인천광역시 남구 구월동 223-11");
 		
-		service.modify(dto);
+		service.modify(dtoo);
 	}
 	
 	@Test
