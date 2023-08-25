@@ -14,9 +14,9 @@ public interface MemberService {
 	
 	MemberDTO read(String id);//회원 단건 조회
 	
-	void modify(MemberDTO member);//마이페이지 수정
+	void modify(MemberDTO dto);//마이페이지 수정
 	
-	void delete(MemberDTO member);//회원삭제
+	void delete(MemberDTO dto);//회원삭제
 	
 
 	//회원 엔티티를 멤버 dto로 변환

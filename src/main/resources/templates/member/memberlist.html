@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<th:block th:replace="~{/layout/basic :: setContent(~{this::content} )}">
+
+	<th:block th:fragment="content">
+
+		<h1>
+			회원관리 목록 페이지
+
+		</h1>
+
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th scope="col">아이디</th>
+					<th scope="col">이름</th>
+					<th scope="col">멤버등급</th>
+				</tr> 
+			</thead>
+			<tbody>
+				<tr th:each="dto : ${list}">
+					<th scope="row">
+						<a th:href="@{/member/read(id = ${dto.id}, page= ${list.number + 1})}">
+							[[${dto.id}]]
+						</a>
+					</th>
+					<td>[[${dto.name}]]</td>
+					<td>[[${dto.level}]]</td>
+				</tr>
+			</tbody>
+</table>
+
+<ul class="pagination h-100 justify-content-center align-items-center">
+
+			<th:block th:each="page : ${#numbers.sequence(1, list.totalPages)}">
+				<li th:class=" 'page-item ' + ${(list.number + 1) == page?'active':''} ">
+					<a class="page-link" th:href="@{/member/memberlist(page = ${page})}">
+						[[${page}]]
+					</a>
+				</li>
+			</th:block>
+
+		</ul>
+
+
+	</th:block>
+</th:block>
