@@ -28,7 +28,7 @@ public interface ItemService {
 				.price(dto.getPrice())
 				.image(dto.getImage())
 				.description(dto.getDescription())
-				.build();
+				.build();		
 		return entity;
 	}
 	
@@ -39,6 +39,8 @@ public interface ItemService {
 				.price(entity.getPrice())
 				.image(entity.getImage())
 				.description(entity.getDescription())
+				.modDate(entity.getModDate())
+				.regDate(entity.getRegDate())
 				.build();
 		return dto;
 		

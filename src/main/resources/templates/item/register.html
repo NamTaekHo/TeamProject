@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<th:block th:replace="~{/layout/basic :: setContent(~{this::content} )}"> <!-- 템플릿 조각 전달 -->
+	<th:block th:fragment="content"> <!-- 템플릿 만들기 -->
+	
+		<h1 class="mt-4">Item Register Page</h1>
+
+        <form th:action="@{/item/register}" th:method="post">
+            
+            <div class="form-group">
+                <label >상품이름</label>
+                <input type="text" class="form-control" name="itemName">
+            </div><br>
+            <div class="form-group">
+                <label >가격</label>
+                <input type="text" class="form-control" name="price">
+            </div><br>
+            <div class="form-group">
+                <label >상품 상세설명</label>
+                <textarea class="form-control" rows="5" name="description"></textarea>
+            </div><br>
+            
+            
+                   
+                   
+            <div class="form-group">
+				<label>첨부파일</label>
+				<input type="file" class="form-control" name="image"/>
+			</div><br><br>       
+            
+            
+            
+           <!--<div class="form-group">
+                <label >이미지(첨부 및 리네이밍)</label>
+                <textarea class="form-control" rows="5" name="image"></textarea>
+            </div><br>-->
+            
+
+            <button type="submit" class="btn btn-primary">등록하기</button>
+        </form><br><br>
+        
+        
+
+        
+		
+	</th:block>
+</th:block>

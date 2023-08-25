@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<th:block th:replace="~{/layout/basic :: setContent(~{this::content} )}"> <!-- 템플릿 조각 전달 -->
+	<th:block th:fragment="content"> <!-- 템플릿 만들기 -->
+	
+			<!--  공지번호  공지글  작성자  -->
+	
+		<h1 class="mt-4">공지사항 등록 페이지</h1>
+
+        <form th:action="@{/notice/register}" th:method="post">
+            
+            <div class="form-group">
+                <label >공지제목</label>
+                <input type="text" class="form-control" name="title">
+            </div><br>
+            <div class="form-group">
+                <label >작성자</label>
+                <input type="text" class="form-control" name="writer" readonly>
+            </div><br>
+            <div class="form-group">
+                <label >공지내용</label>
+                <textarea class="form-control" rows="5" name="content"></textarea>
+            </div><br>
+
+            <button type="submit" class="btn btn-primary">등록하기</button>
+        </form><br><br>
+        
+        		
+	</th:block>
+</th:block>

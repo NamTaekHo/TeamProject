@@ -35,6 +35,8 @@ public interface NoticeService {
 				.title(entity.getTitle())
 				.writer(entity.getWriter())
 				.content(entity.getContent())
+				.modDate(entity.getModDate())
+				.regDate(entity.getRegDate())
 				.build();
 		return dto;
 	}

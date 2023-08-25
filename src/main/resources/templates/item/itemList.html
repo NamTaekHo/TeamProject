@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<th:block th:replace="~{/layout/basic :: setContent(~{this::content} )}"> <!-- 템플릿 조각 전달 -->
+	<th:block th:fragment="content"> <!-- 템플릿 만들기 -->
+	
+		<h1>Item List Page
+		 	<span>
+                <a th:href="@{/item/register}">
+                    <button type="button" class="btn btn-outline-primary">상품 등록</button>
+                </a>
+            </span>
+		</h1>
+
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th scope="col">상품번호</th>
+					<th scope="col">상품이름</th>
+					<th scope="col">가격</th>
+					<th scope="col">등록일</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="dto : ${list}">
+					<!--<th scope="row">
+						<a th:href="@{/item/read(itemNo = ${dto.itemNo}, page= ${list.number + 1})}">
+							[[${dto.itemNo}]]
+						</a>
+					</th>
+					<td>[[${dto.itemName}]]</td>-->
+					<td>[[${dto.itemNo}]]</td>
+					<th scope="row">
+						<a th:href="@{/item/read(itemNo = ${dto.itemNo}, page= ${list.number + 1})}">
+							[[${dto.itemName}]]
+						</a>
+					</th>					
+					<td>[[${dto.price}]]</td>
+					<td>[[${#temporals.format(dto.regDate, 'yyyy/MM/dd')}]]</td>
+				</tr>
+
+			</tbody>
+		</table>
+
+		<ul class="pagination h-100 justify-content-center align-items-center">
+
+			<th:block th:each="page : ${#numbers.sequence(1, list.totalPages)}">
+				<li th:class=" 'page-item ' + ${(list.number + 1) == page?'active':''} ">
+					<a class="page-link" th:href="@{/item/itemList(page = ${page})}">
+						[[${page}]]
+					</a>
+				</li>
+			</th:block>
+
+		</ul>
+
+		<script th:inline="javascript">
+			$(document).ready(function(){
+			  var itemNo = [[${itemNo}]]
+			  if(itemNo != null){
+				  alert(itemNo + "번 글이 등록되었습니다.");
+			  }
+			});
+		</script>
+		
+	</th:block>
+</th:block>

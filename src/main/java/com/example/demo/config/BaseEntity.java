@@ -9,6 +9,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
 import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 @MappedSuperclass
 @EntityListeners(value = { AuditingEntityListener.class})
