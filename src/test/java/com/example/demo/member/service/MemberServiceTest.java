@@ -27,7 +27,7 @@ public class MemberServiceTest {
 	public void 회원등록() {
 
 		for (int i = 1; i < 30; i++) {
-		MemberDTO dto = new MemberDTO(i+"aa", "aa", null, "둘리", "010-1234-5678", "인천광역시 남동구 구월로 2-54번지 구월그린컴퓨터아트학원", "2000년10월20일", 0);
+		MemberDTO dto = new MemberDTO(i+"aa", "aa", null, "둘리", "010-1234-5678", "인천광역시 남동구 구월로 2-54번지 구월그린컴퓨터아트학원", "2000년10월20일", 0,"ROLE_USER");
 			service.register(dto);
 		}
 	}

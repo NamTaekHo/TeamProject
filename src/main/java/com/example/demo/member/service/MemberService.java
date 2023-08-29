@@ -30,6 +30,7 @@ public interface MemberService {
 				.address(entity.getAddress())
 				.birth(entity.getBirth())
 				.level(entity.getLevel())
+				.role(entity.getRole())
 				.build();
 
 		return dto;
@@ -46,6 +47,7 @@ public interface MemberService {
 				.address(dto.getAddress())
 				.birth(dto.getBirth())
 				.level(dto.getLevel())
+				.role(dto.getRole())
 				.build();
 		
 		return entity;

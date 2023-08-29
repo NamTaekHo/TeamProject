@@ -20,35 +20,33 @@ import lombok.ToString;
 @Builder
 
 public class Member {
-	
-	
+
 	@Id
 	@Column(length = 10)
-	String id;
-	
+	private String id;
+
 	@Column(length = 15, nullable = false)
-	String password;
-	
+	private String password;
+
 	@Column(length = 30, nullable = true)
-	String Email;
-	
-	@Column(length = 10 ,nullable = false)
-	String name;
-	
-	@Column(length = 15 , nullable = false)
-	String pNumber;
-	
+	private String Email;
+
+	@Column(length = 10, nullable = false)
+	private String name;
+
+	@Column(length = 15, nullable = false)
+	private String pNumber;
+
 	@Column(length = 255, nullable = false)
-	String address;
-	
-	@Column(length = 11 , nullable = false)
-	String birth;
-	
+	private String address;
+
+	@Column(length = 11, nullable = false)
+	private String birth;
+
 	@Column(nullable = true)
-	int level;
-	
-	
-	
-	
+	private int level;
+
+	@Column(length = 30 , nullable = false)
+	private String role;
 
 }

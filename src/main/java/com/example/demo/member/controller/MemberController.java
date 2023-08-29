@@ -19,7 +19,7 @@ import com.example.demo.member.entity.Member;
 import com.example.demo.member.service.MemberService;
 
 @Controller
-@RequestMapping("/member")
+//@RequestMapping("/member")
 public class MemberController {
 	
 	@Autowired
@@ -31,13 +31,13 @@ public class MemberController {
 		model.addAttribute("list", list);
 	}
 	
-	@GetMapping("/read")
-	public void read(String id, @RequestParam(defaultValue = "0") int page, Model model) {
-		MemberDTO dto = service.read(id);
-		
-		model.addAttribute("dto",dto);
-		model.addAttribute("page", page);
-	}
+//	@GetMapping("/read")
+//	public void read(String id, @RequestParam(defaultValue = "0") int page, Model model) {
+//		MemberDTO dto = service.read(id);
+//		
+//		model.addAttribute("dto",dto);
+//		model.addAttribute("page", page);
+//	}
 	
 	@GetMapping("/modify")
 	public void modify(String id, Model model) {
@@ -57,6 +57,30 @@ public class MemberController {
 		service.delete(dto);
 		redirectAttributes.addAttribute("id",dto.getId());
 		return "redirect:/member/memberlist";
+	}
+	
+	@GetMapping("/register")
+	public String register() {
+		return "member/register";
+	}
+	
+	@PostMapping("/register")
+	public String registerPost(MemberDTO dto, RedirectAttributes attributes) {
+		boolean isSuccess = service.register(dto);
+		if(isSuccess) {
+			return "redirect:/";
+		}else {
+			attributes.addFlashAttribute("msg","아이디가 중복되어 등록에 실패하였습니다");
+			return "redirect:/register";
+			
+		}
+	}
+	
+	@GetMapping("/member/read")
+	public void read(String id, @RequestParam(defaultValue = "0") int page , Model model) {
+		MemberDTO dto = service.read(id);
+		model.addAttribute("dto",dto);
+		model.addAttribute("page",page);
 	}
 
 }
