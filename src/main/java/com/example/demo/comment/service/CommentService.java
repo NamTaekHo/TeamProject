@@ -19,6 +19,9 @@ public interface CommentService {
 	//댓글 삭제
 	void remove(int commentNo);
 	
+	// 댓글 수정
+	void modify(CommentDTO commentDTO);
+	
 	//DTOtoEntity
 	default Comment dtoToEntity(CommentDTO commentDTO) {
 		Board board = Board.builder().boardNo(commentDTO.getBoardNo()).build();
