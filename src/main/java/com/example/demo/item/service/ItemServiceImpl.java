@@ -66,11 +66,17 @@ public class ItemServiceImpl implements ItemService{
 	@Override
 	public void modify(ItemDTO dto) {
 		Optional<Item> result = repository.findById(dto.getItemNo());
-		if(result.isPresent()) {
+		if(result.isPresent()) { 
 			Item entity =result.get();
 			entity.setItemName(dto.getItemName());
 			entity.setPrice(dto.getPrice());
-			entity.setImage(dto.getImage());
+			
+			//null 아니거나 빈문자열이 아니면 저장하기			
+			if (dto.getImage() != null && !dto.getImage().equals("")) { //이미지가 널이 아니고 빈문자가 아니면, 이미지 변경하겠다
+			    entity.setImage(dto.getImage());
+			}						
+			// 기존코드 entity.setImage(dto.getImage()); //vali 처리 필요. dto에 이미지가 있으면 저장을 하고, 없으면 생략 (조건문)
+			
 			entity.setDescription(dto.getDescription());
 			
 			repository.save(entity);
