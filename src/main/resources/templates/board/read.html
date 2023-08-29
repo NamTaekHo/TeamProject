@@ -53,52 +53,110 @@
 
             function getList(){
                 
-                var board = [[${dto}]]; //
+                var board = {
+                    "no" : [[${dto.boardNo}]],
+                    "id" : "[[${dto.id}]]",
+                    "title" : "[[${dto.title}]]",
+                    "content" : "[[${dto.content}]]"
+                };
+                //[[${dto}]]; 
                 let comment_div = $('#commentdiv');
 
                 $.ajax({
-                    type: "GET",
-                    url: "/comment/boardList?boardNo="+board.boardNo,
-                    success: function(response){
-                        if(response.success){
-                            comment_div.empty();
-                            let list = response.getList([[${boardNo}]])
-                            for(i in list){
-                                let comment = list[i];
-                                let id_span = '<span class="fw-bold strong mar">'+comment.id+'</span>';
+     		      type: "GET",
+     		      url: "/comment/boardList/"+board.no,
+     		      success: function(response){
+     		    	  if(response){
+     		    		  comment_div.empty();
+     		    		  for(i in response){
+     		    			 let comment = response[i];
+     		    			 let writer_span = '<span class="fw-bold strong mar">'+comment.id+'</span>';
      		    			 let content_span = '<span class="mar"> '+comment.content+' </span>';
-     		    			 let href = '/comment/remove?commentNo='+comment.commentNo;
+                             let href = '/comment/modify';
+                             let modyfy_btn = '<a href="#" class="modifyBtn" onclick="modify()">수정</a>';
+     		    			 let href2 = '/comment/remove/'+comment.commentNo;
      		    			 let delete_btn = '<a href="javascript:remove('+comment.commentNo+')">삭제</a>';
-     		    			 let comment_html = writer_span + content_span + delete_btn + '</br>';
+     		    			 let comment_html = writer_span + content_span + modyfy_btn + '&nbsp;' + delete_btn + '</br>';
      		    			 comment_div.append(comment_html);
-                            }
-                        }
-                    }
-                })
-            }
+     		    		  }
+     		    	  }
+     		        }
+     		      })
+        	}
 
-            function register(){
-                //컨트롤러에서 전달받은 dto를 객체로 처리
-                var board = [[${dto}]]
+
+
+            function register() {
+        		var board = {
+                    "no" : [[${dto.boardNo}]],
+                    "id" : "[[${dto.id}]]",
+                    "title" : "[[${dto.title}]]",
+                    "content" : "[[${dto.content}]]"
+                };
+        		let commentContent = document.getElementById("commentContent");
+        		let commentDto ={
+        				"commentNo":0,
+        				"boardNo": board.no,
+                        "id" : "나무라코",
+        				"content": commentContent.value
+        		};
+        		 $.ajax({
+        		      type: "POST",
+        		      url: "/comment/register",
+        		      data: commentDto,
+        		      success: function(response){
+        		    	  if(response){
+        		    		  commentContent.value = null;
+        		    		  getList();
+        		    	  }
+        		        }
+        		      })
+	    	}
+
+            function modify(){
+                var board = {
+                    "no" : [[${dto.boardNo}]],
+                    "id" : "[[${dto.id}]]",
+                    "title" : "[[${dto.title}]]",
+                    "content" : "[[${dto.content}]]"
+                };
                 let commentContent = document.getElementById("commentContent");
                 let commentDto = {
-                    commentNo:0,
-                    boardNo:board.boardNo,
-                    content:commentContent.value
-                }
+                    "commentNo" : 37,
+                    "boardNo" : board.no,
+                    "id" : "나무라코",
+                    "content": "일단 무조건 수정"
+                };
                 $.ajax({
-                    type:"POST",
-                    url:"/comment/register",
-                    data:commentDto,
-                    success:function(response){
-                        if(response.success){
-                            commentContent.value = null;
+                    type : "POST",
+                    url: "/comment/modify",
+                    data: commentDto,
+                    success: function(response){
+                        if(response){
+                            // commentContent.value = commentDto.content;
                             getList();
                         }
                     }
                 })
             }
-        </script>
+	    	
+	    	function remove(commentNo){
+				
+        		 $.ajax({
+        		      type: "DELETE",
+        		      url: "/comment/remove/"+commentNo,
+        		      success: function(response){
+        		    	  if(response){
+        		    		  getList();
+        		    	  }
+        		        }
+        		      })
+        	}
+
+        	
+
+		</script>
+
         <!-- 댓글끝 -->
 
         <a th:href="@{/board/modify(boardNo = ${dto.boardNo})}">

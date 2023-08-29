@@ -1,6 +1,7 @@
 package com.example.demo.comment.service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,16 @@ public class CommentServiceImpl implements CommentService{
 	public void remove(int commentNo) {
 		commentRepository.deleteById(commentNo);
 		
+	}
+
+	@Override
+	public void modify(CommentDTO commentDTO) {
+		Optional<Comment> result = commentRepository.findById(commentDTO.getCommentNo());
+		if(result.isPresent()) {
+			Comment comment = result.get();
+			comment.setContent(commentDTO.getContent());
+			commentRepository.save(comment);
+		}
 	}
 	
 	

@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.example.demo.member.entity.Member;
-import com.example.demo.member.repository.MemberRepository;
 
 
 
@@ -59,6 +58,20 @@ public class MemberRepositoryTest {
 		
 		memberRepository.saveAll(list);
 		
+	}
+	
+	@Test
+	public void 데이터등록2() {
+		Member m = Member.builder()
+				.address("인천 연수동")
+				.id("나무라코")
+				.password("aa")
+				.Email("sdsd@naver.com")
+				.name("둘리")
+				.pNumber("010-0000-0000")
+				.birth("2000년10월11일")
+				.build();
+		memberRepository.save(m);
 	}
 	
 	@Test
