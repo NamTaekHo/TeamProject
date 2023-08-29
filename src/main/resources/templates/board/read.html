@@ -70,19 +70,30 @@
      		    		  comment_div.empty();
      		    		  for(i in response){
      		    			 let comment = response[i];
-     		    			 let writer_span = '<span class="fw-bold strong mar">'+comment.id+'</span>';
-     		    			 let content_span = '<span class="mar"> '+comment.content+' </span>';
+     		    			 let writer_div = '<div class="fw-bold strong mar">'+comment.id+'</div>';
+     		    			 let content_p = '<p class="mar"> '+comment.content+' </p>';
                              let href = '/comment/modify';
-                             let modyfy_btn = '<a href="#" class="modifyBtn" onclick="modify()">수정</a>';
+                             let modyfy_btn = '<a href="#" class=" modifyBtn btn btn-primary" data-commentNo="comment.commentNo">수정</a>';
      		    			 let href2 = '/comment/remove/'+comment.commentNo;
-     		    			 let delete_btn = '<a href="javascript:remove('+comment.commentNo+')">삭제</a>';
-     		    			 let comment_html = writer_span + content_span + modyfy_btn + '&nbsp;' + delete_btn + '</br>';
+     		    			 let delete_btn = '<a href="javascript:remove('+comment.commentNo+')" class="deleteBtn btn btn-primary">삭제</a>';
+     		    			 let comment_html = '<div class="row">' + writer_div + '</br>' + content_p + '</br>' + modyfy_btn + '&nbsp;' + delete_btn + '<hr>' + '</div>';
      		    			 comment_div.append(comment_html);
+                                    
      		    		  }
      		    	  }
      		        }
      		      })
         	}
+        	
+        	//댓글 수정버튼 클릭 이벤트 처리
+        	$(document).on("click", ".modifyBtn", function(event){
+				const commentNo = this.getAttribute('data-commentNo');
+				const commentRow = this.closest(".row");
+				const commentText = commentRow.find("p").eq(0).text();
+				const saveBtn = '<button class="saveBtn" data-commentNo="comment.commentNo">저장</button>';
+				commentRow.find("p").eq(0).replaceWith('<textarea>commentText</textarea>');
+                this.replaceWith(saveBtn);
+			})
 
 
 
@@ -113,7 +124,7 @@
         		      })
 	    	}
 
-            function modify(){
+            function modify(commentNo){
                 var board = {
                     "no" : [[${dto.boardNo}]],
                     "id" : "[[${dto.id}]]",
@@ -122,7 +133,7 @@
                 };
                 let commentContent = document.getElementById("commentContent");
                 let commentDto = {
-                    "commentNo" : 37,
+                    "commentNo" : commentNo,
                     "boardNo" : board.no,
                     "id" : "나무라코",
                     "content": "일단 무조건 수정"
