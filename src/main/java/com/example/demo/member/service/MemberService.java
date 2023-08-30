@@ -18,6 +18,8 @@ public interface MemberService {
 	
 	void delete(MemberDTO dto);//회원삭제
 	
+	MemberDTO myPage(String id);
+	
 
 	//회원 엔티티를 멤버 dto로 변환
 	default MemberDTO entityToDto(Member entity) {
