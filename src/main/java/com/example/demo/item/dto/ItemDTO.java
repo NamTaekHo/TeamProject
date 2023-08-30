@@ -2,6 +2,7 @@ package com.example.demo.item.dto;
 
 import java.time.LocalDateTime;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -24,7 +25,6 @@ public class ItemDTO {
 	private String description;
 	private LocalDateTime regDate;
 	private LocalDateTime modDate;
-	
 	
 
 }

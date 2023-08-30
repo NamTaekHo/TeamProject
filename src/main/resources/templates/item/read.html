@@ -22,7 +22,7 @@
                 <h1 class="display-5 fw-bolder">[[${dto.itemName}]]</h1>
                 <div class="fs-5 mb-5">
 
-                    <label>가격</label>
+                    <label>가격 : </label>
                     <!--<span> : [[${dto.price}]] 원</span>-->
                     <span th:text="${#numbers.formatDecimal(dto.price, 0, 'COMMA', 0, 'POINT')} + ' 원'"></span>
                 </div>                
