@@ -25,7 +25,7 @@ public class ItemServiceImpl implements ItemService{
 	@Override
 	public int register(ItemDTO dto) {
 		Item entity = dtoToEntity(dto);
-		repository.save(entity);		
+		repository.save(entity); 		
 
 		return entity.getItemNo();
 	}	
@@ -34,7 +34,7 @@ public class ItemServiceImpl implements ItemService{
 	@Override
 	public Page<ItemDTO> getList(int pageNumber) {
 		int pageNum = (pageNumber == 0) ? 0 : pageNumber-1;
-		Pageable pageable = PageRequest.of(pageNum, 10, Sort.by("itemNo").descending());
+		Pageable pageable = PageRequest.of(pageNum, 6, Sort.by("itemNo").descending());
 		Page<Item> entityPage= repository.findAll(pageable);
 		Page<ItemDTO> dtoPage = entityPage.map(entity -> entityToDto(entity));
 		
@@ -71,15 +71,15 @@ public class ItemServiceImpl implements ItemService{
 			entity.setItemName(dto.getItemName());
 			entity.setPrice(dto.getPrice());
 			
-			//null 아니거나 빈문자열이 아니면 저장하기			
+			
 			if (dto.getImage() != null && !dto.getImage().equals("")) { //이미지가 널이 아니고 빈문자가 아니면, 이미지 변경하겠다
 			    entity.setImage(dto.getImage());
-			}						
-			// 기존코드 entity.setImage(dto.getImage()); //vali 처리 필요. dto에 이미지가 있으면 저장을 하고, 없으면 생략 (조건문)
-			
+			}			
 			entity.setDescription(dto.getDescription());
 			
 			repository.save(entity);
+			
+			//todo: 폴더에 해당 파일이 존재할경우, 삭제하고 저장하기 
 		}
 		
 		

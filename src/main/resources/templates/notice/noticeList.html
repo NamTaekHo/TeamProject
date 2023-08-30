@@ -12,7 +12,7 @@
                     <button type="button" class="btn btn-outline-primary">공지 등록</button>
                 </a>
             </span>
-		</h1>
+		</h1><br>
 
 		<table class="table table-striped">
 			<thead>
@@ -37,7 +37,8 @@
 							[[${dto.title}]]
 						</a>
 					</th>					
-					<td>[[${dto.writer}]]</td>
+					<td>관리자</td>
+					<!--<td>[[${dto.title}]]</td>-->
 					<td>[[${#temporals.format(dto.regDate, 'yyyy/MM/dd')}]]</td>
 				</tr>
 
