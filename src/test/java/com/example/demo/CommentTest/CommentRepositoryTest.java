@@ -2,6 +2,7 @@ package com.example.demo.CommentTest;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,5 +48,12 @@ public class CommentRepositoryTest {
 		Board board = Board.builder().boardNo(30).build();
 		List<Comment> list = repository.getCommentByBoardOrderByCommentNo(board);
 		list.forEach(comment -> System.out.println(comment));
+	}
+	
+	@Test
+	public void 게시물_댓글삭제() {
+		Optional<Board> result = boardRepository.findById(30);
+		Board board = result.get();
+		repository.deleteCommentByBoard(board);
 	}
 }

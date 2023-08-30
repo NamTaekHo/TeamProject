@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.example.demo.board.dto.BoardDTO;
 import com.example.demo.board.entity.Board;
 import com.example.demo.board.repository.BoardRepository;
+import com.example.demo.comment.repository.CommentRepository;
 
 @Service
 public class BoardServiceImpl implements BoardService {
@@ -19,6 +20,9 @@ public class BoardServiceImpl implements BoardService {
 	// 사용 리파지토리 선언
 	@Autowired
 	private BoardRepository repository;
+	
+	@Autowired
+	private CommentRepository commentRepository;
 
 	@Override
 	public int register(BoardDTO dto) {
@@ -69,12 +73,13 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public int remove(int no) {
 		Optional<Board> result = repository.findById(no);
-
-		if (result.isPresent()) {
+		Board board = result.get();
+		if(result.isPresent()) {
+			commentRepository.deleteCommentByBoard(board);
 			repository.deleteById(no);
-			return 1; // 성공
+			return no;
 		} else {
-			return 0; // 실패
+			return 0;
 		}
 	}
 

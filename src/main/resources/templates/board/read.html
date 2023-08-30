@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+	
 
 <th:block th:replace="~{/layout/basic :: setContent(~{this::content} )}">
 
@@ -39,12 +40,15 @@
                 <h6 class="m-0 font-weight-bold text-primary">댓글보기</h6>
             </div>
             <div class="card-body" id="commentdiv">
+				
             </div>
             <div class="card-body">
                 <textarea class="form-control" id="commentContent" rows="3"></textarea>
                 <button type="button" class="btn btn-secondary" onclick="register()">댓글등록</button>
             </div>
         </div>
+        
+        
 
         <script>
             $(document).ready(function(){
@@ -71,12 +75,12 @@
      		    		  for(i in response){
      		    			 let comment = response[i];
      		    			 let writer_div = '<div class="fw-bold strong mar">'+comment.id+'</div>';
-     		    			 let content_p = '<p class="mar"> '+comment.content+' </p>';
+     		    			 let content_p = '<p class="mar cont"> '+comment.content+' </p>';
                              let href = '/comment/modify';
-                             let modyfy_btn = '<a href="#" class=" modifyBtn btn btn-primary" data-commentNo="comment.commentNo">수정</a>';
+                             let modyfy_btn = '<button class="modifyBtn btn btn-primary" data-commentNo="' + comment.commentNo + '">수정</button>';
      		    			 let href2 = '/comment/remove/'+comment.commentNo;
      		    			 let delete_btn = '<a href="javascript:remove('+comment.commentNo+')" class="deleteBtn btn btn-primary">삭제</a>';
-     		    			 let comment_html = '<div class="row">' + writer_div + '</br>' + content_p + '</br>' + modyfy_btn + '&nbsp;' + delete_btn + '<hr>' + '</div>';
+     		    			 let comment_html = '<div class="divbx">' + writer_div + '</br>' + content_p + '</br>' + modyfy_btn + '&nbsp;' + delete_btn + '<hr>' + '</div>';
      		    			 comment_div.append(comment_html);
                                     
                                     
@@ -89,12 +93,50 @@
         	//댓글 수정버튼 클릭 이벤트 처리
         	$(document).on("click", ".modifyBtn", function(event){
 				const commentNo = this.getAttribute('data-commentNo');
-				const commentRow = this.closest(".row");
-				const commentText = commentRow.find("p").eq(0).text();
-				const saveBtn = '<button class="saveBtn" data-commentNo="comment.commentNo">저장</button>';
-				commentRow.find("p").eq(0).replaceWith('<textarea>commentText</textarea>');
-                this.replaceWith(saveBtn);
+				const commentRow = this.closest(".divbx");
+				const commentText = commentRow.querySelector(".cont").textContent;
+				const saveBtn = '<button class="saveBtn btn btn-primary" data-commentNo="' + commentNo + '">저장</button>';
+				commentRow.querySelector(".cont").outerHTML = '<textarea class="modifiedText">' +commentText+ '</textarea>';
+                this.outerHTML = saveBtn;
 			})
+			
+			//댓글 저장버튼 클릭 이벤트 처리
+			$(document).on("click", ".saveBtn", function(event){
+                var board = {
+                    "no" : [[${dto.boardNo}]],
+                };
+                
+                const commentNo = this.getAttribute('data-commentNo');
+                const commentRow = this.closest(".divbx");
+                const newCommentText = commentRow.querySelector("textarea").value;
+                var commentDto = {
+                    "commentNo":commentNo,
+                    "boardNo":board.no,
+                    "id": "나무라코",
+                    "content": newCommentText                    
+                };
+
+                $.ajax({
+                    type: "POST",
+                    url: "/comment/modify",
+                    data: commentDto,
+                    success: function(response){
+                        if(response){
+                            getList();
+                        } else {
+                            alert("댓글 수정에 실패했습니다.");
+                        }
+                       
+                    }
+
+                });
+                // 저장 -> 수정으로 다시 변경
+                const modifyBtn = '<button class="modifyBtn btn btn-primary" data-commentNo="comment.commentNo">수정</button>';
+                this.outerHTML = modifyBtn;
+                // 댓글 textarea -> p태그로 변경
+                const commentText = commentRow.querySelector("textarea").value;
+                commentRow.querySelector("textarea").outerHTML = commentText;
+            })
 
 
 
