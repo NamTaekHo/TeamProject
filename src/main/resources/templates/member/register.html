@@ -39,22 +39,48 @@
     	 <div class="row justify-content-center">
     		<div class="input-div">
 	    	    <h1 class="mt-4">Sign Up</h1>
-				<form th:action="@{/register}" th:method="post"> <!-- 등록처리 주소 변경 -->
+				<form th:action="@{/member/register}" th:method="post"> <!-- 등록처리 주소 변경 -->
 	    	 	<!--<form th:action="@{/member/register}" th:method="post">-->
 		            <div class="form-group">
 		                <label >아이디</label>
-		                <input type="text" class="form-control" name="id">
+		                <input type="text" class="form-control" name="id" required>
 		            </div>
 		            <div class="form-group">
 		                <label >패스워드</label>
-		                <input type="password" class="form-control" name="password">
+		                <input type="password" class="form-control" name="password" required>
 		            </div>
 				    <div class="form-group">
-		                <label >이름</label>
-		                <input type="text" class="form-control" name="name">
+		                <label >이메일</label>
+		                <input type="text" class="form-control" name="Email">
 		            </div>
+		            
+		            <div class="form-group">
+		                <label >이름</label>
+		                <input type="text" class="form-control" name="name" required>
+		            </div>
+		            
+		            <div class="form-group">
+		                <label >전화번호</label>
+		                <input type="text" class="form-control" name="pNumber" required>
+		            </div>
+		            
+		             <div class="form-group">
+		                <label >주소</label>
+		                <input type="text" class="form-control" name="address" required>
+		            </div>
+		            
+		            <div class="form-group">
+		                <label >생년월일</label>
+		                <input type="text" class="form-control" name="birth" required>
+		            </div>
+		            
+		             <div class="form-group">
+		                <label >멤버등급</label>
+		                <input type="text" class="form-control" name="level">
+		            </div>
+		            
 					<!-- 등급 필드 추가 -->
-					<div class="form-group">
+<!--					<div class="form-group">
 						<div class="form-check form-check-solid">
 							<input class="form-check-input"  type="radio" id="user" name="role" value="ROLE_USER" checked>
 							<label class="form-check-label" for="user">일반사용자</label>
@@ -63,7 +89,7 @@
 							<input class="form-check-input" type="radio" id="admin" name="role" value="ROLE_ADMIN">
 							<label class="form-check-label" for="admin">관리자</label>
 						</div>
-					</div>
+					</div>-->
 		            <button type="submit" class="btn btn-primary">등록</button>
 	        	</form>
         	</div>

@@ -24,8 +24,10 @@ public class MemberController {
 	
 	@Autowired
 	private MemberService service;
+
 	
-	@GetMapping("/memberlist")
+
+	@GetMapping("/member/memberlist")
 	public void list(@RequestParam(defaultValue = "0") int page, Model model) {
 		Page<MemberDTO> list = service.getlist(page);
 		model.addAttribute("list", list);
@@ -39,20 +41,20 @@ public class MemberController {
 //		model.addAttribute("page", page);
 //	}
 	
-	@GetMapping("/modify")
+	@GetMapping("/member/modify")
 	public void modify(String id, Model model) {
 		MemberDTO dto = service.read(id);
 		model.addAttribute("dto", dto);
 	}
 	
-	@PostMapping("/modify")
+	@PostMapping("/member/modify")
 	public String modifyPost(MemberDTO dto, RedirectAttributes redirectAttributes) {
 		service.modify(dto);
 		redirectAttributes.addAttribute("id", dto.getId());
 		return "redirect:/member/read";
 	}
 	
-	@PostMapping("/remove")
+	@PostMapping("/member/remove")
 	public String removePost(MemberDTO dto,RedirectAttributes redirectAttributes) {
 		service.delete(dto);
 		redirectAttributes.addAttribute("id",dto.getId());
@@ -76,7 +78,7 @@ public class MemberController {
 		}
 	}
 	
-	@GetMapping("/member/read")
+	@GetMapping("/member/read")//테스트 주석 추가
 	public void read(String id, @RequestParam(defaultValue = "0") int page , Model model) {
 		MemberDTO dto = service.read(id);
 		model.addAttribute("dto",dto);
