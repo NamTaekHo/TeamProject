@@ -16,12 +16,15 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.item.dto.ItemDTO;
 import com.example.demo.item.service.ItemService;
 
+import io.micrometer.common.util.StringUtils;
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.persistence.criteria.Path;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
@@ -43,6 +46,7 @@ public class ItemController {
 	public void register(){
 		
 	}	
+		
 	
 	//상품 등록
 	@PostMapping("/register")

@@ -2,6 +2,8 @@ package com.example.demo.item.dto;
 
 import java.time.LocalDateTime;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -25,6 +27,4 @@ public class ItemDTO {
 	private LocalDateTime regDate;
 	private LocalDateTime modDate;
 	
-	
-
 }

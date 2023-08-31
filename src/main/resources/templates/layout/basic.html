@@ -26,7 +26,7 @@
     <div class="border-end bg-white" id="sidebar-wrapper">
         <div class="sidebar-heading border-bottom bg-light">1조</div>
         <div class="list-group list-group-flush">
-            <a class="list-group-item list-group-item-action list-group-item-light p-3" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')" th:href="@{/member/list}">공지사항</a> <!-- 메뉴 수정 -->
+            <a class="list-group-item list-group-item-action list-group-item-light p-3" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')" th:href="@{/notice/noticeList}">공지사항</a> <!-- 메뉴 수정 -->
             <a class="list-group-item list-group-item-action list-group-item-light p-3" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')" th:href="@{/board/list}">Q&A</a> <!-- 메뉴 수정 -->           
             <a class="list-group-item list-group-item-action list-group-item-light p-3" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')" th:href="@{/item/itemList}">상품</a> <!-- 메뉴 수정 --> 
         </div>

@@ -4,40 +4,36 @@
 <th:block th:replace="~{/layout/basic :: setContent(~{this::content} )}"> <!-- 템플릿 조각 전달 -->
 	<th:block th:fragment="content"> <!-- 템플릿 만들기 -->
 	
-		<h1>상품 전체 페이지  
+		<br><h1>상품 전체 페이지  
 		 	<span>
                 <a th:href="@{/item/register}">
                     <button type="button" class="btn btn-outline-primary">상품 등록</button>
                 </a>
             </span>
-		</h1>
-
-		<table class="table table-striped">
-			<thead>
-				<tr>
-					<th scope="col">상품번호</th>
-					<th scope="col">상품이름</th>
-					<th scope="col">가격</th>
-					<th scope="col">등록일</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="dto : ${list}">
-					
-					<td>[[${dto.itemNo}]]</td>
-					<th scope="row">
-						<a th:href="@{/item/read(itemNo = ${dto.itemNo}, page= ${list.number + 1})}">
-							[[${dto.itemName}]]
-						</a>
-					</th>					
-					<!--<td>[[${dto.price}]]원</td>-->
-					<td th:text="${#numbers.formatDecimal(dto.price, 0, 'COMMA', 0, 'POINT')} + ' 원'"></td>
-					<td>[[${#temporals.format(dto.regDate, 'yyyy/MM/dd')}]]</td>
-				</tr>
-
-			</tbody>
-		</table>
-
+		</h1><br><br>		
+		
+		<!--상품 6개씩 페이징처리-->
+		
+		<div class="container">
+        <div class="row">
+            <div class="col-md-4" th:each="dto : ${list}">
+                <div class="card">
+                    <img class="card-img-top" th:src="@{'/image/' + ${dto.image}}" width="200" height="400" alt="..." />
+                    <div class="card-body text-center">
+                        <h5 class="card-title fw-bolder" th:text="${dto.itemName}"></h5>
+                        <div th:text="${#numbers.formatDecimal(dto.price, 0, 'COMMA', 0, 'POINT')} + ' 원'"></div>
+                        <span hidden="hidden" th:text="${dto.itemNo}"></span>
+                    </div>
+                    <div class="card-footer text-center">
+                        <a class="btn btn-outline-dark" th:href="@{/item/read(itemNo = ${dto.itemNo}, page = ${list.number + 1})}">제품 상세보기</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><br><br>		
+    
+    
+			<!--페이지 버튼-->
 		<ul class="pagination h-100 justify-content-center align-items-center">
 
 			<th:block th:each="page : ${#numbers.sequence(1, list.totalPages)}">
@@ -50,11 +46,13 @@
 
 		</ul>
 
+		
+		<!--상품등-->
 		<script th:inline="javascript">
 			$(document).ready(function(){
 			  var itemNo = [[${itemNo}]]
 			  if(itemNo != null){
-				  alert(itemNo + "번 글이 등록되었습니다.");
+				  alert(itemNo + "번 상품이 등록되었습니다.");
 			  }
 			});
 		</script>
