@@ -6,6 +6,7 @@ import org.assertj.core.api.Assertions;
 import static org.assertj.core.api.Assertions.*;
 
 import java.io.File;
+import java.io.IOException;
 
 import org.junit.jupiter.api.Test;
 
@@ -31,6 +32,24 @@ public class FileTests {
 	public void 파일찾기() {
 		
 		File file = new File("C:\\Users\\user\\Desktop\\a\\b\\c\\asdf.txt");
+		
+		System.out.println(file.exists());
+	}
+	
+	@Test
+	public void 파일생성() throws IOException {
+		
+		File file = new File("C:\\Users\\user\\Desktop\\a\\b\\c\\vv.txt");
+		file.createNewFile();
+		
+		System.out.println(file.exists());
+	}
+	
+	@Test
+	public void 파일삭제(){
+		
+		File file = new File("C:\\Users\\user\\Desktop\\a\\b\\c\\vv.txt");
+		file.delete();
 		
 		System.out.println(file.exists());
 	}

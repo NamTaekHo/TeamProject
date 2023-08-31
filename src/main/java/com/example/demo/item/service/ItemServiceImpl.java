@@ -16,19 +16,27 @@ import com.example.demo.item.dto.ItemDTO;
 import com.example.demo.item.entity.Item;
 import com.example.demo.item.repository.ItemRepository;
 
+
+
+
 @Service
 public class ItemServiceImpl implements ItemService{
 	
 	@Autowired
 	private ItemRepository repository;
+	
+	
 
 	@Override
 	public int register(ItemDTO dto) {
-		Item entity = dtoToEntity(dto);
+		
+		Item entity = dtoToEntity(dto);	
+		
 		repository.save(entity); 		
 
 		return entity.getItemNo();
 	}	
+	
 	
 	
 	@Override
@@ -100,3 +108,4 @@ public class ItemServiceImpl implements ItemService{
 	
 
 }
+
