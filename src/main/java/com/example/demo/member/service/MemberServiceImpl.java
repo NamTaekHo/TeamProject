@@ -5,6 +5,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.member.dto.MemberDTO;
@@ -43,47 +45,64 @@ public class MemberServiceImpl implements MemberService {
 		}
 
 	}
-	
+
 	@Override
-	public void modify(MemberDTO dto) {//회원정보 수정
+	public MemberDTO myPage(String id) { // 마이페이지
+		Optional<Member> result = memberRepository.findById(id);
+		if (result.isPresent()) {
+
+			Member member = result.get();
+			return entityToDto(member);
+
+		} else {
+			return null;
+		}
+
+	}
+
+	@Override
+	public void modify(MemberDTO dto) {// 회원정보 수정
 		Optional<Member> result = memberRepository.findById(dto.getId());
-		if(result.isPresent()) {
+		if (result.isPresent()) {
 			Member entity = result.get();
-			
+
 			entity.setAddress(dto.getAddress());
 			entity.setEmail(dto.getEmail());
 //			entity.setPassword(dto.getPassword());
 			entity.setPNumber(dto.getPNumber());
-			
+
 			memberRepository.save(entity);
 		}
-		
+
 	}
 
 	@Override
-	public boolean register(MemberDTO dto) {//회원 등록
+	public boolean register(MemberDTO dto) {// 회원 등록
 		String id = dto.getId();// 아이디 중복 체크
 		MemberDTO getDto = read(id);// 상세조회
 		if (getDto != null) {
 			System.out.println("사용중인 아이디입니다.");
 			return false;
 		}
-
 		Member entity = DtoToEntity(dto);
+
+		PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();//패스워드를 암호화
+		String hashpassword = passwordEncoder.encode(entity.getPassword());//암호화 한 패스워드를 서버에 저장
+		entity.setPassword(hashpassword);
 		memberRepository.save(entity);
+
 		return true;
 	}
 
 	@Override
 	public void delete(MemberDTO dto) {
 		Optional<Member> result = memberRepository.findById(dto.getId());
-		if(result.isPresent()) {
-			
+		if (result.isPresent()) {
+
 			Member entity = result.get();
-			
+
 			memberRepository.delete(entity);
 		}
 	}
-
 
 }
