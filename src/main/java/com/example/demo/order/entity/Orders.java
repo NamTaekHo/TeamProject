@@ -1,7 +1,6 @@
 package com.example.demo.order.entity;
 
 import com.example.demo.config.BaseEntity;
-import com.example.demo.item.entity.Item;
 import com.example.demo.member.entity.Member;
 
 import jakarta.persistence.Column;
@@ -31,9 +30,6 @@ public class Orders extends BaseEntity {
 	int orderNo;
 
 	@ManyToOne
-	private Item itemNo;
-
-	@ManyToOne
 	private Member id;
 
 	@Column(length = 10, nullable = true)
@@ -44,4 +40,7 @@ public class Orders extends BaseEntity {
 
 	@Column(length = 255, nullable = true)
 	private String shipAddress;
+	
+	@Column(nullable = false)
+	private double totalPrice;
 }

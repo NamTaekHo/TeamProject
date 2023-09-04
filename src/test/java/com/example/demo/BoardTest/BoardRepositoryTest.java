@@ -25,7 +25,7 @@ public class BoardRepositoryTest {
 	@Test
 	public void 데이터등록() {
 		List<Board> list = new ArrayList<>();
-		Member member = Member.builder().id("bbb").build();
+		Member member = Member.builder().id("나무라코").build();
 		for(int i = 0; i<30; i++) {
 			list.add(new Board(0, "bbb", "b", member));
 		}
