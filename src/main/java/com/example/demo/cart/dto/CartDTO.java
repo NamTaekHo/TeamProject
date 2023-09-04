@@ -29,11 +29,5 @@ public class CartDTO {
 	
 	private int count;
 	
-	private int totalPrice;
-	
-	public int getTotalPrice() {
-		
-		return totalPrice;
-	}
 
 }

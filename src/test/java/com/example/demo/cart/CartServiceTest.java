@@ -16,12 +16,12 @@ public class CartServiceTest {
 	@Autowired
 	CartService service;
 	
-//	@Test
-//	public void 데이터등록() {
-//		for(int i = 0; i<30; i++) {
-//			service.register(new CartDTO(i, 1, "10aa", null, null, i));
-//		}
-//	}
+	@Test
+	public void 데이터등록() {
+		for(int i = 0; i<3; i++) {
+			service.register(new CartDTO(i, 1, "sd", null, null, i, i));
+		}
+	}
 	
 	@Test
 	public void 데이터조회() {

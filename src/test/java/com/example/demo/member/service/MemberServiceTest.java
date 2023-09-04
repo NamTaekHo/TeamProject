@@ -35,7 +35,7 @@ public class MemberServiceTest {
 	@Test
 	public void 회원등록1() {
 
-		MemberDTO dto = new MemberDTO("zzz", "123", null, "또치", "ㅁㄴㅇ", "ㅁㅁㅁ", "ㅁㅁㅁㅁㅁ", 0, "ROLE_USER");
+		MemberDTO dto = new MemberDTO("sd", "123", null, "또치", "ㅁㄴㅇ", "ㅁㅁㅁ", "ㅁㅁㅁㅁㅁ", 0, "ROLE_USER");
 			service.register(dto);
 	}
 	
