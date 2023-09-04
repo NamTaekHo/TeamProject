@@ -1,13 +1,21 @@
 package com.example.demo.cart.service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.cart.dto.CartDTO;
 import com.example.demo.cart.entity.Cart;
 import com.example.demo.cart.repository.CartRepository;
+import com.example.demo.item.dto.ItemDTO;
+import com.example.demo.item.entity.Item;
 
 @Service
 public class CartServiceImpl implements CartService {
@@ -64,5 +72,30 @@ public class CartServiceImpl implements CartService {
 		}
 
 	}
+	//카트페이지 만들기 9/4 페이지, 리스트 추가
+	
+	@Override
+	public Page<CartDTO> getList(int pageNumber) {
+	int pageNum = (pageNumber == 0) ? 0 : pageNumber-1;
+	Pageable pageable = PageRequest.of(pageNum, 5, Sort.by("cartNo").descending());
+	Page<Cart> entityPage= cartRepository.findAll(pageable);
+	Page<CartDTO> dtoPage = entityPage.map(entity -> entityToDto(entity));
+
+	return dtoPage;
+	}
+
+	@Override
+	public List<CartDTO> getList() {
+	List<Cart> entityList = cartRepository.findAll();
+	List<CartDTO> dtoList = entityList.stream()
+	.map(entity -> entityToDto(entity))
+	.collect(Collectors.toList());
+
+	return dtoList;
+	}
+	
+	
+
+	
 
 }
