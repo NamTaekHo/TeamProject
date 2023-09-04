@@ -9,11 +9,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 	
-	String webpath = "C:\\Users\\user\\Desktop\\test\\";
+	String webpath = "file:/C:\\Users\\user\\Desktop\\test\\";
 	
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/test/**").addResourceLocations(webpath);
+		registry.addResourceHandler("/aa/**")
+		        .addResourceLocations(webpath);
 		WebMvcConfigurer.super.addResourceHandlers(registry);
 	}
 }

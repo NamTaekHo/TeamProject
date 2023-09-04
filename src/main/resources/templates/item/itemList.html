@@ -12,13 +12,12 @@
             </span>
 		</h1><br><br>		
 		
-		<!--상품 6개씩 페이징처리-->
-		
+		<!--상품 6개씩 페이징처리-->	
 		<div class="container">
         <div class="row">
             <div class="col-md-4" th:each="dto : ${list}">
                 <div class="card">
-                    <img class="card-img-top" th:src="@{'/test2/' + ${dto.image}}" width="200" height="400" alt="이미지를 찾을 수 없습니다." />
+                    <img class="card-img-top" th:src="@{'/aa/' + ${dto.image}}" width="200" height="400" alt="이미지를 찾을 수 없습니다." />
                     <div class="card-body text-center">
                         <h5 class="card-title fw-bolder" th:text="${dto.itemName}"></h5>
                         <div th:text="${#numbers.formatDecimal(dto.price, 0, 'COMMA', 0, 'POINT')} + ' 원'"></div>
