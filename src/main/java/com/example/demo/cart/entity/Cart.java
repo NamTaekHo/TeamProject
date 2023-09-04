@@ -4,7 +4,6 @@ import com.example.demo.config.BaseEntity;
 import com.example.demo.item.entity.Item;
 import com.example.demo.member.entity.Member;
 
-import jakarta.annotation.Generated;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -31,7 +30,7 @@ public class Cart extends BaseEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int cartNo;
 	
-	@Id //id 추가 9/4
+//	@Id //id 추가 9/4 //주석 풀고 여기부터 지우면 됨
 	@ManyToOne
 	private Item itemNo;
 
