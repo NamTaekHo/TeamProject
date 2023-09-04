@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import com.example.demo.item.entity.Item;
 import com.example.demo.member.entity.Member;
 
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -22,9 +23,11 @@ public class OrdersDTO {
 	
 	private int orderNumber;
 	
-	private int itemNo;
+	@ManyToOne
+	private Item itemNo;
 	
-	private String id;
+	@ManyToOne
+	private Member id;
 	
 	private LocalDateTime orderDate;
 	

@@ -70,6 +70,8 @@ public class MemberRepositoryTest {
 				.name("둘리")
 				.pNumber("010-0000-0000")
 				.birth("2000년10월11일")
+				.level(1)
+				.role("ROLE_ADMIN")
 				.build();
 		memberRepository.save(m);
 	}
