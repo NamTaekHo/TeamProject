@@ -23,8 +23,7 @@ public class SecurityConfig {
 		.requestMatchers("/member/memberlist").hasAnyRole("ADMIN")
 		.requestMatchers("/item/*").hasAnyRole("ADMIN","USER")
 		.requestMatchers("/board/*").hasAnyRole("ADMIN","USER")
-		.requestMatchers("/notice/*").hasAnyRole("ADMIN","USER")
-		.requestMatchers("/cart/*").hasAnyRole("ADMIN","USER");
+		.requestMatchers("/notice/*").hasAnyRole("ADMIN","USER");
 		
 		http.formLogin();
 		http.csrf().disable();
