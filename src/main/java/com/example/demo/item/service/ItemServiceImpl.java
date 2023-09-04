@@ -15,6 +15,9 @@ import org.springframework.stereotype.Service;
 import com.example.demo.item.dto.ItemDTO;
 import com.example.demo.item.entity.Item;
 import com.example.demo.item.repository.ItemRepository;
+import com.example.demo.util.FileUtils2;
+
+import ch.qos.logback.core.util.FileUtil;
 
 
 
@@ -25,12 +28,18 @@ public class ItemServiceImpl implements ItemService{
 	@Autowired
 	private ItemRepository repository;
 	
+	@Autowired
+	private FileUtils2 fileUtils2;
+	
 	
 
 	@Override
 	public int register(ItemDTO dto) {
-		
 		Item entity = dtoToEntity(dto);	
+		
+		String img = fileUtils2.fileUpload(dto.getUploadFile());
+		
+		entity.setImage(img);
 		
 		repository.save(entity); 		
 

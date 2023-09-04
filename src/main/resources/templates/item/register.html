@@ -6,7 +6,7 @@
 	
 		<h1 class="mt-4">상 품  등 록</h1>
 
-        <form th:action="@{/item/register}" th:method="post">
+        <form th:action="@{/item/register}" th:method="post" enctype="multipart/form-data">
             
             <div class="form-group">
                 <label >상품이름</label>
@@ -26,7 +26,7 @@
                    
             <div class="form-group">
 				<label>첨부파일</label>
-				<input type="file" class="form-control" name="image">
+				<input type="file" class="form-control" name="uploadFile">
 			</div><br><br>       
             
             

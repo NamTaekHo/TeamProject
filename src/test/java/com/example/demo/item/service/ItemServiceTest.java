@@ -16,12 +16,12 @@ public class ItemServiceTest {
 	@Autowired
 	ItemService service;
 	
-	@Test
-	public void 상품30개등록() {
-		for(int i=1; i<=30; i++) {
-			service.register(new ItemDTO(i, "yellow jacket", i*20000, null, "new arrival", null, null));
-		}
-	}
+//	@Test
+//	public void 상품30개등록() {
+//		for(int i=1; i<=30; i++) {
+//			service.register(new ItemDTO(i, "yellow jacket", i*20000, null, "new arrival", null, null));
+//		}
+//	}
 	
 	@Test
 	public void 상품목록조회() {

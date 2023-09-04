@@ -12,7 +12,7 @@
         <div class="row gx-3 gx-lg-4 align-items-center">
             <th:block th:if="${dto.image != null}">
                 <div class="col-md-6">
-                    <img th:src="@{'/image/' + ${dto.image}}" src="https://dummyimage.com/600x700/dee2e6/6c757d.jpg"
+                    <img th:src="@{'/test2/' + ${dto.image}}" src="https://dummyimage.com/600x700/dee2e6/6c757d.jpg"
                         alt="..." />
                 </div>
             </th:block>
@@ -84,9 +84,21 @@
             <label>수정일</label>
             <input type="text" class="form-control" th:value="${#temporals.format(dto.modDate, 'yyyy/MM/dd HH:mm:ss')}"
                 readonly>
-        </div>
+<!--        </div>
+                <th:block th:if="${dto.image!=null}">  
+            <div class="form-group">
+            	<img th:src="@{'/test/'+${dto.image}}">
+        	</div>
+        </th:block>-->
         <br>
         <br>
+        
+    <th:block th:if="${dto.image!=null}">
+		<div class="form-group">
+			<img th:src="@{'/test2/' + ${dto.image}}">
+			
+		</div>
+	</th:block>
 
         <a th:href="@{/item/modify(itemNo = ${dto.itemNo})}">
             <button type="button" class="btn btn-primary">상품정보 수정하기</button>
