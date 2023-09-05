@@ -31,7 +31,8 @@ public class SecurityConfig {
 		
 		http.formLogin()
 		.loginPage("/customlogin")
-		.loginProcessingUrl("login")
+		.loginProcessingUrl("/login")
+		.defaultSuccessUrl("/",true)
 		.permitAll();
 		
 	

@@ -1,18 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<th:block th:replace="~{/layout/basic2 :: setContent(~{this::content} )}">
-   <th:block th:fragment="content">
-      <!--인증시 사용된 객체에 대한 정보-->
-      <b>Authenticated DTO:</b>
-      <div sec:authentication="principal"></div>
+<th:block th:replace="~{/layout/basic2 :: setContent(~{this::content} )}"> <!-- 템플릿 조각 전달 -->
+	<th:block th:fragment="content"> <!-- 템플릿 만들기 -->
+	
+		<br><h1>상품 전체 페이지  
+		 	<span>
+                <a th:href="@{/item/register}">
+                    <button type="button" class="btn btn-outline-primary">상품 등록</button>
+                </a>
+            </span>
+		</h1><br><br>		
+		
+		<!--상품 6개씩 페이징처리-->	
+		<div class="container">
+        <div class="row">
+            <div class="col-md-4" th:each="dto : ${list}">
+                <div class="card">
+                    <img class="card-img-top" th:src="@{'/aa/' + ${dto.image}}" width="200" height="400" alt="이미지를 찾을 수 없습니다." />
+                    <div class="card-body text-center">
+                        <h5 class="card-title fw-bolder" th:text="${dto.itemName}"></h5>
+                        <div th:text="${#numbers.formatDecimal(dto.price, 0, 'COMMA', 0, 'POINT')} + ' 원'"></div>
+                        <span hidden="hidden" th:text="${dto.itemNo}"></span>
+                    </div>
+                    <div class="card-footer text-center">
+                        <a class="btn btn-outline-dark" th:href="@{/item/read(itemNo = ${dto.itemNo}, page = ${list.number + 1})}">제품 상세보기</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><br><br>		
+    
+    
+			<!--페이지 버튼-->
+		<ul class="pagination h-100 justify-content-center align-items-center">
 
-      <!--인증시 사용된 객체의 아이디-->
-      <b>Authenticated username:</b>
-      <div sec:authentication="name"></div>
+			<th:block th:each="page : ${#numbers.sequence(1, list.totalPages)}">
+				<li th:class=" 'page-item ' + ${(list.number + 1) == page?'active':''} ">
+					<a class="page-link" th:href="@{/item/itemList(page = ${page})}">
+						[[${page}]]
+					</a>
+				</li>
+			</th:block>
 
-      <!--객체의 권한-->
-<!--      <b>Authenticated user role:</b>
-      <div sec:authentication="principal.authorities"></div>-->
-   </th:block>
+		</ul>
+
+		
+		<!--상품등-->
+		<script th:inline="javascript">
+			$(document).ready(function(){
+			  var itemNo = [[${itemNo}]]
+			  if(itemNo != null){
+				  alert(itemNo + "번 상품이 등록되었습니다.");
+			  }
+			});
+		</script>
+		
+	</th:block>
 </th:block>
