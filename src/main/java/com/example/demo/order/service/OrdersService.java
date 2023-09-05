@@ -1,6 +1,6 @@
 package com.example.demo.order.service;
 
-import java.util.List;
+import org.springframework.data.domain.Page;
 
 import com.example.demo.member.entity.Member;
 import com.example.demo.order.dto.OrdersDTO;
@@ -11,8 +11,11 @@ public interface OrdersService {
 	//주문 등록
 	int register(OrdersDTO dto);
 	
-	//주문 조회
-	List<OrdersDTO> getList(int orderNo);
+	//주문 전체 조회
+	Page<OrdersDTO> getList(int page);
+	
+	//주문 단건 상세조회
+	OrdersDTO read(int orderNo);
 	
 	//주문 삭제
 	void remove(int orderNo);
