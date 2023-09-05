@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -28,13 +29,11 @@ public class ItemRepositoryTest {
 		Item item3 = new Item(0, "운재킷", 490, "ㅁㅁ", "가을철 가벼운 브라운");
 		Item item4 = new Item(0, "재킷", 4900, "ㅁㅁ", "가을철 가벼운 브라운 재");
 		
-		list.add(item0);
-		list.add(item1);
-		list.add(item2);
-		list.add(item3);
-		list.add(item4);
+
 		
-		repository.saveAll(list);
+		List<Item> itemList = repository.saveAll(List.of(item0,item1,item2,item3,item4));
+		
+		Assertions.assertThat(itemList).hasSize(5);
 	}
 
 	@Test

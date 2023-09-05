@@ -23,8 +23,8 @@ public interface CartService {
 	
 	//카트페이지 만들기 9/4 페이지, 리스트 추가
 	
-	Page<CartDTO> getList(int pageNumber);
-	
+//	Page<CartDTO> getList(int pageNumber);
+//	
 	List<CartDTO> getList();
 	
 	
@@ -45,11 +45,13 @@ public interface CartService {
 		return entity;
 	}
 	
+	//아이템정보 옮겨오기
 	//entityToDto 변환
 	default CartDTO entityToDto(Cart entity) {
 		CartDTO dto = CartDTO.builder()
 				.cartNo(entity.getCartNo())
-				.itemNo(entity.getItemNo().getItemNo())
+				.itemNo(entity.getItemNo().getItemNo()) //참고해서
+				.itemName(entity.getItemNo().getItemName())
 				.id(entity.getId().getId())
 				.regDate(entity.getRegDate())
 				.modDate(entity.getModDate())

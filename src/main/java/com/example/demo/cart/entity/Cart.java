@@ -26,19 +26,21 @@ import lombok.ToString;
 @NoArgsConstructor
 @Builder
 public class Cart extends BaseEntity {
-
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int no;
+
+	@Column(nullable = false)
 	private int cartNo;
 	
-	@Id //id 추가 9/4
 	@ManyToOne
 	private Item itemNo;
 
 	@ManyToOne
 	private Member id;
 
-	@Column(nullable = true)
-	int count;
+	@Column(nullable = false)
+	private int count;
 
 }

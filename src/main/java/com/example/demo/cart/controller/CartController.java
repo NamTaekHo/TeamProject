@@ -1,6 +1,9 @@
 package com.example.demo.cart.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,12 +23,14 @@ public class CartController {
 	
 	
 	@GetMapping("/cartList")
-	public void read(@RequestParam(defaultValue = "0")int read, Model model) {
-		CartDTO itemRead = service.read(read);
-		model.addAttribute("itemRead", itemRead);
+//	public void list(@RequestParam(defaultValue = "0")int page, Model model) {
+//		Page<CartDTO> list = service.getList(page);
+//		model.addAttribute("list", list);
+//	}
+	public void list(Model model) {
+		List<CartDTO> list = service.getList();
+		model.addAttribute("list", list);
 	}
-	
-	
 	
 	
 	

@@ -1,15 +1,37 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<th:block th:replace="~{/layout/basic3 :: setContent(~{this::content} )}">
+<th:block th:replace="~{/layout/basic2 :: setContent(~{this::content} )}">
 <th:block th:fragment="content">
 
 <!--[[${dto}]]-->
 <h1>장바구니 리스트</h1>
 
 
-[[${dto}]]
+			<table class="table table-striped">
+			<thead>
+				<tr>
+					<th scope="col"> </th>
+					<th scope="col">담은상품</th>
+					<th scope="col">수량</th>
+					<th scope="col">등록일</th>
+				</tr>
+			</thead>
+			<tbody>				
+				<tr th:each="dto : ${list}">
+					<td>[[${dto.no}]]</td>
+					<td>
+						<a th:href="@{/item/read(itemNo = ${dto.itemNo})}">
+						[[${dto.itemName}]]
+						</a>
+					</td>
+					<td><input class="form-control text-center me-3" id="inputQuantity" type="num" value="1"
+                        style="max-width: 3rem" /></td>
+					<td>[[${#temporals.format(dto.regDate, 'yyyy/MM/dd')}]]</td>
+				</tr>
 
+			</tbody>
+			</table>
 
 
 

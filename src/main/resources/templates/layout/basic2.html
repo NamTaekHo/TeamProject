@@ -31,6 +31,7 @@
             <a class="list-group-item list-group-item-action list-group-item-light p-3" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')" th:href="@{/}">Home</a> <!-- 메뉴 수정 -->            
             <a class="list-group-item list-group-item-action list-group-item-light p-3" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')" th:href="@{/item/itemList}">상품</a> <!-- 메뉴 수정 -->
             <a class="list-group-item list-group-item-action list-group-item-light p-3" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')" th:href="@{/notice/noticeList}">공지사항</a>
+            <a class="list-group-item list-group-item-action list-group-item-light p-3" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')" th:href="@{/cart/cartList}">장바구니</a>
              
         </div>
     </div>
