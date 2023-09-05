@@ -24,6 +24,8 @@ public class CartDTO {
 	private int itemNo;
 	
 	private String itemName;
+	
+	private int price;
 	//아이템 정보 필드 추가
 	
 	private String id;

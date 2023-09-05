@@ -9,36 +9,32 @@
 
 
 			<table class="table table-striped">
-			<thead>
-				<tr>
-					<th scope="col"> </th>
-					<th scope="col">담은상품</th>
-					<th scope="col">수량</th>
-					<th scope="col">등록일</th>
-				</tr>
-			</thead>
-			<tbody>				
-				<tr th:each="dto : ${list}">
-					<td>[[${dto.no}]]</td>
-					<td>
-						<a th:href="@{/item/read(itemNo = ${dto.itemNo})}">
-						[[${dto.itemName}]]
-						</a>
-					</td>
-					<td><input class="form-control text-center me-3" id="inputQuantity" type="num" value="1"
-                        style="max-width: 3rem" /></td>
-					<td>[[${#temporals.format(dto.regDate, 'yyyy/MM/dd')}]]</td>
-				</tr>
-
-			</tbody>
-			</table>
-
-
-
-
-
-
-
+    <thead>
+        <tr>
+            <th scope="col">담은상품</th>
+            <th scope="col">수량</th>
+            <th scope="col">금액</th>
+            <th scope="col">등록일</th>
+        </tr>
+    </thead>
+        <tbody>
+            <tr th:each="dto : ${list}">
+                <td>
+                    <a th:href="@{/item/read(itemNo = ${dto.itemNo})}">
+                        [[${dto.itemName}]]
+                    </a>
+                </td>
+                <td>
+                    <input class="form-control text-center me-3 inputQuantity" type="number" value="1"
+                        style="max-width: 3rem" min="1" data-price="[[${dto.price}]]">
+                </td>
+                <td>
+                    <span class="totalAmount">[[${dto.price}]]</span>
+                </td>
+                <td>[[${#temporals.format(dto.regDate, 'yyyy/MM/dd')}]]</td>
+            </tr>
+        </tbody>
+    </table>
 
 
 
@@ -46,3 +42,9 @@
 
 	</th:block>
 </th:block>
+
+
+
+
+
+

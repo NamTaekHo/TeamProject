@@ -29,7 +29,7 @@ public class CartServiceImpl implements CartService {
 		Cart entity = dtoToEntity(dto);
 		cartRepository.save(entity);
 
-		return entity.getCartNo();
+		return entity.getNo();
 	}
 
 	@Override
@@ -87,7 +87,7 @@ public class CartServiceImpl implements CartService {
 //
 	@Override
 	public List<CartDTO> getList() {
-		List<Cart> result = cartRepository.findAll();
+		List<Cart> result = cartRepository.findAll(); //사용자별 목록조회 호출하도록 변경
 		List<CartDTO> dtoList = new ArrayList<>(); 
 		dtoList =result.stream()
 		.map(entity -> entityToDto(entity))

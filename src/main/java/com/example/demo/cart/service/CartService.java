@@ -52,6 +52,7 @@ public interface CartService {
 				.cartNo(entity.getCartNo())
 				.itemNo(entity.getItemNo().getItemNo()) //참고해서
 				.itemName(entity.getItemNo().getItemName())
+				.price(entity.getItemNo().getPrice())
 				.id(entity.getId().getId())
 				.regDate(entity.getRegDate())
 				.modDate(entity.getModDate())
