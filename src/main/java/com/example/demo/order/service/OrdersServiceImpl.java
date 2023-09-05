@@ -9,6 +9,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.cart.repository.CartRepository;
+import com.example.demo.member.repository.MemberRepository;
 import com.example.demo.order.dto.OrdersDTO;
 import com.example.demo.order.entity.Orders;
 import com.example.demo.order.repository.OrderRepository;
@@ -22,12 +24,21 @@ public class OrdersServiceImpl implements OrdersService{
 	
 	@Autowired
 	OrdersItemRepository ordersItemRepository;
+	
+	@Autowired
+	CartRepository cartRepository;
+	
+	@Autowired
+	MemberRepository memberRepository;
 
 	@Override
-	public int register(OrdersDTO dto) {
-		Orders order = dtoToEntity(dto);
-		orderRepository.save(order);
-		return dto.getOrderNo();
+	public int register(String memberID) {
+		//회원 아이디 사용해서 장바구니 목록 가져오기
+		
+		
+//		Orders order = dtoToEntity(dto);
+//		orderRepository.save(order);
+		return 0;
 	}
 	
 	@Override
