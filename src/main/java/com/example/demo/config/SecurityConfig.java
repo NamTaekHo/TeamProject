@@ -29,10 +29,10 @@ public class SecurityConfig {
 		http.csrf().disable();
 		http.logout();
 		
-//		http.formLogin()
-//		.loginPage("/customlogin")
-//		.loginProcessingUrl("login")
-//		.permitAll();
+		http.formLogin()
+		.loginPage("/customlogin")
+		.loginProcessingUrl("login")
+		.permitAll();
 		
 	
 		return http.build();

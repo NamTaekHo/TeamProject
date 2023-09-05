@@ -31,7 +31,7 @@ public class Cart extends BaseEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int cartNo;
 	
-	@Id //id 추가 9/4
+//	@Id //id 추가 9/4 이거만 풀면 됨
 	@ManyToOne
 	private Item itemNo;
 
