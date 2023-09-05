@@ -27,7 +27,7 @@ public class Orders extends BaseEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	int orderNo;
+	private int orderNo;
 
 	@ManyToOne
 	private Member id;

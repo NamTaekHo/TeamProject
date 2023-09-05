@@ -1,8 +1,8 @@
-package com.example.demo.cart.entity;
+package com.example.demo.ordersItem.entity;
 
 import com.example.demo.config.BaseEntity;
 import com.example.demo.item.entity.Item;
-import com.example.demo.member.entity.Member;
+import com.example.demo.order.entity.Orders;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -21,27 +21,24 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
-public class Cart extends BaseEntity {
-
+public class OrdersItem extends BaseEntity{
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int cartNo;
+	private int no;
 	
-<<<<<<< HEAD
-//	@Id //id 추가 9/4 이거만 풀면 됨
-=======
-//	@Id //id 추가 9/4 //주석 풀고 여기부터 지우면 됨
->>>>>>> refs/remotes/origin/feature/taco0904
 	@ManyToOne
-	private Item itemNo;
-
+	private Item iNo;
+	
 	@ManyToOne
-	private Member id;
-
-	@Column(nullable = true)
-	int count;
-
+	private Orders oNo;
+	
+	@Column(nullable = false)
+	private int price;
+	
+	@Column(nullable = false)
+	private int count;
 }
