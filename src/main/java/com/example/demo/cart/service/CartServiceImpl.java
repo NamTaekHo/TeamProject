@@ -1,5 +1,6 @@
 package com.example.demo.cart.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -74,24 +75,25 @@ public class CartServiceImpl implements CartService {
 	}
 	//카트페이지 만들기 9/4 페이지, 리스트 추가
 	
-	@Override
-	public Page<CartDTO> getList(int pageNumber) {
-	int pageNum = (pageNumber == 0) ? 0 : pageNumber-1;
-	Pageable pageable = PageRequest.of(pageNum, 5, Sort.by("cartNo").descending());
-	Page<Cart> entityPage= cartRepository.findAll(pageable);
-	Page<CartDTO> dtoPage = entityPage.map(entity -> entityToDto(entity));
-
-	return dtoPage;
-	}
-
+//	@Override
+//	public Page<CartDTO> getList(int pageNumber) {
+//	int pageNum = (pageNumber == 0) ? 0 : pageNumber-1;
+//	Pageable pageable = PageRequest.of(pageNum, 5, Sort.by("cartNo").descending());
+//	Page<Cart> entityPage= cartRepository.findAll(pageable);
+//	Page<CartDTO> dtoPage = entityPage.map(entity -> entityToDto(entity));
+//
+//	return dtoPage;
+//	}
+//
 	@Override
 	public List<CartDTO> getList() {
-	List<Cart> entityList = cartRepository.findAll();
-	List<CartDTO> dtoList = entityList.stream()
-	.map(entity -> entityToDto(entity))
-	.collect(Collectors.toList());
-
-	return dtoList;
+		List<Cart> result = cartRepository.findAll();
+		List<CartDTO> dtoList = new ArrayList<>(); 
+		dtoList =result.stream()
+		.map(entity -> entityToDto(entity))
+		.collect(Collectors.toList());
+	
+		return dtoList;
 	}
 	
 	

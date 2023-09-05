@@ -17,9 +17,14 @@ import lombok.ToString;
 @Builder
 public class CartDTO {
 	
+	private int no;
+	
 	private int cartNo;
 	
 	private int itemNo;
+	
+	private String itemName;
+	//아이템 정보 필드 추가
 	
 	private String id;
 	

@@ -25,23 +25,21 @@ import lombok.ToString;
 @NoArgsConstructor
 @Builder
 public class Cart extends BaseEntity {
-
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int no;
+
+	@Column(nullable = false)
 	private int cartNo;
 	
-<<<<<<< HEAD
-//	@Id //id 추가 9/4 이거만 풀면 됨
-=======
-//	@Id //id 추가 9/4 //주석 풀고 여기부터 지우면 됨
->>>>>>> refs/remotes/origin/feature/taco0904
 	@ManyToOne
 	private Item itemNo;
 
 	@ManyToOne
 	private Member id;
 
-	@Column(nullable = true)
-	int count;
+	@Column(nullable = false)
+	private int count;
 
 }

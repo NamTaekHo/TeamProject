@@ -18,61 +18,61 @@ import com.example.demo.item.service.ItemService;
 @RequestMapping("/item")
 public class ItemController {
 
-@Autowired
-private ItemService service;
+	@Autowired
+	private ItemService service;
 
-//상품 홈
-@GetMapping("/itemList")
-public void list(@RequestParam(defaultValue = "0")int page, Model model) {
-Page<ItemDTO> list = service.getList(page);
-model.addAttribute("list",list);
-}
+	//상품 홈
+	@GetMapping("/itemList")
+	public void list(@RequestParam(defaultValue = "0")int page, Model model) {
+		Page<ItemDTO> list = service.getList(page);
+		model.addAttribute("list",list);
+	}
 
-//상품 등록화면
-@GetMapping("/register")
-public void register(){
-
-}
-
-
-//상품 등록
-@PostMapping("/register")
-public String registerItem(ItemDTO dto, RedirectAttributes redirectAttributes){
-int itemNo = service.register(dto);
-redirectAttributes.addFlashAttribute("itemNo", itemNo);
-return "redirect:/item/itemList";
-}
-
-
-//상품 상세페이지
-@GetMapping("/read")
-public void read(int itemNo, @RequestParam(defaultValue = "0")int page, Model model) {
-ItemDTO dto= service.read(itemNo);
-model.addAttribute("dto", dto);
-model.addAttribute("page", page);
-}
-
-//상품 수정페이지
-@GetMapping("/modify")
-public void modify(int itemNo, Model model) {
-ItemDTO dto=service.read(itemNo);
-model.addAttribute("dto", dto);
-}
-
-//상품 수정하기
-@PostMapping("/modify")
-public String modifyItem(ItemDTO dto, RedirectAttributes redirectAttributes) {
-service.modify(dto);
-redirectAttributes.addAttribute("itemNo", dto.getItemNo());
-return "redirect:/item/read";
-}
-
-
-//상품 삭제하기
-@PostMapping("/remove")
-public String removeItem(int itemNo) {
-service.remove(itemNo);
-return "redirect:/item/itemList";
-}
+	//상품 등록화면
+	@GetMapping("/register")
+	public void register(){
+	
+	}
+	
+	
+	//상품 등록
+	@PostMapping("/register")
+	public String registerItem(ItemDTO dto, RedirectAttributes redirectAttributes){
+		int itemNo = service.register(dto);
+		redirectAttributes.addFlashAttribute("itemNo", itemNo);
+		return "redirect:/item/itemList";
+	}
+	
+	
+	//상품 상세페이지
+	@GetMapping("/read")
+	public void read(int itemNo, @RequestParam(defaultValue = "0")int page, Model model) {
+		ItemDTO dto= service.read(itemNo);
+		model.addAttribute("dto", dto);
+		model.addAttribute("page", page);
+	}
+	
+	//상품 수정페이지
+	@GetMapping("/modify")
+	public void modify(int itemNo, Model model) {
+		ItemDTO dto=service.read(itemNo);
+		model.addAttribute("dto", dto);
+	}
+	
+	//상품 수정하기
+	@PostMapping("/modify")
+	public String modifyItem(ItemDTO dto, RedirectAttributes redirectAttributes) {
+		service.modify(dto);
+		redirectAttributes.addAttribute("itemNo", dto.getItemNo());
+		return "redirect:/item/read";
+	}
+	
+	
+	//상품 삭제하기
+	@PostMapping("/remove")
+	public String removeItem(int itemNo) {
+		service.remove(itemNo);
+		return "redirect:/item/itemList";
+	}
 
 } //컨트롤러
