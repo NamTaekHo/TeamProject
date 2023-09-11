@@ -10,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.example.demo.cart.entity.Cart;
 import com.example.demo.cart.repository.CartRepository;
+import com.example.demo.cart.service.CartService;
 import com.example.demo.item.entity.Item;
 import com.example.demo.item.repository.ItemRepository;
 import com.example.demo.member.entity.Member;
@@ -20,6 +21,9 @@ public class CartRepositoryTest2 {
 
 	@Autowired
 	CartRepository cartRepository;
+	
+	@Autowired
+	CartService cartService;
 	
 	@Autowired
 	MemberRepository memberRepository;
@@ -42,5 +46,41 @@ public class CartRepositoryTest2 {
 		cartRepository.saveAll(list);
 		
 		
+	}
+	
+//	@Test
+//	public void 쿼리테스트1_dto로표시() {
+//		List<Cart> list = cartRepository.selectCartByID("나무라코");
+//		List<CartDTO> dtolist = new ArrayList<>();
+//		for(int i = 0; i<list.size(); i++) {
+//			Cart c =  list.get(i);
+//			CartDTO dto = cartService.entityToDto(c);
+//			dtolist.add(dto);
+//		}
+//		System.out.println(dtolist);
+//		
+//	}
+	
+//	@Test
+//	public void 쿼리테스트2 () {
+//		Optional<Member> result = memberRepository.findById("나무라코");
+//		Member member = result.get();
+//		List<Cart> list = cartRepository.selectCartByID(member);
+//		System.out.println(list);
+//	}
+	
+//	@Test
+//	public void 쿼리테스트3() {
+//		List<Cart> list = cartRepository.getCartByMemberId("나무라코");
+//		System.out.println(list);
+//	}
+	
+	@Test
+	public void 쿼리테스트4() {
+		List<Cart> list = cartRepository.getCartByMemberId("나무라코");
+		for(Cart cart : list) {
+			System.out.println(cart);
+		}
+//		System.out.println(list);
 	}
 }

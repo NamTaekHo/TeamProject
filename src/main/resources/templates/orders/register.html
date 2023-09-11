@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<th:block th:replace="~{/layout/basic2 :: setContent(~{this::content} )}">
+
+	<th:block th:fragment="content">
+
+		<h1>주문 상품</h1>
+
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th scope="col">상품명</th>
+					<th scope="col">수량</th>
+					<th scope="col">상품금액</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="cartDTO : ${list}">
+					<th scope="row">
+						<a th:href="@{/item/read(itemNo = ${cartDTO.itemNo})}">
+							[[${cartDTO.itemName}]]
+						</a>
+					</th>
+					<td>[[${cartDTO.count}]]</td>
+					<td>금액</td>
+				</tr>
+			</tbody>
+</table>
+
+<br><br>
+<h1 class="mt-4">주문자 정보</h1>
+
+        <form>
+        <div class="form-group">
+            <label >주문자 아이디</label>
+            <input type="text" class="form-control" name="id" th:value="${memberDTO.id}" readonly >
+        </div>
+        
+        <div class="form-group">
+            <label >수령인</label>
+            <input type="text" class="form-control" name="name" th:value="${memberDTO.name}">
+        </div>
+
+        <div class="form-group">
+            <label >연락처</label>
+            <input type="text" class="form-control" name="pNumber" th:value="${memberDTO.pNumber}" >
+        </div>
+        <div class="form-group">
+            <label >배송지</label>
+            <textarea class="form-control" rows="3" name="content">[[${memberDTO.address}]]</textarea>
+        </div>
+        <div class="form-group">
+            <label >이메일</label>
+            <input type="text" class="form-control" name="email" th:value="${memberDTO.Email}" readonly>
+        </div>
+
+        <div>
+         <div>
+			<span>총 주문금액</span><br>
+			<span>가격</span><span>원</span>
+		 </div>
+        </div>
+        
+      </form>
+      <button type="button" class="btn btn-primary modifyBtn">결제하기</button>
+
+      <button type="button" class="btn btn-info listBtn">취소</button>
+
+
+
+
+		
+
+
+	</th:block>
+</th:block>
