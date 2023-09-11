@@ -27,12 +27,12 @@ public class CartServiceTest {
 //		}
 //	}
 	
-	@Test
-	public void 데이터조회() {
-		CartDTO dto = service.read(14);
-		
-		System.out.println(dto);
-	}
+//	@Test
+//	public void 데이터조회() {
+//		CartDTO dto = service.read(14);
+//		
+//		System.out.println(dto);
+//	}
 	
 	@Test
 	public void 데이터전체조회() {

@@ -29,10 +29,14 @@
                     <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1"
                         style="max-width: 3rem" />
                     <div class="d-flex justify-content-between">
-                        <button class="btn btn-outline-dark flex-shrink-0" type="button">
+						
+						<a th:href="@{/cart/register}" th:method="post">
+                        <button  class="btn btn-outline-dark flex-shrink-0" type="button">
                             <i class="bi-cart-fill me-1"></i>
                             Add to cart
                         </button>
+						</a>
+						
                         <div class="ms-2"></div> <!-- 여기서 간격 조절 -->
                         
                         <button class="btn btn-outline-dark flex-shrink-0" type="button">

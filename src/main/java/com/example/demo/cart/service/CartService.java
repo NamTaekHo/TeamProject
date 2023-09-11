@@ -14,7 +14,7 @@ public interface CartService {
 	
 	int register(CartDTO dto);
 	
-	CartDTO read(int cartNo);
+//	CartDTO read(int cartNo);//id로 읽기?
 	
 	void modify(CartDTO dto);
 	
@@ -22,10 +22,8 @@ public interface CartService {
 	
 	
 	//카트페이지 만들기 9/4 페이지, 리스트 추가
-	
-//	Page<CartDTO> getList(int pageNumber);
-//	
-	List<CartDTO> getList();
+
+	List<CartDTO> getList(String id);
 	
 	
 	
@@ -36,7 +34,6 @@ public interface CartService {
 		Item item = Item.builder().itemNo(dto.getItemNo()).build();
 		
 		Cart entity = Cart.builder()
-				.cartNo(dto.getCartNo())
 				.itemNo(item)
 				.id(member)
 				.count(dto.getCount())
@@ -49,9 +46,9 @@ public interface CartService {
 	//entityToDto 변환
 	default CartDTO entityToDto(Cart entity) {
 		CartDTO dto = CartDTO.builder()
-				.cartNo(entity.getCartNo())
 				.itemNo(entity.getItemNo().getItemNo()) //참고해서
 				.itemName(entity.getItemNo().getItemName())
+				.price(entity.getItemNo().getPrice())
 				.id(entity.getId().getId())
 				.regDate(entity.getRegDate())
 				.modDate(entity.getModDate())
