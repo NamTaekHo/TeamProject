@@ -36,18 +36,13 @@ public class CartRepositoryTest {
 	public void 데이터등록() {
 		List<Cart> list = new ArrayList<>();
 		Item item1 = Item.builder().itemNo(1).build();
-		Member member1 = Member.builder().id("10aa").build();
+		Member member1 = Member.builder().id("나무라코").build();		
+		Item item2 = Item.builder().itemNo(2).build();
+		Item item3 = Item.builder().itemNo(3).build();
 		
-		Item item2 = Item.builder().itemNo(23).build();
-		Member member2 = Member.builder().id("11aa").build();
-		
-		Item item3 = Item.builder().itemNo(30).build();
-		Member member3 = Member.builder().id("12aa").build();
-		
-		list.add(new Cart(0, 1, item3, member1, 2));
-		list.add(new Cart(0, 2, item3, member3, 3));
-		list.add(new Cart(0, 3, item3, member2, 1));
-		list.add(new Cart(0, 4, item3, member3, 2));
+		list.add(new Cart(0, item1, member1, 2));
+		list.add(new Cart(0, item2, member1, 3));
+		list.add(new Cart(0, item3, member1, 1));
 		
 		cartRepository.saveAll(list);		
 	}
@@ -96,32 +91,49 @@ public class CartRepositoryTest {
 	
 	
 	
-	@Test
-	@DisplayName("장바구니 엔티티를 생성해서 장바구니 리파지토리에 저장에 성공해야한다.")
-	public void save() {
-		//given
-		Item item2 = itemRepository.findById(2).get();
-		Member aa = memberRepository.findById("aa").get();
-		
-		Cart cart2 = Cart.builder()
-		.cartNo(1)
-		.itemNo(item2)
-		.id(aa)
-		.count(1)
-		.build();
-		
-		//when
-		cartRepository.save(cart2);
-		
-		
-//		//then
-//		List<Cart> carts = cartRepository.findAll();
-//		System.out.println(""+carts.size());
+//	@Test
+//	@DisplayName("장바구니 엔티티를 생성해서 장바구니 리파지토리에 저장에 성공해야한다.")
+//	public void save() {
+//		//given
+//		Item item2 = itemRepository.findById(2).get();
+//		Member aa = memberRepository.findById("aa").get();
 //		
-//		Assertions.assertThat(carts).hasSize(1);
-		
-			
+//		Cart cart2 = Cart.builder()
+////		.cartNo(1)
+//		.itemNo(item2)
+//		.id(aa)
+//		.count(1)
+//		.build();
+//		
+//		//when
+//		cartRepository.save(cart2);
+//		
+//		
+////		//then
+////		List<Cart> carts = cartRepository.findAll();
+////		System.out.println(""+carts.size());
+////		
+////		Assertions.assertThat(carts).hasSize(1);
+//		
+//			
+//	}
+	
+//	@Test
+//	public void 아이디별로장바구니목록확인test() {
+//		
+//		List<E>
+//		
+//	}
+	
+	@Test
+	public void 쿼리테스트1() {
+		List<Cart> list = cartRepository.selectCartByID("나무라코");
+		for(Cart c : list) {
+			System.out.println(c);
+		}
+		System.out.println();
 	}
+	
 	
 
 

@@ -26,31 +26,37 @@ public class CartServiceImpl implements CartService {
 
 	@Override
 	public int register(CartDTO dto) {
+		
+		//장바구니에 로그인한 아이디 set
+		
+		//데이터베이스 저장
+		
+		
 		Cart entity = dtoToEntity(dto);
 		cartRepository.save(entity);
 
 		return entity.getNo();
 	}
 
-	@Override
-	public CartDTO read(int cartNo) {
-		Optional<Cart> result = cartRepository.findById(cartNo);
-
-		if (result.isPresent()) {
-			Cart cart = result.get();
-			return entityToDto(cart);
-			
-		}else {
-			
-			return null;
-		}
-
-	}
+//	@Override
+//	public CartDTO read(int cartNo) {
+//		Optional<Cart> result = cartRepository.findById(cartNo);
+//
+//		if (result.isPresent()) {
+//			Cart cart = result.get();
+//			return entityToDto(cart);
+//			
+//		}else {
+//			
+//			return null;
+//		}
+//
+//	}
 
 	@Override
 	public void modify(CartDTO dto) {
 		
-		Optional<Cart> result = cartRepository.findById(dto.getCartNo());
+		Optional<Cart> result = cartRepository.findById(dto.getNo());
 		
 		if(result.isPresent()) {
 			Cart entity = result.get();
@@ -64,7 +70,7 @@ public class CartServiceImpl implements CartService {
 
 	@Override
 	public void remove(CartDTO dto) {
-		Optional<Cart> result = cartRepository.findById(dto.getCartNo());
+		Optional<Cart> result = cartRepository.findById(dto.getNo());
 		
 		if(result.isPresent()) {
 			Cart entity = result.get();
@@ -75,25 +81,23 @@ public class CartServiceImpl implements CartService {
 	}
 	//카트페이지 만들기 9/4 페이지, 리스트 추가
 	
-//	@Override
-//	public Page<CartDTO> getList(int pageNumber) {
-//	int pageNum = (pageNumber == 0) ? 0 : pageNumber-1;
-//	Pageable pageable = PageRequest.of(pageNum, 5, Sort.by("cartNo").descending());
-//	Page<Cart> entityPage= cartRepository.findAll(pageable);
-//	Page<CartDTO> dtoPage = entityPage.map(entity -> entityToDto(entity));
-//
-//	return dtoPage;
-//	}
-//
-	@Override
-	public List<CartDTO> getList() {
-		List<Cart> result = cartRepository.findAll(); //사용자별 목록조회 호출하도록 변경
-		List<CartDTO> dtoList = new ArrayList<>(); 
-		dtoList =result.stream()
-		.map(entity -> entityToDto(entity))
-		.collect(Collectors.toList());
 	
-		return dtoList;
+//	@Override
+//	public List<CartDTO> getList() {
+//		//사용자별 목록조회 호출하도록 변경
+//		List<Cart> result = cartRepository.findAll(); 
+//		List<CartDTO> dtoList = new ArrayList<>(); 
+//		dtoList =result.stream()
+//		.map(entity -> entityToDto(entity))
+//		.collect(Collectors.toList());
+//	
+//		return dtoList;
+//	}
+
+	@Override
+	public List<CartDTO> getList(String id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	

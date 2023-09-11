@@ -30,8 +30,8 @@ public class Cart extends BaseEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int no;
 
-	@Column(nullable = false)
-	private int cartNo;
+//	@Column(nullable = false)
+//	private int cartNo;
 	
 	@ManyToOne
 	private Item itemNo;

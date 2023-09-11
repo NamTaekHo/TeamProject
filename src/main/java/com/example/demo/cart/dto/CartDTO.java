@@ -19,8 +19,6 @@ public class CartDTO {
 	
 	private int no;
 	
-	private int cartNo;
-	
 	private int itemNo;
 	
 	private String itemName;
