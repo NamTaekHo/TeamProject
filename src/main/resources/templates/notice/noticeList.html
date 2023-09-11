@@ -9,7 +9,7 @@
 		<h1>공 지 사 항
 		 	<span>
                 <a th:href="@{/notice/register}">
-                    <button type="button" class="btn btn-outline-primary">공지 등록</button>
+                    <button type="button" class="btn btn-outline-primary" sec:authorize="hasAnyRole('ROLE_ADMIN')" th:href="@{/notice/register}">공지 등록</button>
                 </a>
             </span>
 		</h1><br>

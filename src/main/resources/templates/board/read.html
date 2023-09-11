@@ -212,9 +212,10 @@
 		</script>
 
         <!-- 댓글끝 -->
-
+        
+        
         <a th:href="@{/board/modify(boardNo = ${dto.boardNo})}">
-        	<button type="button" class="btn btn-primary">수정</button>
+        	<button type="button" class="btn btn-primary" th:if="${dto.id == memberId}">수정</button>
         </a>
 
         <!-- 목록페이지 링크 수정 -->

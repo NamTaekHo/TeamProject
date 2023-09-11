@@ -15,10 +15,16 @@ public class HomeController {
 
 	@Autowired
 	private ItemService service;
+	
+	
 
 	@GetMapping("/")
-	public String home() {
+	public String mainHome(@RequestParam(defaultValue = "0") int page, Model model) {
+		Page<ItemDTO> list = service.getList(page);
+		model.addAttribute("list",list);
 		return "home/main";
+		
+	
 	}
 
 	

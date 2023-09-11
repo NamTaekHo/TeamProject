@@ -7,7 +7,7 @@
 		<br><h1>상품 전체 페이지  
 		 	<span>
                 <a th:href="@{/item/register}">
-                    <button type="button" class="btn btn-outline-primary">상품 등록</button>
+                    <button type="button" class="btn btn-outline-primary" sec:authorize="hasAnyRole('ROLE_ADMIN')" th:href="@{/item/register}">상품 등록</button>
                 </a>
             </span>
 		</h1><br><br>		

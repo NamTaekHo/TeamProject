@@ -1,6 +1,12 @@
 
 package com.example.demo.board.controller;
 
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+import java.security.Principal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -13,6 +19,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.board.dto.BoardDTO;
 import com.example.demo.board.service.BoardService;
+import com.example.demo.member.dto.MemberDTO;
+import com.example.demo.member.entity.Member;
+import com.example.demo.member.repository.MemberRepository;
 
 @Controller
 @RequestMapping("/board")
@@ -36,7 +45,9 @@ public class BoardController {
 	
 	//게시물 등록
 	@PostMapping("/register")
-	public String registerPost(BoardDTO dto, RedirectAttributes redirectAttributes) {
+	public String registerPost(BoardDTO dto, RedirectAttributes redirectAttributes,Principal principal) {
+		String memberId = principal.getName();
+		dto.setId(memberId);
 		int boardNo = service.register(dto);
 		redirectAttributes.addFlashAttribute("msg", boardNo);
 		return "redirect:/board/boardList";
@@ -44,11 +55,21 @@ public class BoardController {
 	
 	//게시물 상세페이지
 	@GetMapping("/read")
-	public void read(int boardNo, @RequestParam(defaultValue = "0") int page, Model model) {
+	public void read(int boardNo,@RequestParam(defaultValue = "0") int page, Model model, Principal principal,BoardDTO boardDTO) {//int boardNo,
+		String memberId = principal.getName();
+		boardDTO.setId(memberId);	
 		BoardDTO dto = service.read(boardNo);
+		
 		model.addAttribute("dto", dto);
 		model.addAttribute("page", page);
+		model.addAttribute("memberId",memberId);
 	}
+	
+//	@Retention(RetentionPolicy.RUNTIME)
+//	@Target(ElementType.PARAMETER)
+//	public @interface LoginUser{
+		
+//	}
 	
 	//게시물 수정페이지
 	@GetMapping("/modify")

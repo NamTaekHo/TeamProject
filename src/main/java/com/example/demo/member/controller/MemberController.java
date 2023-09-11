@@ -21,7 +21,7 @@ import com.example.demo.member.service.MemberService;
 import lombok.extern.log4j.Log4j2;
 
 @Controller
-//@RequestMapping("/member")
+//회원가입시 스크립트 적용하기 2023/09/11
 public class MemberController {
 
 	@Autowired
@@ -40,13 +40,6 @@ public class MemberController {
 //		model.addAttribute("dto",dto);
 //	}
 
-//	@GetMapping("/read")
-//	public void read(String id, @RequestParam(defaultValue = "0") int page, Model model) {
-//		MemberDTO dto = service.read(id);
-//		
-//		model.addAttribute("dto",dto);
-//		model.addAttribute("page", page);
-//	}
 
 	@GetMapping("/member/modify") // 회원 수정페이지
 	public void modify(String id, Model model) {
@@ -77,12 +70,12 @@ public class MemberController {
 	public String registerPost(MemberDTO dto, RedirectAttributes attributes) {
 		boolean isSuccess = service.register(dto);
 		if (isSuccess) {
+//			attributes.addFlashAttribute("msg2","회원가입을 축하드립니다.");
 			return "redirect:/";
 		} else {
 			attributes.addFlashAttribute("msg", "아이디가 중복되어 등록에 실패하였습니다");
 			return "redirect:/register";
-
-		}
+		}		
 	}
 
 	@GetMapping("/member/read") // 상세페이지

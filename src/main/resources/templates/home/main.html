@@ -4,12 +4,12 @@
 <th:block th:replace="~{/layout/basic2 :: setContent(~{this::content} )}"> <!-- 템플릿 조각 전달 -->
 	<th:block th:fragment="content"> <!-- 템플릿 만들기 -->
 	
-		<br><h1>상품 전체 페이지  
-		 	<span>
+		<br><h1>메인페이지 
+<!--		 	<span>
                 <a th:href="@{/item/register}">
                     <button type="button" class="btn btn-outline-primary">상품 등록</button>
                 </a>
-            </span>
+            </span>-->
 		</h1><br><br>		
 		
 		<!--상품 6개씩 페이징처리-->	
@@ -47,14 +47,14 @@
 
 		
 		<!--상품등-->
-		<script th:inline="javascript">
+<!--		<script th:inline="javascript">
 			$(document).ready(function(){
 			  var itemNo = [[${itemNo}]]
 			  if(itemNo != null){
 				  alert(itemNo + "번 상품이 등록되었습니다.");
 			  }
 			});
-		</script>
+		</script>-->
 		
 	</th:block>
 </th:block>

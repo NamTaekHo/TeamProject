@@ -66,7 +66,7 @@
             	<img th:src="@{'/aa/'+${dto.image}}">
         	</div>-->
         	        <a th:href="@{/item/modify(itemNo = ${dto.itemNo})}">
-            <button type="button" class="btn btn-primary">상품정보 수정하기</button>
+            <button type="button" class="btn btn-primary" sec:authorize="hasAnyRole('ROLE_ADMIN')" th:href="@{/item/read}">상품정보 수정하기</button>
         </a>
 
         <!-- 목록페이지 링크 수정 -->
