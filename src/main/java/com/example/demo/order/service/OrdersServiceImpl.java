@@ -1,5 +1,7 @@
 package com.example.demo.order.service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +11,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.cart.entity.Cart;
 import com.example.demo.cart.repository.CartRepository;
+import com.example.demo.member.entity.Member;
 import com.example.demo.member.repository.MemberRepository;
 import com.example.demo.order.dto.OrdersDTO;
 import com.example.demo.order.entity.Orders;
@@ -30,14 +34,33 @@ public class OrdersServiceImpl implements OrdersService{
 	
 	@Autowired
 	MemberRepository memberRepository;
+	
 
 	@Override
-	public int register(String memberID) {
+	public int register(String memberId) {
+		// 인자로 전달받은 String id 로 멤버 객체 찾기
+		Optional<Member> result = memberRepository.findById(memberId);
+		Member member = result.get();
+		
+		
 		//회원 아이디 사용해서 장바구니 목록 가져오기
+		List<Cart> cartlist = cartRepository.getCartByMemberId(memberId);
+		List<Orders> olist = new ArrayList<>();
+		for(Cart cart : cartlist) {
+			Orders orders = Orders.builder()
+					.orderNo(0)
+					.id(member)
+					.receiverName(member.getName())
+					.receiverPhone(member.getPNumber())
+					.shipAddress(member.getAddress())
+					.totalPrice(0)
+					.build();
+			olist.add(orders);
+					
+
+		}
 		
-		
-//		Orders order = dtoToEntity(dto);
-//		orderRepository.save(order);
+
 		return 0;
 	}
 	
