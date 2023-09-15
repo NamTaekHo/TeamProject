@@ -9,6 +9,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.board.entity.Board;
+import com.example.demo.board.repository.BoardRepository;
+import com.example.demo.board.service.BoardService;
 import com.example.demo.member.dto.MemberDTO;
 import com.example.demo.member.entity.Member;
 import com.example.demo.member.repository.MemberRepository;
@@ -23,6 +26,12 @@ public class MemberServiceImpl implements MemberService {
 
 	@Autowired
 	private MemberRepository memberRepository;
+	
+	@Autowired
+	private BoardRepository boardRepository;
+	
+	@Autowired
+	private BoardService boardService;
 
 	@Override // 게시판 페이지
 	public Page<MemberDTO> getlist(int page) {
@@ -97,12 +106,31 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public void delete(MemberDTO dto) {
 		Optional<Member> result = memberRepository.findById(dto.getId());
+		Member entity = result.get();
 		if (result.isPresent()) {
-
-			Member entity = result.get();
-
+			boardRepository.deleteBoardByMember(entity);
 			memberRepository.delete(entity);
+			
 		}
 	}
+
+	@Override
+	public String remove(String id) {
+		Optional<Member> result = memberRepository.findById(id);
+		Member member = result.get();
+		if(result.isPresent()) {
+			List<Board> boardList = boardRepository.getBoardByMember(member);
+			for(Board b : boardList) {
+				boardService.remove(b.getBoardNo());
+			}
+			boardRepository.deleteBoardByMember(member);
+			memberRepository.deleteById(id);
+			return "1";
+		}else {
+			return "0";
+		}
+		
+	}
+
 
 }

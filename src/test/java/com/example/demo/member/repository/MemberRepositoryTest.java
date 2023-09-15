@@ -108,7 +108,7 @@ public class MemberRepositoryTest {
 	
 	@Test
 	public void 데이터삭제() {
-		Optional<Member> result = memberRepository.findById("ccc");
+		Optional<Member> result = memberRepository.findById("cc");
 		if(result.isPresent()) {
 			Member member = result.get();
 			memberRepository.delete(member);

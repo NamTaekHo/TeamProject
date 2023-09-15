@@ -31,7 +31,7 @@ public class HomeController {
 
 	@GetMapping("/customlogin")
 	public String customLogin() {
-		return "/home/login";
+		return "home/login";
 	}
 
 }

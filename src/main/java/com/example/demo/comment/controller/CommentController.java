@@ -1,5 +1,6 @@
 package com.example.demo.comment.controller;
 
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,9 +37,11 @@ public class CommentController {
 	
 	// 댓글 등록
 	@PostMapping("/register")
-	public ResponseEntity<Integer> register(CommentDTO commentDTO){
+	public ResponseEntity<Integer> register(CommentDTO commentDTO){//, Principal principal
+//		String id = principal.getName();
+//		commentDTO.setId(id);
 		log.info(commentDTO);
-		int commentNo = commentService.register(commentDTO);
+		int commentNo = commentService.register(commentDTO);		
 		return new ResponseEntity<>(commentNo, HttpStatus.OK);
 	}
 	
