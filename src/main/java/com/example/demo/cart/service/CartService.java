@@ -1,15 +1,11 @@
 package com.example.demo.cart.service;
-
 import java.util.List;
-
 import org.springframework.data.domain.Page;
-
 import com.example.demo.cart.dto.CartDTO;
 import com.example.demo.cart.entity.Cart;
 import com.example.demo.item.dto.ItemDTO;
 import com.example.demo.item.entity.Item;
 import com.example.demo.member.entity.Member;
-
 public interface CartService {
 	
 	int register(CartDTO dto);
@@ -22,7 +18,6 @@ public interface CartService {
 	
 	
 	//카트페이지 만들기 9/4 페이지, 리스트 추가
-
 	List<CartDTO> getList(String id);
 	
 	
@@ -57,5 +52,4 @@ public interface CartService {
 		
 		return dto;
 	}
-
 }
