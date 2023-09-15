@@ -16,15 +16,17 @@ public class SecurityConfig {
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		
 		http.authorizeHttpRequests()
-		.requestMatchers("/register", "/orders/*").permitAll()
-		.requestMatchers("/assets/*" ,"/css/*", "," ,"/js/*","/aa/**").permitAll()
+		.requestMatchers("/register").permitAll()
+		.requestMatchers("/assets/*" ,"/css/*","/js/*","/aa/**").permitAll()
+		.requestMatchers("/mainPage/*").permitAll()
+		.requestMatchers("/comment/**").hasAnyRole("ADMIN","USER")
 		.requestMatchers("/").hasAnyRole("ADMIN","USER")
 		.requestMatchers("/member/read").hasAnyRole("ADMIN","USER")
-		.requestMatchers("/member/memberlist").hasAnyRole("ADMIN")
-		.requestMatchers("/item/*").hasAnyRole("ADMIN","USER")
-		.requestMatchers("/board/*").hasAnyRole("ADMIN","USER")
+		.requestMatchers("/member/memberlist","/member/modify","/member/remove").hasAnyRole("ADMIN")
+		.requestMatchers("/item/**").hasAnyRole("ADMIN","USER")
+		.requestMatchers("/board/**").hasAnyRole("ADMIN","USER")
 		.requestMatchers("/cart/**").hasAnyRole("ADMIN","USER")
-		.requestMatchers("/notice/*").hasAnyRole("ADMIN","USER");
+		.requestMatchers("/notice/**").hasAnyRole("ADMIN","USER");
 		
 		http.formLogin();
 		http.csrf().disable();

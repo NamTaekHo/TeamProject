@@ -1,24 +1,19 @@
 package com.example.demo.member.controller;
 
-import java.lang.ProcessBuilder.Redirect;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
+
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.example.demo.board.dto.BoardDTO;
 import com.example.demo.member.dto.MemberDTO;
-import com.example.demo.member.entity.Member;
-import com.example.demo.member.service.MemberService;
 
-import lombok.extern.log4j.Log4j2;
+import com.example.demo.member.service.MemberService;
 
 @Controller
 //회원가입시 스크립트 적용하기 2023/09/11
@@ -33,13 +28,6 @@ public class MemberController {
 		model.addAttribute("list", list);
 
 	}
-
-//	@GetMapping("/member/mypage")//상세페이지
-//	public void mypage(String id, Model model) {
-//		MemberDTO dto = service.myPage(id);
-//		model.addAttribute("dto",dto);
-//	}
-
 
 	@GetMapping("/member/modify") // 회원 수정페이지
 	public void modify(String id, Model model) {
@@ -60,6 +48,7 @@ public class MemberController {
 		redirectAttributes.addAttribute("id", dto.getId());
 		return "redirect:/member/memberlist";
 	}
+	
 
 	@GetMapping("/register") // 회원등록 페이지
 	public String register() {
@@ -75,7 +64,7 @@ public class MemberController {
 		} else {
 			attributes.addFlashAttribute("msg", "아이디가 중복되어 등록에 실패하였습니다");
 			return "redirect:/register";
-		}		
+		}
 	}
 
 	@GetMapping("/member/read") // 상세페이지

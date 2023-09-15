@@ -62,5 +62,11 @@ public class MemberServiceTest {
 		MemberDTO dto = service.read("9aa");
 		service.delete(dto);
 	}
+	
+	@Test
+	public void 데이터삭제2() {
+		service.remove("cc");
+		System.out.println();
+	}
 
 }

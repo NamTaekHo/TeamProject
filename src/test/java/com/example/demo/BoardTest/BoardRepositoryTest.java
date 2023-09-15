@@ -70,4 +70,14 @@ public class BoardRepositoryTest {
 		}
 		
 	}
+	
+	@Test
+	public void 데이터삭제2() {
+		Optional<Member> result = memberRepository.findById("zz");
+		if(result.isPresent()) {
+			Member member = result.get();
+			repository.deleteBoardByMember(member);
+		}
+		
+	}
 }
