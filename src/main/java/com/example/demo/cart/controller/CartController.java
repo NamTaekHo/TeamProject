@@ -20,6 +20,7 @@ import com.example.demo.cart.entity.Cart;
 import com.example.demo.cart.service.CartService;
 import com.example.demo.item.dto.ItemDTO;
 import com.example.demo.item.service.ItemService;
+import com.example.demo.member.service.MemberService;
 
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
@@ -33,6 +34,9 @@ public class CartController {
 	@Autowired
 	private ItemService itemService;
 	
+	@Autowired
+	private MemberService memberService;
+	
 	
 //	@GetMapping("/cartList")  -- 원본
 //	public void list(Model model, Principal principal) {
@@ -43,8 +47,8 @@ public class CartController {
 	@GetMapping("/cartList")
 	public void list(Model model, Principal principal) {
 		//사용자아이디 꺼내고,          //이건 추후에
-		String id = principal.getName();
-		List<CartDTO> list = cartService.getList(id); //사용자아이디에 따라서 목록조회
+		String memberId = principal.getName();
+		List<CartDTO> list = cartService.getList(memberId); //사용자아이디에 따라서 목록조회
 		model.addAttribute("list", list);
 		
 		
@@ -67,13 +71,12 @@ public class CartController {
 	
 	
 	@PostMapping("/register")
-	public String registerCart(ItemDTO dto, RedirectAttributes redirectAttributes, Principal principal) { //파라미터 상품번호 수집하기
+	public String registerCart(int cartNo, RedirectAttributes redirectAttributes, Principal principal) { //파라미터 상품번호 수집하기
 		
 		//등록할 때 필요한 장바구니 데이터는 하나씩 구성하기
-		principal.getName();//
-		
-//		int no = service.register(dto);
-		int no = itemService.register(dto);		
+		String memberId =principal.getName();//
+		memberService.read(memberId);
+		int no = cartNo;
 		redirectAttributes.addFlashAttribute("no",no);
 		return "redirect:/item/itemList";
 	}

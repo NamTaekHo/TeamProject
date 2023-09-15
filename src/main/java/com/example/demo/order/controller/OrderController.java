@@ -27,12 +27,12 @@ public class OrderController {
 	@Autowired
 	MemberService memberService;
 	
-	@GetMapping("/register")
-	public void register(String memberId, Model model) {
-		MemberDTO memberDTO = memberService.read(memberId);
-		List<CartDTO> list = cartService.getList();
-		model.addAttribute("cartList", list);
-		model.addAttribute("memberDTO", memberDTO);
-	}
+//	@GetMapping("/register")
+//	public void register(String memberId, Model model) {
+//		MemberDTO memberDTO = memberService.read(memberId);
+//		List<CartDTO> list = cartService.getList();
+//		model.addAttribute("cartList", list);
+//		model.addAttribute("memberDTO", memberDTO);
+//	}
 	
 }

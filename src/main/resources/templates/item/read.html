@@ -30,12 +30,12 @@
                         style="max-width: 3rem" />
                     <div class="d-flex justify-content-between">
 						
-						<a th:href="@{/cart/register}" th:method="post">
-                        <button  class="btn btn-outline-dark flex-shrink-0" type="button">
+						
+                        <button  class="btn btn-outline-dark flex-shrink-0" onclick="registerCart()" type="button">
                             <i class="bi-cart-fill me-1"></i>
                             Add to cart
                         </button>
-						</a>
+						
 						
                         <div class="ms-2"></div> <!-- 여기서 간격 조절 -->
                         
@@ -77,6 +77,41 @@
         <a th:href="@{/item/itemList(page=${page})}">
             <button type="button" class="btn btn-info">목록으로</button>
         </a><br><br>
+        
+        
+        
+        
+        
+        
+        <script>
+			
+			$(document).ready(function() {
+				registerCart();
+			  });
+			
+			function registerCart() {
+        		var cart = [[${dto}]];
+        		
+        		 $.ajax({
+        		      type: "POST",
+        		      url: "/cart/register"+cart.itemNo,
+        		          success: function(response){
+        		    	  if(response.success){
+        		    		  alert(itemNo + "장바구니에 등록되었습니다.");
+        		    	  }
+        		        }
+        		      })
+	    	}
+			
+			
+			
+		</script>
+        
+        
+        
+        
+        
+        
         
         </th:block>
 
