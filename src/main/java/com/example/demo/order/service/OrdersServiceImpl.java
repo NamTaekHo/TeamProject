@@ -65,10 +65,10 @@ public class OrdersServiceImpl implements OrdersService{
 	}
 	
 	@Override
-	public Page<OrdersDTO> getList(int page) {
+	public Page<OrdersDTO> getList(int page, String memberId) {
 		int pageNum = (page == 0) ? 0 : page - 1; //page는 index처럼 0부터 시작.
 		Pageable pageable = PageRequest.of(pageNum, 10, Sort.by("orderNo").descending());
-		Page<Orders> entityPage = orderRepository.findAll(pageable);
+		Page<Orders> entityPage = orderRepository.getOrdersByMemberId(memberId, pageable);
 		Page<OrdersDTO> dtoPage = entityPage.map(entity -> entityToDTO(entity));
 		
 		return dtoPage;
@@ -91,7 +91,7 @@ public class OrdersServiceImpl implements OrdersService{
 		Optional<Orders> result = orderRepository.findById(orderNo);
 		if(result.isPresent()) {
 			orderRepository.deleteById(orderNo);
-			System.out.println(orderNo + " 번 주문이 삭제되었습니다.");
+			System.out.println(orderNo + " 번 주문내역이 삭제되었습니다.");
 		}
 		
 	}

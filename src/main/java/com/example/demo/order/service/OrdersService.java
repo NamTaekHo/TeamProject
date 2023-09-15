@@ -12,7 +12,7 @@ public interface OrdersService {
 	int register(String memberID);
 	
 	//주문 전체 조회
-	Page<OrdersDTO> getList(int page);
+	Page<OrdersDTO> getList(int page, String memberId);
 	
 	//주문 단건 상세조회
 	OrdersDTO read(int orderNo);

@@ -5,6 +5,10 @@ import java.util.Optional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 
 import com.example.demo.item.entity.Item;
 import com.example.demo.item.repository.ItemRepository;
@@ -30,10 +34,11 @@ public class OrdersRepositoryTest {
 		Item i = Item.builder()
 				.itemNo(2)
 				.build();
-		Member m = Member.builder()
-				.id("나무라코")
-				.build();
-		Orders o = new Orders(0, m, "남택호", "01024015119", "유천아파트", 4);
+		
+		Optional<Member> result = memberRepository.findById("나무라코");
+		Member m = result.get();
+		
+		Orders o = new Orders(0, m, m.getName(), m.getPNumber(), m.getAddress(), 51220);
 		orderRepository.save(o);
 	}
 	
@@ -42,6 +47,18 @@ public class OrdersRepositoryTest {
 		Optional<Orders> result = orderRepository.findById(1);
 		Orders order = result.get();
 		System.out.println(order);
+	}
+	
+	@Test
+	public void 쿼리테스트() {
+		int page = 1;
+		int pageNum = (page == 0) ? 0 : page - 1; //page는 index처럼 0부터 시작.
+		Pageable pageable = PageRequest.of(pageNum, 10, Sort.by("orderNo").descending());
+		Page<Orders> result = orderRepository.getOrdersByMemberId("나무라코", pageable);
+		
+		for(Orders o : result) {
+			System.out.println(o);
+		}
 	}
 	
 	

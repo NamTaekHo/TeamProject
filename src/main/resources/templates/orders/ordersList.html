@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<th:block th:replace="~{/layout/basic2 :: setContent(~{this::content} )}">
+
+	<th:block th:fragment="content">
+
+		<h1>주문 내역</h1>
+
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th scope="col">주문번호</th>
+					<th scope="col">주문자</th>
+					<th scope="col">주문금액</th>
+					<th scope="col">주문일자</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="dto : ${list}">
+					<th scope="row">
+						<a th:href="@{/orders/read(orderNo = ${dto.orderNo}, page= ${list.number + 1})}">
+							[[${dto.orderNo}]]
+						</a>
+					</th>
+					<td>[[${dto.id}]]</td>
+					<td>[[${#numbers.formatDecimal(dto.totalPrice, 1,0)}]]</td>
+					<td>[[${#temporals.format(dto.orderDate, 'yyyy/MM/dd')}]]</td>
+				</tr>
+			</tbody>
+</table>
+
+<ul class="pagination h-100 justify-content-center align-items-center">
+
+			<th:block th:each="page : ${#numbers.sequence(1, list.totalPages)}">
+				<li th:class=" 'page-item ' + ${(list.number + 1) == page?'active':''} ">
+					<a class="page-link" th:href="@{/orders/ordersList(page = ${page})}">
+						[[${page}]]
+					</a>
+				</li>
+			</th:block>
+
+		</ul>
+
+
+
+
+		
+
+
+	</th:block>
+</th:block>

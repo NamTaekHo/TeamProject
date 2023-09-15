@@ -41,8 +41,8 @@ public class CartRepositoryTest2 {
 		Item i2 = result3.get();
 		
 		List<Cart> list = new ArrayList<>();
-		list.add(new Cart(0, 1, i1, m, 2));
-		list.add(new Cart(0, 1, i2, m, 3));
+		list.add(new Cart(0, i1, m, 2));
+		list.add(new Cart(0, i2, m, 3));
 		cartRepository.saveAll(list);
 		
 		

@@ -28,9 +28,9 @@ public class OrdersItemRepositoryTest {
 	
 	@Test
 	public void 오더아이템등록() {
-		Optional<Orders> result1 = orderRepository.findById(1);
+		Optional<Orders> result1 = orderRepository.findById(3);
 		Orders orders = result1.get();
-		Optional<Item> result2 = itemRepository.findById(3);
+		Optional<Item> result2 = itemRepository.findById(4);
 		Item item = result2.get();
 		
 		OrdersItem oi = OrdersItem.builder()
@@ -44,10 +44,11 @@ public class OrdersItemRepositoryTest {
 	
 	@Test
 	public void 오더아이템조회() {
-		List<OrdersItem> list = ordersItemRepository.findAll();
-		for(OrdersItem oi : list) {
-			System.out.println(oi);
-		}
+		Optional<Orders> result1 = orderRepository.findById(3);
+		Orders orders = result1.get();
+		List<OrdersItem> list = ordersItemRepository.getOrdersItemByOrders(orders);
+		list.forEach(oi -> System.out.println(oi));
+		
 	}
 	
 	@Test
