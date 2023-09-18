@@ -19,6 +19,8 @@ import com.example.demo.member.dto.MemberDTO;
 import com.example.demo.member.service.MemberService;
 import com.example.demo.order.dto.OrdersDTO;
 import com.example.demo.order.service.OrdersService;
+import com.example.demo.ordersItem.dto.OrdersItemDTO;
+import com.example.demo.ordersItem.service.OrdersItemService;
 
 @Controller
 @RequestMapping("/orders")
@@ -32,6 +34,9 @@ public class OrdersController {
 	
 	@Autowired
 	MemberService memberService;
+	
+	@Autowired
+	OrdersItemService ordersItemService;
 	
 	// 주문 내역(리스트)
 	@GetMapping("/ordersList")
@@ -48,9 +53,11 @@ public class OrdersController {
 	public void read(int orderNo, @RequestParam(defaultValue = "0") int page, Model model, Principal principal, OrdersDTO ordersDTO) {
 		String memberId = principal.getName();
 		ordersDTO.setId(memberId);
-		OrdersDTO dto = ordersService.read(orderNo);
+		ordersDTO = ordersService.read(orderNo);
+		List<OrdersItemDTO> list = ordersItemService.getList(orderNo);
 		
-		model.addAttribute("ordersDTO", dto);
+		model.addAttribute("oIDTOList", list);
+		model.addAttribute("ordersDTO", ordersDTO);
 		model.addAttribute("page", page);
 		model.addAttribute("memberId", memberId);
 	}
@@ -70,10 +77,10 @@ public class OrdersController {
 	public String registerOrder(OrdersDTO dto, RedirectAttributes redirectAttributes, Principal principal) {
 		String memberId = principal.getName();
 		dto.setId(memberId);
-		int orderNo = ordersService.register(memberId);
+		int orderNo = ordersService.register(memberId, dto);
 		redirectAttributes.addFlashAttribute("msg", orderNo);
 		
-		return "redirect:/orders/orderList";
+		return "redirect:/orders/ordersList";
 	}
 	
 	// 주문내역 삭제

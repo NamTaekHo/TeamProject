@@ -29,7 +29,7 @@ public class OrdersDTO {
 	
 	private String shipAddress;
 	
-	private double totalPrice;
+	private int totalPrice;
 
 
 }

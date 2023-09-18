@@ -25,7 +25,7 @@ public class SecurityConfig {
 		.requestMatchers("/member/memberlist","/member/modify","/member/remove").hasAnyRole("ADMIN")
 		.requestMatchers("/item/**").hasAnyRole("ADMIN","USER")
 		.requestMatchers("/board/**").hasAnyRole("ADMIN","USER")
-		.requestMatchers("/cart/**").hasAnyRole("ADMIN","USER")
+		.requestMatchers("/cart/**", "/orders/**").hasAnyRole("ADMIN","USER")
 		.requestMatchers("/notice/**").hasAnyRole("ADMIN","USER");
 		
 		http.formLogin();

@@ -44,9 +44,7 @@ public class OrdersItemRepositoryTest {
 	
 	@Test
 	public void 오더아이템조회() {
-		Optional<Orders> result1 = orderRepository.findById(3);
-		Orders orders = result1.get();
-		List<OrdersItem> list = ordersItemRepository.getOrdersItemByOrders(orders);
+		List<OrdersItem> list = ordersItemRepository.getOrdersItemByOrders(3);
 		list.forEach(oi -> System.out.println(oi));
 		
 	}

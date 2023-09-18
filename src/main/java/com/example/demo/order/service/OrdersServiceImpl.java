@@ -39,7 +39,7 @@ public class OrdersServiceImpl implements OrdersService{
 
 	// 주문 등록(주문 등록과 동시에 주문 상품에 장바구니 내 아이템 등록)
 	@Override
-	public int register(String memberId) {
+	public int register(String memberId, OrdersDTO dto) {
 		// 인자로 전달받은 String id 로 멤버 객체 찾기
 		Optional<Member> result = memberRepository.findById(memberId);
 		Member member = result.get();
@@ -48,11 +48,11 @@ public class OrdersServiceImpl implements OrdersService{
 		Orders orders = Orders.builder()
 				.orderNo(0)
 				.id(member)
-				.receiverName(member.getName())
-				.receiverPhone(member.getPNumber())
-				.shipAddress(member.getAddress())
+				.receiverName(dto.getReceiverName())
+				.receiverPhone(dto.getReceiverPhone())
+				.shipAddress(dto.getShipAddress())
 				// totalPrice는 뷰단에서 처리
-				.totalPrice(0)
+				.totalPrice(dto.getTotalPrice())
 				.build();
 		orderRepository.save(orders);
 		
@@ -69,10 +69,11 @@ public class OrdersServiceImpl implements OrdersService{
 					.count(cart.getCount())
 					.build();
 			oItemList.add(oi);
-			// 장바구니 내 상품 등록 후 주문한 상품은 장바구니에서 삭제
-			cartRepository.deleteById(cart.getNo());
+			
 		}
+		
 		ordersItemRepository.saveAll(oItemList);
+		cartRepository.deleteCartbyMemberId(memberId);
 		
 		// 주문번호 반환
 		return orders.getOrderNo();
@@ -100,6 +101,7 @@ public class OrdersServiceImpl implements OrdersService{
 		
 	}
 	
+	
 	@Override
 	public void remove(int orderNo) {
 		Optional<Orders> result = orderRepository.findById(orderNo);
@@ -109,6 +111,8 @@ public class OrdersServiceImpl implements OrdersService{
 		}
 		
 	}
+
+	
 
 	
 

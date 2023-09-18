@@ -42,5 +42,5 @@ public class Orders extends BaseEntity {
 	private String shipAddress;
 	
 	@Column(nullable = false)
-	private double totalPrice;
+	private int totalPrice;
 }
