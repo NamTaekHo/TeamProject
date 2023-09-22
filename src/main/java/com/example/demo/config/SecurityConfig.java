@@ -17,14 +17,14 @@ public class SecurityConfig {
 		
 		http.authorizeHttpRequests()
 		.requestMatchers("/register").permitAll()
-		.requestMatchers("/assets/*" ,"/css/*","/js/*","/aa/**").permitAll()
+		.requestMatchers("/assets/**" ,"/css/*","/js/*","/aa/**").permitAll()
 		.requestMatchers("google/**").permitAll()
 		.requestMatchers("/comment/**").hasAnyRole("ADMIN","USER")
 		.requestMatchers("/").hasAnyRole("ADMIN","USER")
 		.requestMatchers("/member/read").hasAnyRole("ADMIN","USER")
 		.requestMatchers("/member/memberlist","/member/modify","/member/remove").hasAnyRole("ADMIN")
 		.requestMatchers("/item/**").hasAnyRole("ADMIN","USER")
-		.requestMatchers("/board/**").hasAnyRole("ADMIN","USER")
+		.requestMatchers("/board/**", "/orders/**", "/map/**").hasAnyRole("ADMIN","USER")
 		.requestMatchers("/cart/**").hasAnyRole("ADMIN","USER")
 		.requestMatchers("/notice/**").hasAnyRole("ADMIN","USER");
 		
