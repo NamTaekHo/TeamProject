@@ -18,6 +18,7 @@ import com.example.demo.member.repository.MemberRepository;
 import com.example.demo.order.dto.OrdersDTO;
 import com.example.demo.order.entity.Orders;
 import com.example.demo.order.repository.OrderRepository;
+import com.example.demo.ordersItem.entity.OrdersItem;
 import com.example.demo.ordersItem.repository.OrdersItemRepository;
 
 @Service
@@ -36,32 +37,46 @@ public class OrdersServiceImpl implements OrdersService{
 	MemberRepository memberRepository;
 	
 
+	// 주문 등록(주문 등록과 동시에 주문 상품에 장바구니 내 아이템 등록)
 	@Override
-	public int register(String memberId) {
+	public int register(String memberId, OrdersDTO dto) {
 		// 인자로 전달받은 String id 로 멤버 객체 찾기
 		Optional<Member> result = memberRepository.findById(memberId);
 		Member member = result.get();
 		
+		// 찾은 멤버 객체 사용해서 orders 생성
+		Orders orders = Orders.builder()
+				.orderNo(0)
+				.id(member)
+				.receiverName(dto.getReceiverName())
+				.receiverPhone(dto.getReceiverPhone())
+				.shipAddress(dto.getShipAddress())
+				// totalPrice는 뷰단에서 처리
+				.totalPrice(dto.getTotalPrice())
+				.build();
+		orderRepository.save(orders);
 		
-		//회원 아이디 사용해서 장바구니 목록 가져오기
+		
+		// 인자로 받은 memberId로 장바구니 목록 찾아서 주문상품목록에 등록
 		List<Cart> cartlist = cartRepository.getCartByMemberId(memberId);
-		List<Orders> olist = new ArrayList<>();
+		List<OrdersItem> oItemList = new ArrayList<>();
 		for(Cart cart : cartlist) {
-			Orders orders = Orders.builder()
-					.orderNo(0)
-					.id(member)
-					.receiverName(member.getName())
-					.receiverPhone(member.getPNumber())
-					.shipAddress(member.getAddress())
-					.totalPrice(0)
+			OrdersItem oi = OrdersItem.builder()
+					.no(0)
+					.iNo(cart.getItemNo())
+					.oNo(orders)
+					.price(cart.getItemNo().getPrice())
+					.count(cart.getCount())
 					.build();
-			olist.add(orders);
-					
-
+			oItemList.add(oi);
+			
 		}
 		
-
-		return 0;
+		ordersItemRepository.saveAll(oItemList);
+		cartRepository.deleteCartbyMemberId(memberId);
+		
+		// 주문번호 반환
+		return orders.getOrderNo();
 	}
 	
 	@Override
@@ -86,15 +101,20 @@ public class OrdersServiceImpl implements OrdersService{
 		
 	}
 	
+	
 	@Override
 	public void remove(int orderNo) {
 		Optional<Orders> result = orderRepository.findById(orderNo);
 		if(result.isPresent()) {
+			Orders orders = result.get();
+			ordersItemRepository.deleteOrdersItemByOrdersNo(orders);
 			orderRepository.deleteById(orderNo);
 			System.out.println(orderNo + " 번 주문내역이 삭제되었습니다.");
 		}
 		
 	}
+
+	
 
 	
 

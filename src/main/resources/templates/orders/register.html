@@ -72,7 +72,7 @@
 
 
 			
-			<button type="submit" class="btn btn-primary registerBtn">결제하기</button>
+			<button type="submit" class="btn btn-primary registerBtn">결제하기(등록)</button>
 			
 
 		</form>
@@ -85,25 +85,27 @@
 
 			function priceSum() {
 
-				var cartList = [
-					[$ {
-						cartList
-					}]
-				];
+				var cartList = [[${cartList}]];
 				var total = 0;
 				cartList.forEach(function (cart) {
-					total += cart.price;
+					total += cart.price*cart.count;
 
 				});
 				var totalElement = document.getElementById("totalPrice");
 				totalElement.textContent = "총 주문금액: " + total + " 원";
 
 				var payElement = document.getElementById("paymentAmount");
-				payElement.value = total + " 원";
+				payElement.value = total;
 
 
 
 			}
+			
+			$(".registerBtn").click(function(){
+				if(!confirm("결제하시겠습니까?")){
+					return;
+				}
+			})
 		</script>
 
 		<a th:href="@{cart/cartList}">

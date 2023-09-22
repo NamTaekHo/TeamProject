@@ -24,7 +24,7 @@
 <div class="d-flex" id="wrapper">
     <!-- Sidebar-->
     <div class="border-end bg-white" id="sidebar-wrapper">
-        <div class="sidebar-heading border-bottom bg-light">1조</div>
+        <div class="sidebar-heading border-bottom bg-light"><a th:href="@{/}">1조</a></div>
         <div class="list-group list-group-flush">
             <a class="list-group-item list-group-item-action list-group-item-light p-3" sec:authorize="hasAnyRole('ROLE_ADMIN')" th:href="@{/member/memberlist}">회원관리</a> <!-- 메뉴 수정 -->
             <a class="list-group-item list-group-item-action list-group-item-light p-3" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')" th:href="@{/board/boardList}">Q&A</a> <!-- 메뉴 수정 -->
@@ -32,6 +32,7 @@
             <a class="list-group-item list-group-item-action list-group-item-light p-3" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')" th:href="@{/item/itemList}">상품</a> <!-- 메뉴 수정 -->
             <a class="list-group-item list-group-item-action list-group-item-light p-3" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')" th:href="@{/notice/noticeList}">공지사항</a>
             <a class="list-group-item list-group-item-action list-group-item-light p-3" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')" th:href="@{/cart/cartList}">장바구니</a>
+            <a class="list-group-item list-group-item-action list-group-item-light p-3" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')" th:href="@{/map/shop}">매장 찾기</a>
              
         </div>
     </div>
@@ -49,12 +50,15 @@
                         <!-- 로그아웃 버튼 추가 -->
                         <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<span th:text="${#authentication.name}"></span>
+							</a>
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#!">Action</a>
-                                <a class="dropdown-item" href="#!">Another action</a>
+                                <a class="dropdown-item" th:href="@{/member/read(id=${#authentication.name})}">내 정보</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#!">Something else here</a>
+                                <a class="dropdown-item" th:href="@{/orders/ordersList}">주문 내역</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" th:href="@{/cart/cartList}">장바구니</a>
                             </div>
                         </li>
                     </ul>

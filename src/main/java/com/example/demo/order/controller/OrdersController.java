@@ -19,6 +19,8 @@ import com.example.demo.member.dto.MemberDTO;
 import com.example.demo.member.service.MemberService;
 import com.example.demo.order.dto.OrdersDTO;
 import com.example.demo.order.service.OrdersService;
+import com.example.demo.ordersItem.dto.OrdersItemDTO;
+import com.example.demo.ordersItem.service.OrdersItemService;
 
 @Controller
 @RequestMapping("/orders")
@@ -33,6 +35,9 @@ public class OrdersController {
 	@Autowired
 	MemberService memberService;
 	
+	@Autowired
+	OrdersItemService ordersItemService;
+	
 	// 주문 내역(리스트)
 	@GetMapping("/ordersList")
 	public void list(@RequestParam(defaultValue = "0") int page, Principal principal, Model model) {
@@ -45,12 +50,14 @@ public class OrdersController {
 	// 주문 상세 조회
 	// 주문번호로 주문상품 찾는 쿼리 생성 - 찾아서 model객체에 담아서 뷰단에 전달.
 	@GetMapping("/read")
-	public void read(int orderNo, @RequestParam(defaultValue = "0") int page, Model model, Principal principal, OrdersDTO ordersDTO) {
-		String memberId = principal.getName();
+	public void read(@RequestParam int orderNo, @RequestParam(defaultValue = "0") int page, Model model, Principal principal) {
+		String memberId = principal.getName();		
+		OrdersDTO ordersDTO = ordersService.read(orderNo);
 		ordersDTO.setId(memberId);
-		OrdersDTO dto = ordersService.read(orderNo);
+		List<OrdersItemDTO> list = ordersItemService.getList(orderNo);
 		
-		model.addAttribute("ordersDTO", dto);
+		model.addAttribute("oIDTOList", list);
+		model.addAttribute("ordersDTO", ordersDTO);
 		model.addAttribute("page", page);
 		model.addAttribute("memberId", memberId);
 	}
@@ -70,17 +77,17 @@ public class OrdersController {
 	public String registerOrder(OrdersDTO dto, RedirectAttributes redirectAttributes, Principal principal) {
 		String memberId = principal.getName();
 		dto.setId(memberId);
-		int orderNo = ordersService.register(memberId);
+		int orderNo = ordersService.register(memberId, dto);
 		redirectAttributes.addFlashAttribute("msg", orderNo);
 		
-		return "redirect:/orders/orderList";
+		return "redirect:/orders/ordersList";
 	}
 	
 	// 주문내역 삭제
 	@PostMapping("/remove")
 	public String removeOrder(int orderNo) {
 		ordersService.remove(orderNo);
-		return "redirect:/orders/orderlist";
+		return "redirect:/orders/ordersList";
 	}
 	
 }

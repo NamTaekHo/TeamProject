@@ -9,7 +9,7 @@ import com.example.demo.order.entity.Orders;
 public interface OrdersService {
 
 	//주문 등록
-	int register(String memberID);
+	int register(String memberID, OrdersDTO dto);
 	
 	//주문 전체 조회
 	Page<OrdersDTO> getList(int page, String memberId);

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<th:block th:replace="~{/layout/basic2 :: setContent(~{this::content} )}">
+
+	<th:block th:fragment="content">
+		
+		<h1>주문 상세</h1>
+		<!--<div>
+			<span><s>주문 일자 </s></span>
+			<span th:value="${ordersDTO.regDate, 'yyyy/MM/dd HH:mm:ss')}"></span>
+		</div>-->
+		<div>
+			<span><b>주문 금액 </b></span>
+			<span>[[${ordersDTO.totalPrice}]]</span>
+		</div>
+
+		<table class="table table-striped">
+			<thead>
+				<th>상품번호</th>
+				<th>주문수량</th>
+				<th>상품가격</th>
+			</thead>
+			<tbody>
+				<tr th:each=" dto : ${oIDTOList}">
+
+
+					<td scope="row">
+						<a th:href="@{/item/read(itemNo = ${dto.iNo})}">
+							[[${dto.iNo}]]
+						</a>
+					</td>
+					<td>[[${dto.count}]]</td>
+					<td>[[${dto.price}]]</td>
+				</tr>
+			</tbody>
+		</table>
+		<br>
+		
+		<form action="/orders/remove" method="post" id="removeForm">
+			<input type="hidden" name="orderNo" th:value="${ordersDTO.orderNo}">
+			<button type="button" class="btn btn-danger removeBtn">삭제</button>
+		</form>
+		
+		
+		<!-- 삭제버튼 자바스크립트 처리 -->
+		<script th:inline="javascript">
+			
+			var form = $("#removeForm");
+			
+			$(".removeBtn").click(function(){
+				if(!confirm("삭제하시겠습니까?")){
+					return;
+				}
+				
+				form.attr("action", "/orders/remove");
+				form.attr("method", "post");
+				
+				
+				form.submit();
+			});
+			
+		</script>
+
+		
+		
+
+	</th:block>
+</th:block>

@@ -24,11 +24,11 @@
 						</a>
 					</th>
 					<td>[[${dto.id}]]</td>
-					<td>[[${#numbers.formatDecimal(dto.totalPrice, 1,0)}]]</td>
+					<td>[[${dto.totalPrice}]]</td>
 					<td>[[${#temporals.format(dto.orderDate, 'yyyy/MM/dd')}]]</td>
 				</tr>
 			</tbody>
-</table>
+		</table>
 
 <ul class="pagination h-100 justify-content-center align-items-center">
 
@@ -40,7 +40,7 @@
 				</li>
 			</th:block>
 
-		</ul>
+</ul>
 
 
 
