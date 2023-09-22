@@ -5,31 +5,112 @@
 
   <th:block th:fragment="content">
 
+    <head>
+      <style>
+        .icon-text-container {
+          display: flex;
+          align-items: center;
+          width: 400px;
+          height: 30px;
+          padding-bottom: 10px;
+          margin-bottom: 10px;
+        }
+
+        .map-icon {
+          width: 20px;
+          height: 20px;
+          border-radius: 4px;
+        }
+        
+        .th-shop-name{
+          padding-left: 10px;
+          padding-right: 10px;
+        }
+        
+        .table {
+          border-collapse: collapse;
+          width: 90%;
+          margin-bottom: 20px;
+          border: 1px solid #dcdcdc;
+          background-color: #f7f7f7;
+        }
+
+        .table, th, td {
+          border: 1px solid #dcdcdc;
+        }
+
+        th {
+          background-color: #777;
+          color: white;
+          text-align: center;
+          padding: 8px;
+          margin: 20px;
+        }
+
+        td {
+          text-align: center;
+          padding: 8px;
+        }
+      </style>
+    </head>
 
 
     <h2>오프라인 매장 찾기</h2>
     <hr>
 
     <div>
-      <div style="width: 300px; height: 30px;">쇼핑몰 본사</div>
-      <div style="width: 300px; height: 30px;">연수점</div>
-      <div style="width: 300px; height: 30px;">가좌점</div>
-      <div style="width: 300px; height: 30px;">서창점</div>
+      <table>
+        <tr>
+          <th class="th-shop-name">매장명</th>
+          <th>전화번호</th>
+          <th>주소</th>
+          <th>지도</th>
+        </tr>
+        <tr>
+          <td class="shop-name">본사</td>
+          <td>0507-1419-2266</td>
+          <td>인천 남동구 문화로 147 건설회관 2층</td>
+          <td><img src="/assets/map.ico" alt="쇼핑몰 본사로 이동" class="map-icon" onclick="moveToCenter(37.4522, 126.6996)"></td>
+        </tr>
+        
+        <tr>
+          <td class="shop-name">연수점</td>
+          <td>010-2401-5119</td>
+          <td>인천 연수구 먼우금로 302</td>
+          <td><img src="/assets/map.ico" alt="연수점으로 이동" class="map-icon" onclick="moveToCenter(37.4228, 126.6853)"></td>
+        </tr>
+
+        <tr>
+          <td class="shop-name">가좌점</td>
+          <td>010-2223-0000</td>
+          <td>인천 서구 장고개로 375-3</td>
+          <td><img src="/assets/map.ico" alt="가좌점으로 이동" class="map-icon" onclick="moveToCenter(37.4957, 126.69)"></td>
+        </tr>
+
+        <tr>
+          <td class="shop-name">서창점</td>
+          <td>010-0000-0000</td>
+          <td>인천 남동구 운연천로 9</td>
+          <td><img src="/assets/map.ico" alt="서창점으로 이동" class="map-icon" onclick="moveToCenter(37.4277, 126.7584)"></td>
+        </tr>
+      </table>
     </div>
+    
+    <div style="height: 30px;"></div>
 
     <div>
       <div id="map" style="width:500px;height:400px;"></div>
 
     </div>
 
-    
+
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=462919d82dc682dec7ee8b627ced233c">
     </script>
     <script>
       var container = document.getElementById('map');
       var options = {
         center: new kakao.maps.LatLng(37.4522, 126.6996),
-        level: 2
+        level: 8
       };
 
       var map = new kakao.maps.Map(container, options);
@@ -70,6 +151,13 @@
           title: positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시
           image: markerImage // 마커 이미지 
         });
+      }
+
+      // 이동 버튼 클릭 시 호출하는 함수
+      function moveToCenter(x, y) {
+        var moveLatLng = new kakao.maps.LatLng(x, y);
+        map.setCenter(moveLatLng); // 새로운 중심좌표
+        map.setLevel(2); // 중심좌표로 이동 후 확대
       }
     </script>
 
