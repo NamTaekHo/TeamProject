@@ -8,7 +8,6 @@
         <h1 class="mt-4">상품 상세 페이지</h1><br>
 
 
-
         <div class="row gx-3 gx-lg-4 align-items-center">
             <th:block th:if="${dto.image != null}">
                 <div class="col-md-6">
@@ -21,21 +20,18 @@
                 <h1 class="display-5 fw-bolder">[[${dto.itemName}]]</h1>
                 <div class="fs-5 mb-5">
 
-                    <label>가격 : </label>
-                    <!--<span> : [[${dto.price}]] 원</span>-->
+                    <label>가격 : </label>                    
                     <span th:text="${#numbers.formatDecimal(dto.price, 0, 'COMMA', 0, 'POINT')} + ' 원'"></span>
                 </div>                
                 <div class="d-flex">
                     <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1"
                         style="max-width: 3rem" />
-                    <div class="d-flex justify-content-between">
+                    <div class="d-flex justify-content-between">						
 						
-						
-                        <button  class="btn btn-outline-dark flex-shrink-0" onclick="registerCart()" type="button">
+                        <button  class="btn btn-outline-dark flex-shrink-0" onclick="addToCart()" type="button">
                             <i class="bi-cart-fill me-1"></i>
                             Add to cart
-                        </button>
-						
+                        </button>						
 						
                         <div class="ms-2"></div> <!-- 여기서 간격 조절 -->
                         
@@ -63,15 +59,11 @@
         <div class="form-group">
             <label>수정일</label>
             <input type="text" class="form-control" th:value="${#temporals.format(dto.modDate, 'yyyy/MM/dd HH:mm:ss')}"
-                readonly>
-<!--       </div>
-                <th:block th:if="${dto.image!=null}">  
-            <div class="form-group">
-            	<img th:src="@{'/aa/'+${dto.image}}">
-        	</div>-->
-        	        <a th:href="@{/item/modify(itemNo = ${dto.itemNo})}">
-            <button type="button" class="btn btn-primary" sec:authorize="hasAnyRole('ROLE_ADMIN')" th:href="@{/item/read}">상품정보 수정하기</button>
-        </a>
+                readonly><br>
+
+  			<a th:href="@{/item/modify(itemNo = ${dto.itemNo})}">
+            <button type="button" class="btn btn-primary" sec:authorize="hasAnyRole('ROLE_ADMIN')">상품정보 수정하기</button>
+       		</a>
 
         <!-- 목록페이지 링크 수정 -->
         <a th:href="@{/item/itemList(page=${page})}">
@@ -83,38 +75,32 @@
         
         
         
-        <script>
+        <script th:inline="javascript">			
 			
-			$(document).ready(function() {
-				registerCart();
-			  });
 			
+			
+			function addToCart() {
+     		   if (confirm("장바구니에 추가하시겠습니까?")) {
+            		registerCart();
+        		}
+  	 		 }			
+		
 			function registerCart() {
         		var cart = [[${dto}]];
         		
+        		
         		 $.ajax({
-        		      type: "POST",
-        		      url: "/cart/register"+cart.itemNo,
-        		          success: function(response){
-        		    	  if(response.success){
-        		    		  alert(itemNo + "장바구니에 등록되었습니다.");
-        		    	  }
-        		        }
-        		      })
+        		      type: "GET",
+        		      url: "/cart/register/"+cart.itemNo,
+        		          success: function(response){        		    	  
+							  alert("장바구니에 등록되었습니다. 장바구니로 이동하시겠습니까?");
+							  }})
 	    	}
-			
-			
+	    			
 			
 		</script>
-        
-        
-        
-        
-        
-        
-        
+		
         </th:block>
 
     </th:block>
 
-</th:block>
