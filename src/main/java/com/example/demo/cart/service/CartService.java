@@ -8,14 +8,10 @@ import com.example.demo.item.entity.Item;
 import com.example.demo.member.entity.Member;
 public interface CartService {
 	
-	int register(CartDTO dto);
+	int register(CartDTO dto);	
 	
-//	CartDTO read(int cartNo);//id로 읽기?
 	
-	void modify(CartDTO dto);
-	
-	void remove(CartDTO dto);
-	
+	void remove(int no);	
 	
 	//카트페이지 만들기 9/4 페이지, 리스트 추가
 	List<CartDTO> getList(String id);
@@ -42,6 +38,7 @@ public interface CartService {
 	default CartDTO entityToDto(Cart entity) {
 		CartDTO dto = CartDTO.builder()
 				.itemNo(entity.getItemNo().getItemNo()) //참고해서
+				.no(entity.getNo())
 				.itemName(entity.getItemNo().getItemName())
 				.price(entity.getItemNo().getPrice())
 				.id(entity.getId().getId())

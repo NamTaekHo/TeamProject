@@ -28,10 +28,10 @@ public class CartRepositoryTest {
 	
 	@Test
 	public void 데이터등록() {
-		Optional<Member> result1 = memberRepository.findById("qq");
+		Optional<Member> result1 = memberRepository.findById("ww");
 		Member m = result1.get();
 		Optional<Item> result2 = itemRepository.findById(1);
-		Optional<Item> result3 = itemRepository.findById(5);
+		Optional<Item> result3 = itemRepository.findById(1);
 		Item i1 = result2.get();
 		Item i2 = result3.get();
 		
