@@ -1,10 +1,7 @@
 
 package com.example.demo.board.controller;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+
 import java.security.Principal;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.board.dto.BoardDTO;
 import com.example.demo.board.service.BoardService;
-import com.example.demo.member.dto.MemberDTO;
-import com.example.demo.member.entity.Member;
-import com.example.demo.member.repository.MemberRepository;
+
 
 @Controller
 @RequestMapping("/board")
@@ -65,11 +60,6 @@ public class BoardController {
 		model.addAttribute("memberId",memberId);
 	}
 	
-//	@Retention(RetentionPolicy.RUNTIME)
-//	@Target(ElementType.PARAMETER)
-//	public @interface LoginUser{
-		
-//	}
 	
 	//게시물 수정페이지
 	@GetMapping("/modify")

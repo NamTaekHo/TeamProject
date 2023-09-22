@@ -26,12 +26,11 @@ public class MemberServiceImpl implements MemberService {
 
 	@Autowired
 	private MemberRepository memberRepository;
-	
+
 	@Autowired
 	private BoardRepository boardRepository;
-	
-	@Autowired
-	private BoardService boardService;
+
+
 
 	@Override // 게시판 페이지
 	public Page<MemberDTO> getlist(int page) {
@@ -95,8 +94,8 @@ public class MemberServiceImpl implements MemberService {
 		}
 		Member entity = DtoToEntity(dto);
 
-		PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();//패스워드를 암호화
-		String hashpassword = passwordEncoder.encode(entity.getPassword());//암호화 한 패스워드를 서버에 저장
+		PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();// 패스워드를 암호화
+		String hashpassword = passwordEncoder.encode(entity.getPassword());// 암호화 한 패스워드를 서버에 저장
 		entity.setPassword(hashpassword);
 		memberRepository.save(entity);
 
@@ -110,27 +109,29 @@ public class MemberServiceImpl implements MemberService {
 		if (result.isPresent()) {
 			boardRepository.deleteBoardByMember(entity);
 			memberRepository.delete(entity);
-			
+
 		}
 	}
 
-	@Override
-	public String remove(String id) {
-		Optional<Member> result = memberRepository.findById(id);
-		Member member = result.get();
-		if(result.isPresent()) {
-			List<Board> boardList = boardRepository.getBoardByMember(member);
-			for(Board b : boardList) {
-				boardService.remove(b.getBoardNo());
-			}
-			boardRepository.deleteBoardByMember(member);
-			memberRepository.deleteById(id);
-			return "1";
-		}else {
-			return "0";
-		}
-		
-	}
+//	@Override
+//	public String remove(String id) {
+//		Optional<Member> result = memberRepository.findById(id);
+//		Member member = result.get();
+//		if(result.isPresent()) {
+//			List<Board> boardList = boardRepository.getBoardByMember(member);
+//			for(Board b : boardList) {
+//				boardService.remove(b.getBoardNo());
+//			}
+//			boardRepository.deleteBoardByMember(member);
+//			memberRepository.deleteById(id);
+//			return "1";
+//		}else {
+//			return "0";
+//		}
+//		
+//	}
+
+
 
 
 }

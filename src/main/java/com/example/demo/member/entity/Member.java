@@ -31,16 +31,16 @@ public class Member {
 	@Column(length = 30, nullable = true)
 	private String Email;
 
-	@Column(length = 10, nullable = false)
+	@Column(length = 10, nullable = true)
 	private String name;
 
-	@Column(length = 15, nullable = false)
+	@Column(length = 15, nullable = true)
 	private String pNumber;
 
-	@Column(length = 255, nullable = false)
+	@Column(length = 255, nullable = true)
 	private String address;
 
-	@Column(length = 11, nullable = false)
+	@Column(length = 11, nullable = true)
 	private String birth;
 
 	@Column(nullable = true)

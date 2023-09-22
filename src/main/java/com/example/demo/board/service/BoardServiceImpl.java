@@ -1,5 +1,6 @@
 package com.example.demo.board.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,8 @@ import com.example.demo.board.dto.BoardDTO;
 import com.example.demo.board.entity.Board;
 import com.example.demo.board.repository.BoardRepository;
 import com.example.demo.comment.repository.CommentRepository;
+import com.example.demo.member.entity.Member;
+import com.example.demo.member.repository.MemberRepository;
 
 @Service
 public class BoardServiceImpl implements BoardService {
@@ -20,9 +23,13 @@ public class BoardServiceImpl implements BoardService {
 	// 사용 리파지토리 선언
 	@Autowired
 	private BoardRepository repository;
-	
+
 	@Autowired
 	private CommentRepository commentRepository;
+
+
+
+
 
 	@Override
 	public int register(BoardDTO dto) {
@@ -34,11 +41,11 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public Page<BoardDTO> getList(int page) {
-		int pageNum = (page == 0) ? 0 : page - 1; //page는 index처럼 0부터 시작.
+		int pageNum = (page == 0) ? 0 : page - 1; // page는 index처럼 0부터 시작.
 		Pageable pageable = PageRequest.of(pageNum, 10, Sort.by("boardNo").descending());
 		Page<Board> entityPage = repository.findAll(pageable);
 		Page<BoardDTO> dtoPage = entityPage.map(entity -> entityToDto(entity));
-		
+
 		return dtoPage;
 
 	}
@@ -74,7 +81,7 @@ public class BoardServiceImpl implements BoardService {
 	public int remove(int no) {
 		Optional<Board> result = repository.findById(no);
 		Board board = result.get();
-		if(result.isPresent()) {
+		if (result.isPresent()) {
 			commentRepository.deleteCommentByBoard(board);
 			repository.deleteById(no);
 			return no;
@@ -82,5 +89,7 @@ public class BoardServiceImpl implements BoardService {
 			return 0;
 		}
 	}
+
+
 
 }

@@ -18,7 +18,7 @@ public interface MemberService {
 	
 	void delete(MemberDTO dto);//회원삭제
 	
-	String remove(String id);
+//	String remove(String id);
 	
 	MemberDTO myPage(String id);
 	

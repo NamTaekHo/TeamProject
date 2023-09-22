@@ -63,10 +63,10 @@ public class MemberServiceTest {
 		service.delete(dto);
 	}
 	
-	@Test
-	public void 데이터삭제2() {
-		service.remove("cc");
-		System.out.println();
-	}
+//	@Test
+//	public void 데이터삭제2() {
+//		service.remove("cc");
+//		System.out.println();
+//	}
 
 }
