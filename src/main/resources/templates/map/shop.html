@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<th:block th:replace="~{/layout/basic2 :: setContent(~{this::content} )}">
+
+  <th:block th:fragment="content">
+
+
+
+    <h2>오프라인 매장 찾기</h2>
+    <hr>
+
+    <div>
+      <div style="width: 300px; height: 30px;">쇼핑몰 본사</div>
+      <div style="width: 300px; height: 30px;">연수점</div>
+      <div style="width: 300px; height: 30px;">가좌점</div>
+      <div style="width: 300px; height: 30px;">서창점</div>
+    </div>
+
+    <div>
+      <div id="map" style="width:500px;height:400px;"></div>
+
+    </div>
+
+    
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=462919d82dc682dec7ee8b627ced233c">
+    </script>
+    <script>
+      var container = document.getElementById('map');
+      var options = {
+        center: new kakao.maps.LatLng(37.4522, 126.6996),
+        level: 2
+      };
+
+      var map = new kakao.maps.Map(container, options);
+
+      var positions = [{
+          title: '쇼핑몰 본사',
+          latlng: new kakao.maps.LatLng(37.4522, 126.6996)
+        },
+        {
+          title: '연수점',
+          latlng: new kakao.maps.LatLng(37.4228, 126.6853)
+        },
+        {
+          title: '가좌점',
+          latlng: new kakao.maps.LatLng(37.4957, 126.69)
+        },
+        {
+          title: '서창점',
+          latlng: new kakao.maps.LatLng(37.4277, 126.7584)
+        }
+      ];
+
+      // 마커 이미지의 이미지 주소입니다
+      var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+
+      for (var i = 0; i < positions.length; i++) {
+
+        // 마커 이미지의 이미지 크기 입니다
+        var imageSize = new kakao.maps.Size(24, 35);
+
+        // 마커 이미지를 생성합니다    
+        var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+
+        // 마커를 생성합니다
+        var marker = new kakao.maps.Marker({
+          map: map, // 마커를 표시할 지도
+          position: positions[i].latlng, // 마커를 표시할 위치
+          title: positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시
+          image: markerImage // 마커 이미지 
+        });
+      }
+    </script>
+
+
+  </th:block>
+</th:block>
+
+</html>

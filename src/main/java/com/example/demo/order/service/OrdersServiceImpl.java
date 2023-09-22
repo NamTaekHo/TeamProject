@@ -106,6 +106,8 @@ public class OrdersServiceImpl implements OrdersService{
 	public void remove(int orderNo) {
 		Optional<Orders> result = orderRepository.findById(orderNo);
 		if(result.isPresent()) {
+			Orders orders = result.get();
+			ordersItemRepository.deleteOrdersItemByOrdersNo(orders);
 			orderRepository.deleteById(orderNo);
 			System.out.println(orderNo + " 번 주문내역이 삭제되었습니다.");
 		}

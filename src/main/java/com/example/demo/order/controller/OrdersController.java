@@ -50,10 +50,10 @@ public class OrdersController {
 	// 주문 상세 조회
 	// 주문번호로 주문상품 찾는 쿼리 생성 - 찾아서 model객체에 담아서 뷰단에 전달.
 	@GetMapping("/read")
-	public void read(int orderNo, @RequestParam(defaultValue = "0") int page, Model model, Principal principal, OrdersDTO ordersDTO) {
-		String memberId = principal.getName();
+	public void read(@RequestParam int orderNo, @RequestParam(defaultValue = "0") int page, Model model, Principal principal) {
+		String memberId = principal.getName();		
+		OrdersDTO ordersDTO = ordersService.read(orderNo);
 		ordersDTO.setId(memberId);
-		ordersDTO = ordersService.read(orderNo);
 		List<OrdersItemDTO> list = ordersItemService.getList(orderNo);
 		
 		model.addAttribute("oIDTOList", list);
@@ -87,7 +87,7 @@ public class OrdersController {
 	@PostMapping("/remove")
 	public String removeOrder(int orderNo) {
 		ordersService.remove(orderNo);
-		return "redirect:/orders/orderlist";
+		return "redirect:/orders/ordersList";
 	}
 	
 }

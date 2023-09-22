@@ -1,6 +1,5 @@
 package com.example.demo.ordersItemTest;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
@@ -42,12 +41,12 @@ public class OrdersItemRepositoryTest {
 		ordersItemRepository.save(oi);
 	}
 	
-	@Test
-	public void 오더아이템조회() {
-		List<OrdersItem> list = ordersItemRepository.getOrdersItemByOrders(3);
-		list.forEach(oi -> System.out.println(oi));
-		
-	}
+//	@Test
+//	public void 오더아이템조회() {
+//		List<OrdersItem> list = ordersItemRepository.getOrdersItemByOrders(3);
+//		list.forEach(oi -> System.out.println(oi));
+//		
+//	}
 	
 	@Test
 	public void 오더아이템수정() {
@@ -63,5 +62,12 @@ public class OrdersItemRepositoryTest {
 		if(result.isPresent()) {
 			ordersItemRepository.deleteById(3);
 		}
+	}
+	
+	@Test
+	public void 주문번호로주문상품삭제쿼리() {
+		Optional<Orders> result = orderRepository.findById(10);
+		Orders orders = result.get();
+		ordersItemRepository.deleteOrdersItemByOrdersNo(orders);
 	}
 }
