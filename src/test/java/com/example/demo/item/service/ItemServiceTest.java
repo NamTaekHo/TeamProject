@@ -8,7 +8,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 
 import com.example.demo.item.dto.ItemDTO;
-import com.example.demo.item.entity.Item;
 
 @SpringBootTest
 public class ItemServiceTest {
@@ -51,6 +50,14 @@ public class ItemServiceTest {
 	public void 상품삭제_25번() {
 		service.remove(25);
 	}
+	
+	@Test
+	public void 상품리스트() {
+		List<ItemDTO> list = service.newList4();
+		System.out.println(list);
+		
+	}
+	
 	
 	
 	

@@ -40,7 +40,7 @@
         }
 
         th {
-          background-color: #777;
+          background-color: #1abc9c;
           color: white;
           text-align: center;
           padding: 8px;
@@ -51,6 +51,20 @@
           text-align: center;
           padding: 8px;
         }
+        
+        .address-table, .map{
+			width: 70%;
+			align-items: center;
+		}
+		
+		#map{
+			align-items: center;
+			margin: 0 auto;
+		}
+		
+		.address-div{
+			
+		}
       </style>
     </head>
 
@@ -58,8 +72,8 @@
     <h2>오프라인 매장 찾기</h2>
     <hr>
 
-    <div>
-      <table>
+    <div class="address-div">
+      <table class="address-table" style="margin-left: auto; margin-right: auto;">
         <tr>
           <th class="th-shop-name">매장명</th>
           <th>전화번호</th>
@@ -70,28 +84,28 @@
           <td class="shop-name">본사</td>
           <td>0507-1419-2266</td>
           <td>인천 남동구 문화로 147 건설회관 2층</td>
-          <td><img src="/assets/map.ico" alt="쇼핑몰 본사로 이동" class="map-icon" onclick="moveToCenter(37.4522, 126.6996)"></td>
+          <td><img src="/images/map.ico" alt="쇼핑몰 본사로 이동" class="map-icon" onclick="moveToCenter(37.4522, 126.6996)"></td>
         </tr>
         
         <tr>
           <td class="shop-name">연수점</td>
           <td>010-2401-5119</td>
           <td>인천 연수구 먼우금로 302</td>
-          <td><img src="/assets/map.ico" alt="연수점으로 이동" class="map-icon" onclick="moveToCenter(37.4228, 126.6853)"></td>
+          <td><img src="/images/map.ico" alt="연수점으로 이동" class="map-icon" onclick="moveToCenter(37.4228, 126.6853)"></td>
         </tr>
 
         <tr>
           <td class="shop-name">가좌점</td>
           <td>010-2223-0000</td>
           <td>인천 서구 장고개로 375-3</td>
-          <td><img src="/assets/map.ico" alt="가좌점으로 이동" class="map-icon" onclick="moveToCenter(37.4957, 126.69)"></td>
+          <td><img src="/images/map.ico" alt="가좌점으로 이동" class="map-icon" onclick="moveToCenter(37.4957, 126.69)"></td>
         </tr>
 
         <tr>
           <td class="shop-name">서창점</td>
           <td>010-0000-0000</td>
           <td>인천 남동구 운연천로 9</td>
-          <td><img src="/assets/map.ico" alt="서창점으로 이동" class="map-icon" onclick="moveToCenter(37.4277, 126.7584)"></td>
+          <td><img src="/images/map.ico" alt="서창점으로 이동" class="map-icon" onclick="moveToCenter(37.4277, 126.7584)"></td>
         </tr>
       </table>
     </div>
@@ -99,7 +113,7 @@
     <div style="height: 30px;"></div>
 
     <div>
-      <div id="map" style="width:500px;height:400px;"></div>
+      <div id="map" style="width:70%;height:500px;"></div>
 
     </div>
 

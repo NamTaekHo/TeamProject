@@ -1,0 +1,382 @@
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Team 1_ShoppingMall</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="images/favicon.png">
+
+    <link rel="stylesheet" href="css/style.css">
+    <!-- JQUERY -->
+    <script src="js/vendor/jquery-1.11.2.min.js"></script>
+    <script src="js/vendor/bootstrap.min.js"></script>
+    <script src="js/isotope.pkgd.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/wow.min.js"></script>
+    <script src="js/custom.js"></script>
+</head>
+
+<body>
+
+    <!-- PRELOADER -->
+    <div id="preloader">
+        <div class="preloader-area">
+            <div class="preloader-box">
+                <div class="preloader"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 헤더_탑 섹션 -->
+    <section class="header-top-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="header-top-content">
+                        <ul class="nav nav-pills navbar-left">
+                            <li><a href="#"><i class="pe-7s-call"></i><span>010-2401-5119</span></a></li>
+                            <li><a href="#"><i class="pe-7s-mail"></i><span> taekho1225@gmail.com</span></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="header-top-menu">
+                        <ul class="nav nav-pills navbar-right">
+                            <!-- member/read 링크 삽입해야함 -->
+                            <li><a href="#">My Account</a></li>
+                            <li><a th:href="@{/cart/cartList}">Cart</a></li>
+                            <li><a href="/logout">Logout</a></li>
+                            <li><a th:href="@{/member/read(id=${#authentication.name})}"><i class="pe-7s-lock"></i>사용자 이름</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 헤더 -->
+        <header class="header-section">
+            <nav class="navbar navbar-default">
+                <div class="container">
+                    <div class="navbar-header">
+                        <!-- 페이지 너비 줄였을 때 나오는 버튼, 이미지 -->
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <!-- 브랜드 로고 -->
+                        <a class="navbar-brand" th:href="@{/}"><b>T</b>eam 1</a>
+                    </div>
+
+                    <!-- 헤더 링크들 -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <li class="active"><a sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')" th:href="@{/}">Home</a></li>
+                            <li><a sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')" th:href="@{/item/itemList}">Shop</a></li>
+                            <li><a sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')" th:href="@{/notice/noticeList}">Notice</a></li>
+                            <li><a sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')" th:href="@{/board/boardList}">Q&A</a></li>
+                            <li><a sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')" th:href="@{/map/shop}">Offline Store</a></li>
+                            <li><a sec:authorize="hasAnyRole('ROLE_ADMIN')" th:href="@{/member/memberlist}">Member</a></li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right cart-menu">
+                        <li><a sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')" th:href="@{/cart/cartList}"><span> Cart&nbsp;</span> <span class="shoping-cart">0</span></a></li>
+                    </ul>
+                    </div><!-- /.navbar-collapse -->
+                </div><!-- /.container -->
+            </nav>
+        </header>
+
+        <!-- 여기부터 타임리프 조각처리 -->
+
+        <!-- 슬라이더 섹션 -->
+        <section class="slider-section">
+            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                <!-- Indicator 생성 -->
+                <ol class="carousel-indicators slider-indicators">
+                    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                </ol>
+
+                <!-- Slide 내부 콘텐츠 -->
+                <!-- 슬라이드별 이미지, 설명 추가하고 링크 설정해야함 -->
+                <div class="carousel-inner" role="listbox">
+                    <div class="item active">
+                        <img src="images/slider.jpg" width="1648" height="600" alt="">
+                        <div class="carousel-caption">
+                            <h2>Slide <b>&</b> No.1</h2>
+                            <h3>FROM OURFAMOUS BRANDS <Span>SALE</Span></h3>
+                            <a href="#">Buy Now</a>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="images/slider.jpg" width="1648" height="600" alt="">
+                        <div class="carousel-caption">
+                            <h2>Slide <b>&</b> No.2</h2>
+                            <h3>FROM OURFAMOUS BRANDS <Span>SALE</Span></h3>
+                            <a href="#">Buy Now</a>
+                        </div>
+                    </div>
+                    <div class="item ">
+                        <img src="images/slider.jpg" width="1648" height="600" alt="">
+                        <div class="carousel-caption">
+                            <h2>Slide <b>&</b> No.3</h2>
+                            <h3>FROM OURFAMOUS BRANDS <Span>SALE</Span></h3>
+                            <a href="#">Buy Now</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 슬라이드 양쪽 화살표(슬라이드 컨트롤) -->
+                <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                    <span class="pe-7s-angle-left glyphicon-chevron-left" aria-hidden="true"></span>
+                </a>
+                <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                    <span class="pe-7s-angle-right glyphicon-chevron-right" aria-hidden="true"></span>
+                </a>
+            </div>
+        </section>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3 col-sm-6 wow fadeInRight animated" data-wow-delay="0.1s">
+                        <div class="service-item">
+                            <i class="pe-7s-settings"></i>
+                            <h3>SETTING</h3>
+                            <p>Lorem ipsum dolor sit amet, vix erat audiam ei. Cum doctus civibus efficiantur in. Nec id tempor imperdiet deterruisset, doctus volumus explicari qui ex, appareat similique an usu.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 wow fadeInRight animated" data-wow-delay="0.2s">
+                        <div class="service-item">
+                            <i class="pe-7s-safe"></i>
+                            <h3>MONEY BACK</h3>
+                            <p>Lorem ipsum dolor sit amet, vix erat audiam ei. Cum doctus civibus efficiantur in. Nec id tempor imperdiet deterruisset, doctus volumus explicari qui ex, appareat similique an usu.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 wow fadeInRight animated" data-wow-delay="0.3s">
+                        <div class="service-item">
+                            <i class="pe-7s-global"></i>
+                            <h3>WORLDWIDE SHIPPING</h3>
+                            <p>Lorem ipsum dolor sit amet, vix erat audiam ei. Cum doctus civibus efficiantur in. Nec id tempor imperdiet deterruisset, doctus volumus explicari qui ex, appareat similique an usu.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 wow fadeInRight animated" data-wow-delay="0.4s">
+                        <div class="service-item">
+                            <i class="pe-7s-headphones"></i>
+                            <h3>Online support</h3>
+                            <p>Lorem ipsum dolor sit amet, vix erat audiam ei. Cum doctus civibus efficiantur in. Nec id tempor imperdiet deterruisset, doctus volumus explicari qui ex, appareat similique an usu.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section> -->
+
+        <!-- new collection 슬라이드에 등록한 상품들 포함해서 4개 넣고 수정해야함 -->
+        <section class="new-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="titie-section wow fadeInDown animated ">
+                            <h1>NEW COLLECTION</h1>
+                        </div>
+                    </div>
+                </div>
+                <!-- 상품 4개 설정 -->
+                <div class="row">
+                    <div class="col-md-3 col-sm-6 wow fadeInLeft animated" data-wow-delay="0.2s">
+                        <div class="product-item">
+                            <img src="images/1.png" class="img-responsive" width="255" height="322" alt="">
+                            <div class="product-hover">
+                                <div class="product-meta">
+                                    <a href="#"><i class="pe-7s-cart"></i>Add to Cart</a>
+                                </div>
+                            </div>
+                            <div class="product-title">
+                                <a href="#">
+                                    <h3>Item1</h3>
+                                    <span>Item1.price</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 wow fadeInLeft animated" data-wow-delay="0.4s">
+                        <div class="product-item">
+                            <img src="images/2.png" class="img-responsive" width="255" height="322" alt="">
+                            <div class="product-hover">
+                                <div class="product-meta">
+                                    <a href="#"><i class="pe-7s-cart"></i>Add to Cart</a>
+                                </div>
+                            </div>
+                            <div class="product-title">
+                                <a href="#">
+                                    <h3>Item2</h3>
+                                    <span>Item2.price</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 wow fadeInLeft animated" data-wow-delay="0.6s">
+                        <div class="product-item">
+                            <img src="images/3.png" class="img-responsive" width="255" height="322" alt="">
+                            <div class="product-hover">
+                                <div class="product-meta">
+                                    <a href="#"><i class="pe-7s-cart"></i>Add to Cart</a>
+                                </div>
+                            </div>
+                            <div class="product-title">
+                                <a href="#">
+                                    <h3>Item3</h3>
+                                    <span>Item3.price</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 wow fadeInLeft animated" data-wow-delay="0.8s">
+                        <div class="product-item">
+                            <img src="images/4.png" class="img-responsive" width="255" height="322" alt="">
+                            <div class="product-hover">
+                                <div class="product-meta">
+                                    <a href="#"><i class="pe-7s-cart"></i>Add to Cart</a>
+                                </div>
+                            </div>
+                            <div class="product-title">
+                                <a href="#">
+                                    <h3>Item4</h3>
+                                    <span>Item4.price</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 상품 섹션 -->
+        <section class="featured-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="titie-section wow fadeInDown animated ">
+                            <h1>PRODUCTS</h1>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 상품 필드 4개만 보여주고 아레에 More Products 버튼 넣어야함-->
+                <div class="row featured isotope">
+                    <div class="col-md-3 col-sm-6 col-xs-12 cat-3 featured-items isotope-item">
+                        <div class="product-item">
+                            <img src="images/product1.png" class="img-responsive" width="255" height="322" alt="">
+                            <div class="sell-meta">
+                                <a href="#" class="new-item">New</a>
+                                <a href="#" class="sell-item">Sell</a>
+                            </div>
+                            <div class="product-hover">
+                                <div class="product-meta">
+                                    <a href="#"><i class="pe-7s-like"></i></a>
+                                    <a href="#"><i class="pe-7s-shuffle"></i></a>
+                                    <a href="#"><i class="pe-7s-clock"></i></a>
+                                    <a href="#"><i class="pe-7s-cart"></i>Add to Cart</a>
+                                </div>
+                            </div>
+                            <div class="product-title">
+                                <a href="#">
+                                    <h3>Cool lingerie</h3>
+                                    <span>$26</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-12 cat-2 featured-items isotope-item">
+                        <div class="product-item">
+                            <img src="images/product2.png" class="img-responsive" width="255" height="322" alt="">
+                            <div class="sell-meta">
+                                <a href="#" class="new-item">New</a>
+                            </div>
+                            <div class="product-hover">
+                                <div class="product-meta">
+                                    <a href="#"><i class="pe-7s-like"></i></a>
+                                    <a href="#"><i class="pe-7s-shuffle"></i></a>
+                                    <a href="#"><i class="pe-7s-clock"></i></a>
+                                    <a href="#"><i class="pe-7s-cart"></i>Add to Cart</a>
+                                </div>
+                            </div>
+                            <div class="product-title">
+                                <a href="#">
+                                    <h3>Cool lingerie</h3>
+                                    <span>$21</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-12 cat-1 featured-items isotope-item">
+                        <div class="product-item">
+                            <img src="images/product3.png" class="img-responsive" width="255" height="322" alt="">
+                            <div class="sell-meta">
+                                <a href="#" class="new-item">New</a>
+                                <a href="#" class="sell-item">Sell</a>
+                            </div>
+                            <div class="product-hover">
+                                <div class="product-meta">
+                                    <a href="#"><i class="pe-7s-like"></i></a>
+                                    <a href="#"><i class="pe-7s-shuffle"></i></a>
+                                    <a href="#"><i class="pe-7s-clock"></i></a>
+                                    <a href="#"><i class="pe-7s-cart"></i>Add to Cart</a>
+                                </div>
+                            </div>
+                            <div class="product-title">
+                                <a href="#">
+                                    <h3>Cool lingerie</h3>
+                                    <span>$31</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-12 cat-3 featured-items isotope-item">
+                        <div class="product-item">
+                            <img src="images/product4.png" class="img-responsive" width="255" height="322" alt="">
+                            <div class="sell-meta">
+                                <a href="#" class="sell-item">Sell</a>
+                            </div>
+                            <div class="product-hover">
+                                <div class="product-meta">
+                                    <a href="#"><i class="pe-7s-like"></i></a>
+                                    <a href="#"><i class="pe-7s-shuffle"></i></a>
+                                    <a href="#"><i class="pe-7s-clock"></i></a>
+                                    <a href="#"><i class="pe-7s-cart"></i>Add to Cart</a>
+                                </div>
+                            </div>
+                            <div class="product-title">
+                                <a href="#">
+                                    <h3>Cool lingerie</h3>
+                                    <span>$56</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <p class="center">Shared by <i class="fa fa-love"></i><a href="https://bootstrapthemes.co">BootstrapThemes</a>
+</p>
+                        
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        
+    </body>
+</html>

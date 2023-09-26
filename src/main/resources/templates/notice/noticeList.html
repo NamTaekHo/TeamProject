@@ -6,7 +6,7 @@
 	
 	<!--  공지번호  공지글  작성자  -->
 	
-		<h1>공 지 사 항
+		<h1>공지사항
 		 	<span>
                 <a th:href="@{/notice/register}">
                     <button type="button" class="btn btn-outline-primary" sec:authorize="hasAnyRole('ROLE_ADMIN')" th:href="@{/notice/register}">공지 등록</button>
@@ -18,7 +18,7 @@
 			<thead>
 				<tr>
 					<th scope="col">공지번호</th>
-					<th scope="col">공지글</th>
+					<th scope="col">제목</th>
 					<th scope="col">작성자</th>
 					<th scope="col">등록일</th>
 				</tr>

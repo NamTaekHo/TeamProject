@@ -45,6 +45,10 @@ public interface ItemService {
 		return dto;
 		
 	}
+	
+	List<ItemDTO> newList4();
+	
+	List<ItemDTO> List4();
 
 	
 

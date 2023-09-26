@@ -1,60 +1,132 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<th:block th:replace="~{/layout/basic2 :: setContent(~{this::content} )}"> <!-- 템플릿 조각 전달 -->
-	<th:block th:fragment="content"> <!-- 템플릿 만들기 -->
+<!doctype html>
+<html class="no-js" lang="en">
 	
-		<br><h1>메인페이지 
-<!--		 	<span>
-                <a th:href="@{/item/register}">
-                    <button type="button" class="btn btn-outline-primary">상품 등록</button>
-                </a>
-            </span>-->
-		</h1><br><br>		
-		
-		<!--상품 6개씩 페이징처리-->	
-		<div class="container">
-        <div class="row">
-            <div class="col-md-4" th:each="dto : ${list}">
-                <div class="card">
-                    <img class="card-img-top" th:src="@{'/aa/' + ${dto.image}}" width="200" height="400" alt="이미지를 찾을 수 없습니다." />
-                    <div class="card-body text-center">
-                        <h5 class="card-title fw-bolder" th:text="${dto.itemName}"></h5>
-                        <div th:text="${#numbers.formatDecimal(dto.price, 0, 'COMMA', 0, 'POINT')} + ' 원'"></div>
-                        <span hidden="hidden" th:text="${dto.itemNo}"></span>
+<th:block th:replace="~{/layout/basic2 :: setContent(~{this::content} )}"> <!-- 템플릿 조각 전달 -->
+	<th:block th:fragment="content">
+
+        <!-- 슬라이더 섹션 -->
+        <section class="slider-section">
+            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                <!-- Indicator 생성 -->
+                <ol class="carousel-indicators slider-indicators">
+                    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                </ol>
+
+                <!-- Slide 내부 콘텐츠 -->
+                <!-- 슬라이드별 이미지, 설명 추가하고 링크 설정해야함 -->
+                <div class="carousel-inner" role="listbox">
+                    <div class="item active">
+                        <img src="images/slider.jpg" width="1648" height="600" alt="">
+                        <div class="carousel-caption">
+                            <h2>Slide <b>&</b> No.1</h2>
+                            <h3>FROM OURFAMOUS BRANDS <Span>SALE</Span></h3>
+                            <a href="#">Buy Now</a>
+                        </div>
                     </div>
-                    <div class="card-footer text-center">
-                        <a class="btn btn-outline-dark" th:href="@{/item/read(itemNo = ${dto.itemNo}, page = ${list.number + 1})}">제품 상세보기</a>
+                    <div class="item">
+                        <img src="images/slider.jpg" width="1648" height="600" alt="">
+                        <div class="carousel-caption">
+                            <h2>Slide <b>&</b> No.2</h2>
+                            <h3>FROM OURFAMOUS BRANDS <Span>SALE</Span></h3>
+                            <a href="#">Buy Now</a>
+                        </div>
+                    </div>
+                    <div class="item ">
+                        <img src="images/slider.jpg" width="1648" height="600" alt="">
+                        <div class="carousel-caption">
+                            <h2>Slide <b>&</b> No.3</h2>
+                            <h3>FROM OURFAMOUS BRANDS <Span>SALE</Span></h3>
+                            <a href="#">Buy Now</a>
+                        </div>
                     </div>
                 </div>
+
+                <!-- 슬라이드 양쪽 화살표(슬라이드 컨트롤) -->
+                <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                    <span class="pe-7s-angle-left glyphicon-chevron-left" aria-hidden="true"></span>
+                </a>
+                <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                    <span class="pe-7s-angle-right glyphicon-chevron-right" aria-hidden="true"></span>
+                </a>
             </div>
-        </div>
-    </div><br><br>		
-    
-    
-			<!--페이지 버튼-->
-		<ul class="pagination h-100 justify-content-center align-items-center">
+        </section>
 
-			<th:block th:each="page : ${#numbers.sequence(1, list.totalPages)}">
-				<li th:class=" 'page-item ' + ${(list.number + 1) == page?'active':''} ">
-					<a class="page-link" th:href="@{/item/itemList(page = ${page})}">
-						[[${page}]]
-					</a>
-				</li>
-			</th:block>
 
-		</ul>
+        <!-- new collection 슬라이드에 등록한 상품들 포함해서 4개 넣고 수정해야함 -->
+        <section class="new-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="titie-section wow fadeInDown animated ">
+                            <h1>NEW COLLECTION</h1>
+                        </div>
+                    </div>
+                </div>
+                <!-- 상품 4개 설정 -->
+                <div class="row">
+					<th:block th:each="item : ${itemDescList}">
+                    <div class="col-md-3 col-sm-6 wow fadeInLeft animated" data-wow-delay="0.2s">
+                        <div class="product-item">
+                            <img src="images/1.png" class="img-responsive" width="255" height="322" alt="">
+                            <div class="product-hover">
+                                <div class="product-meta">
+                                    <a th:href="@{/item/read(itemNo = ${item.itemNo})}"><i class="pe-7s-cart"></i>Buy Now</a>
+                                </div>
+                            </div>
+                            <div class="product-title">
+                                <a href="#">
+                                    <h3>[[${item.itemName}]]</h3>
+                                    <span>[[${item.price}]]</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+					</th:block>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 상품 섹션 -->
+        <section class="featured-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="titie-section wow fadeInDown animated ">
+                            <h1>PRODUCTS</h1>
+                        </div>
+                    </div>
+                </div>
 
-		
-		<!--상품등-->
-<!--		<script th:inline="javascript">
-			$(document).ready(function(){
-			  var itemNo = [[${itemNo}]]
-			  if(itemNo != null){
-				  alert(itemNo + "번 상품이 등록되었습니다.");
-			  }
-			});
-		</script>-->
-		
-	</th:block>
+                <!-- 상품 필드 4개만 보여주고 아레에 More Products 버튼 넣어야함-->
+                <div class="row featured isotope">
+
+                    <th:block th:each="item : ${itemAscList}">
+                    <div class="col-md-3 col-sm-6 col-xs-12 cat-3 featured-items isotope-item">
+                        <div class="product-item">
+                            <img src="images/product2.png" class="img-responsive" width="255" height="322" alt="">
+                            <div class="product-hover">
+                                <div class="product-meta">
+                                    <a th:href="@{/item/read(itemNo = ${item.itemNo})}"><i class="pe-7s-cart"></i>Buy Now</a>
+                                </div>
+                            </div>
+                            <div class="product-title">
+                                <a href="#">
+                                    <h3>[[${item.itemName}]]</h3>
+                                    <span>[[${item.price}]]</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    </th:block>
+                </div>
+            </div>
+
+
+            
+        </section>
+        
+    </th:block>
 </th:block>
+</html>

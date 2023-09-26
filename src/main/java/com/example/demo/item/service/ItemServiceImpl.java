@@ -1,5 +1,6 @@
 package com.example.demo.item.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -11,13 +12,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-
 import com.example.demo.item.dto.ItemDTO;
 import com.example.demo.item.entity.Item;
 import com.example.demo.item.repository.ItemRepository;
 import com.example.demo.util.FileUtils2;
-
-import ch.qos.logback.core.util.FileUtil;
 
 
 
@@ -112,6 +110,33 @@ public class ItemServiceImpl implements ItemService{
 			return 0;
 		}
 		
+	}
+
+
+
+	@Override
+	public List<ItemDTO> newList4() {
+		List<Item> result = repository.findAll();
+		List<Item> reverse = new ArrayList<>();
+		for(int i=result.size()-1; i>=result.size()-4; i--) {
+			reverse.add(result.get(i));
+		}
+		List<ItemDTO> list = new ArrayList<>();
+		for(Item entity : reverse) {
+			list.add(entityToDto(entity));
+		}
+		return list;
+	}
+	
+	@Override
+	public List<ItemDTO> List4(){
+		List<Item> result = repository.findAll();
+		List<ItemDTO> list = new ArrayList<>();
+		for(int i = 0; i<4; i++) {
+			list.add(entityToDto(result.get(i)));
+		}
+		
+		return list;
 	}
 
 	

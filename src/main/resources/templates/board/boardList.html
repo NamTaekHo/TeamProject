@@ -5,7 +5,7 @@
 
 	<th:block th:fragment="content">
 
-		<h1>Board List Page
+		<h1>Q&A
 			<span>
 				<a th:href="@{/board/register}">
 					<button type="button" class="btn btn-outline-primary">질문 등록</button>
@@ -25,12 +25,12 @@
 			</thead>
 			<tbody>
 				<tr th:each="dto : ${list}">
-					<th scope="row">
+					<th scope="row">[[${dto.boardNo}]]</th>
+					<td>
 						<a th:href="@{/board/read(boardNo = ${dto.boardNo}, page= ${list.number + 1})}">
-							[[${dto.boardNo}]]
+						[[${dto.title}]]
 						</a>
-					</th>
-					<td>[[${dto.title}]]</td>
+					</td>
 					<td>[[${dto.id}]]</td>
 					<td>[[${#temporals.format(dto.regDate, 'yyyy/MM/dd')}]]</td>
 				</tr>
