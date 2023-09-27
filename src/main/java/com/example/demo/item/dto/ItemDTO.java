@@ -27,5 +27,7 @@ public class ItemDTO {
 	private LocalDateTime regDate;
 	private LocalDateTime modDate;
 	private MultipartFile uploadFile; //파일 스트림
+	//카테고리 추가해보기
+	private String category;
 	
 }

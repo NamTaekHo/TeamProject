@@ -85,6 +85,7 @@ public class ItemServiceImpl implements ItemService{
 			Item entity =result.get();
 			entity.setItemName(dto.getItemName());
 			entity.setPrice(dto.getPrice());
+			entity.setCategory(dto.getCategory());//카테고리 추가
 			
 			
 			if (dto.getImage() != null && !dto.getImage().equals("")) { //이미지가 널이 아니고 빈문자가 아니면, 이미지 변경하겠다
@@ -100,7 +101,7 @@ public class ItemServiceImpl implements ItemService{
 		
 	}
 
-	@Override // 8월23일 방어코드 수정
+	@Override 
 	public int remove(int itemNo) {
 		Optional<Item> result = repository.findById(itemNo);
 		if(result.isPresent()) {
@@ -111,9 +112,7 @@ public class ItemServiceImpl implements ItemService{
 		}
 		
 	}
-
-
-
+	
 	@Override
 	public List<ItemDTO> newList4() {
 		List<Item> result = repository.findAll();
@@ -137,6 +136,44 @@ public class ItemServiceImpl implements ItemService{
 		}
 		
 		return list;
+	}
+
+
+	@Override
+	public List<ItemDTO> getTop() {
+		List<Item> list = repository.getItemByCategory("top");
+		List<ItemDTO> dtoList = new ArrayList<>();
+		for(Item i : list) {
+			ItemDTO dto = entityToDto(i);
+			dtoList.add(dto);
+		}
+		return dtoList;
+	}
+
+
+
+	@Override
+	public List<ItemDTO> getPants() {
+		List<Item> list = repository.getItemByCategory("pants");
+		List<ItemDTO> dtoList = new ArrayList<>();
+		for(Item i : list) {
+			ItemDTO dto = entityToDto(i);
+			dtoList.add(dto);
+		}
+		return dtoList;
+	}
+
+
+
+	@Override
+	public List<ItemDTO> getShoes() {
+		List<Item> list = repository.getItemByCategory("shoes");
+		List<ItemDTO> dtoList = new ArrayList<>();
+		for(Item i : list) {
+			ItemDTO dto = entityToDto(i);
+			dtoList.add(dto);
+		}
+		return dtoList;
 	}
 
 	

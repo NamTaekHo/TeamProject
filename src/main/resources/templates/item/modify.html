@@ -22,6 +22,14 @@
             <label >가격</label>
             <input type="text" class="form-control" name="price" th:value="${dto.price}" >
         </div><br>
+        <div class="form-group">
+            <select name="category" th:value="${dto.price}">
+					<option value="top">top</option>
+					<option value="pants">pants</option>
+					<option value="shoes">shoes</option>
+				</select>
+        </div><br>
+        
         
         <div class="form-group">
             <label >상품 상세설명</label>

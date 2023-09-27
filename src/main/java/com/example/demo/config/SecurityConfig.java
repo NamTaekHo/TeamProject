@@ -19,7 +19,6 @@ public class SecurityConfig {
 		.requestMatchers("/register").permitAll()
 		.requestMatchers("/aa/**").permitAll()
 		.requestMatchers("/css/**", "/fonts/**", "/images/**", "/js/**").permitAll()
-		.requestMatchers("google/**").permitAll()
 		.requestMatchers("/comment/**").hasAnyRole("ADMIN","USER")
 		.requestMatchers("/").hasAnyRole("ADMIN","USER")
 		.requestMatchers("/member/read").hasAnyRole("ADMIN","USER")
