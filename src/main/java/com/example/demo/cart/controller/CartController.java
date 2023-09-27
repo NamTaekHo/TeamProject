@@ -75,7 +75,12 @@ public class CartController {
 	public ResponseEntity<Boolean> removeCart(@RequestParam("no") int no) {
 		cartService.remove(no);
 		return new ResponseEntity<>(true, HttpStatus.OK);
-	}	
+	}
 	
+	@PostMapping("/modify")
+	public String modifyCount(CartDTO dto) {
+		cartService.modify(dto);
+		return "redirect:/cart/cartList";
+	}	
 	
 }

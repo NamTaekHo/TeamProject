@@ -28,6 +28,7 @@ public interface ItemService {
 				.price(dto.getPrice())
 				.image(dto.getImage())
 				.description(dto.getDescription())
+				.category(dto.getCategory())//카테고리 추가
 				.build();		
 		return entity;
 	}
@@ -41,10 +42,18 @@ public interface ItemService {
 				.description(entity.getDescription())
 				.modDate(entity.getModDate())
 				.regDate(entity.getRegDate())
+				.category(entity.getCategory())//카테고리 추가
 				.build();
 		return dto;
 		
 	}
+	
+	List<ItemDTO> getTop();
+	
+	List<ItemDTO> getPants();
+
+	List<ItemDTO> getShoes();
+
 
 	
 

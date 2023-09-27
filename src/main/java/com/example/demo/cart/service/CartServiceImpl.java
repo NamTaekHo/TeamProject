@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.example.demo.cart.dto.CartDTO;
 import com.example.demo.cart.entity.Cart;
 import com.example.demo.cart.repository.CartRepository;
+import com.example.demo.item.dto.ItemDTO;
 @Service
 public class CartServiceImpl implements CartService {
 	
@@ -52,6 +53,21 @@ public class CartServiceImpl implements CartService {
 		}
 		
 		return dtolist;
-	}		
+	}
+
+
+
+	@Override
+	public void modify(CartDTO dto) {
+		
+		Optional<Cart> result = cartRepository.findById(dto.getNo());
+		if(result.isPresent()) {
+			Cart entity = result.get();
+			entity.setCount(dto.getCount());
+		
+			cartRepository.save(entity);
+		}		
+		
+	}
 	
 }

@@ -83,4 +83,16 @@ public class CartRepositoryTest {
 		}
 //		System.out.println(list);
 	}
+	
+	
+	@Test
+	public void 카트리스트수량수정() {
+		Optional<Cart> result = cartRepository.findById(124);
+		Cart cart = result.get();
+		cart.setCount(5);
+		
+		cartRepository.save(cart);
+	}
+	
+	
 }

@@ -10,12 +10,11 @@ public interface CartService {
 	
 	int register(CartDTO dto);	
 	
-	
 	void remove(int no);	
 	
-	//카트페이지 만들기 9/4 페이지, 리스트 추가
 	List<CartDTO> getList(String id);
 	
+	void modify(CartDTO dto);
 	
 	
 	//DtoToEntity 변환
@@ -33,7 +32,7 @@ public interface CartService {
 		return entity;
 	}
 	
-	//아이템정보 옮겨오기
+
 	//entityToDto 변환
 	default CartDTO entityToDto(Cart entity) {
 		CartDTO dto = CartDTO.builder()

@@ -22,11 +22,13 @@ public class FileUtils2 {
 
 	public String fileUpload(MultipartFile multipartFile) {
 		Path copyOfLocation = null;
-		
+		File folder = new File(filepath); //여기추가
 		if(multipartFile.isEmpty()) { //파일스트림이 없으면 메소드를 종료한다
 			return null;
 		}
-		try {
+		try {if(!folder.exists()) { //if문 추가
+			folder.mkdir();
+		}
 			copyOfLocation = Paths
 					.get(filepath + File.separator + StringUtils.cleanPath(multipartFile.getOriginalFilename())); //파일 전체 경로
 			
@@ -40,3 +42,4 @@ public class FileUtils2 {
 	}
 }
 
+//폴더있는지 확인하고 생성하기

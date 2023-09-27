@@ -34,10 +34,14 @@ public class Item extends BaseEntity{
     private int price; 
 
     @Column(length = 100)
-    private String image;
+    private String image;    
     
     @Column(length = 200)
     private String description;
+    
+    //카테고리 추가해보기
+    @Column(length = 200)
+    private String category;
  
 
     

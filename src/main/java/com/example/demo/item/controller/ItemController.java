@@ -1,5 +1,7 @@
 package com.example.demo.item.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -74,5 +76,25 @@ public class ItemController {
 		service.remove(itemNo);
 		return "redirect:/item/itemList";
 	}
+	
+	// top
+	@GetMapping("top")
+	public void getTop(Model model) {
+		List<ItemDTO> list = service.getTop();
+		model.addAttribute("topList", list);
+	}
+	
+	@GetMapping("pants")
+	public void getPants(Model model) {
+		List<ItemDTO> list = service.getPants();
+		model.addAttribute("pantsList", list);
+	}
+	
+	@GetMapping("shoes")
+	public void getShoes(Model model) {
+		List<ItemDTO> list = service.getShoes();
+		model.addAttribute("shoesList", list);
+	}
+	
 
-} //컨트롤러
+} 
