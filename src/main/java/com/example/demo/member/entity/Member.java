@@ -22,7 +22,7 @@ import lombok.ToString;
 public class Member {
 
 	@Id
-	@Column(length = 10)
+	@Column(length = 50)
 	private String id;
 
 	@Column(length = 255, nullable = false)
