@@ -21,7 +21,7 @@ public class SecurityConfig {
 		.requestMatchers("/css/**", "/fonts/**", "/images/**", "/js/**").permitAll()
 		.requestMatchers("/comment/**").hasAnyRole("ADMIN","USER")
 		.requestMatchers("/").hasAnyRole("ADMIN","USER")
-		.requestMatchers("/member/read").hasAnyRole("ADMIN","USER")
+		.requestMatchers("/member/read", "member/**").hasAnyRole("ADMIN","USER")
 		.requestMatchers("/member/memberlist","/member/modify","/member/remove").hasAnyRole("ADMIN")
 		.requestMatchers("/item/**").hasAnyRole("ADMIN","USER")
 		.requestMatchers("/board/**", "/orders/**", "/map/**").hasAnyRole("ADMIN","USER")

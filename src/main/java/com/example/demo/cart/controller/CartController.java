@@ -31,7 +31,6 @@ import com.example.demo.member.service.MemberService;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
 @Controller
-@RequestMapping("/cart")
 public class CartController {
 	
 	@Autowired
@@ -42,7 +41,7 @@ public class CartController {
 	
 	
 
-	@GetMapping("/cartList")
+	@GetMapping("/cart/cartList")
 	public void list(Model model, Principal principal) {
 		//사용자아이디 꺼내고,          //이건 추후에
 		String memberId = principal.getName();
@@ -53,9 +52,8 @@ public class CartController {
 	
 			
 	//장바구니 등록
-	@GetMapping("/register/{itemNo}") 
-	public ResponseEntity<Integer> registerCart(@PathVariable int itemNo, Principal principal) { 
-		
+	@GetMapping("/cart/register/{itemNo}")
+	public ResponseEntity<Integer> registerCart(@PathVariable int itemNo, Principal principal) {
 		//등록할 때 필요한 장바구니 데이터는 하나씩 구성하기
 		String memberId =principal.getName();
 		memberService.read(memberId);		 		
@@ -71,13 +69,13 @@ public class CartController {
 	
 	
 	
-	@GetMapping("/remove")
+	@GetMapping("/cart/remove")
 	public ResponseEntity<Boolean> removeCart(@RequestParam("no") int no) {
 		cartService.remove(no);
 		return new ResponseEntity<>(true, HttpStatus.OK);
 	}
 	
-	@PostMapping("/modify")
+	@PostMapping("/cart/modify")
 	public String modifyCount(CartDTO dto) {
 		cartService.modify(dto);
 		return "redirect:/cart/cartList";

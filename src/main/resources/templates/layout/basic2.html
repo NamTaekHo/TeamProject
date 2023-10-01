@@ -48,10 +48,10 @@
             <div class="header-top-menu">
               <ul class="nav nav-pills navbar-right">
                 <!-- member/read 링크 삽입해야함 -->
-                <li><a href="#">My Account</a></li>
-                <li><a th:href="@{/cart/cartList}">Cart</a></li>
+                <li><a th:href="@{/member/info(id=${#authentication.name})}">My Account</a></li>
+                <li><a th:href="@{/orders/ordersList}">Order Details</a></li>
                 <li><a href="/logout">Logout</a></li>
-                <li class="k-font"><a th:href="@{/member/read(id=${#authentication.name})}"><i class="pe-7s-lock" th:text="${#authentication.name}"></i></a></li>
+                <li><a th:href="@{/member/info(id=${#authentication.name})}"><i class="pe-7s-lock" th:text="${#authentication.name}"></i></a></li>
                             </ul>
                         </div>
                     </div>

@@ -1,22 +1,21 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<th:block th:replace="~{/layout/basic2 :: setContent(~{this::content} )}">
+<th:block th:replace="~{layout/basic2 :: setContent(~{this::content} )}">
 <th:block th:fragment="content">
 
 
 
-<h1>장바구니 리스트</h1>
+<h1>장바구니</h1>
 
 
 			<table class="table table-striped">
     <thead>
         <tr>
-            <th scope="col">담은상품</th>
+            <th scope="col">상품명</th>
             <th width="350px" scope="col">수량</th>
             <th scope="col">현재수량</th>
             <th scope="col">금액</th>
-            <th scope="col">등록일</th>
             <th scope="col"></th> <!--삭제버튼 자리-->
         </tr>
     </thead>
@@ -29,7 +28,7 @@
                 </td>
                 <td>
                     <div style="display: flex; align-items: center;">
-        				<input class="form-control text-center me-1 inputQuantity" th:id="inputQuantity + ${dto.no}" type="number" style="max-width: 3.5rem" min="1">
+        				<input class="form-control text-center me-1 inputQuantity " th:id="inputQuantity + ${dto.no}" type="number" style="max-width: 100px" min="1">
         				<button type="button" class="btn btn-outline-primary modifyBtn" th:onclick="modifyQuantity([[${dto.no}]])" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')">수량 수정하기</button>
 				    </div>
                 </td>
@@ -46,13 +45,20 @@
             </tr>
         </tbody>
     </table><br>
-    
-    <div style="text-align: center;">
-    	<button type="button" class="btn btn-outline-primary orderBtn" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')">주문하기</button>
-	</div>
 
-    
+    <div style="text-align: center;">
+        <button type="button" class="btn orderBtn"
+                th:onclick="redirectToOrdersRegister()"
+                sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')">주문하기</button>
+    </div>
+
+
+
     <script th:inline="javascript">
+
+        function redirectToOrdersRegister(){
+            window.location.href = '/orders/register';
+        }
 		
 	function deleteBtn(no) {
 		
