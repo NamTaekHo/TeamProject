@@ -22,7 +22,8 @@ public interface CartRepository extends JpaRepository<Cart, Integer> {
 	//2.쿼리메소드 다시 작성해서 단위테스트로 진행 (스프링 jpa 피피티)
 //	@Query(value = "select * from cart c where c.id_id  = :id", nativeQuery = true)
 //	List<Cart> selectCartByID(@Param("id") Member memberId); 
-//	
+//
+	
 	@Query("select c from Cart c where c.id.id = :memberId")
 	List<Cart> getCartByMemberId(@Param("memberId") String memberId);
 	

@@ -12,6 +12,7 @@ public interface ItemRepository extends JpaRepository<Item, Integer>{
 
 	// select * from item where item.category = 'top';
 	
-	@Query("select i from Item i where i.category = :category")
-	List<Item> getItemByCategory(@Param ("category") String category);
+	@Query("SELECT i FROM Item i WHERE i.category = :category ORDER BY i.regDate DESC")
+	List<Item> getItemByCategory(@Param("category") String category);
+	
 }

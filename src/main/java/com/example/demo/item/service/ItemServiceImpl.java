@@ -54,7 +54,9 @@ public class ItemServiceImpl implements ItemService{
 		Page<ItemDTO> dtoPage = entityPage.map(entity -> entityToDto(entity));
 		
 		return dtoPage;
-	}	
+	}		
+		
+	
 
 	@Override
 	public List<ItemDTO> getList() {
@@ -175,6 +177,10 @@ public class ItemServiceImpl implements ItemService{
 		}
 		return dtoList;
 	}
+
+
+
+	
 
 	
 
