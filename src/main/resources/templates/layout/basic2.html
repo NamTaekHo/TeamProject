@@ -13,12 +13,18 @@
 
     <link rel="stylesheet" href="/css/style.css">
     <!-- JQUERY -->
-    <script src="/js/vendor/jquery-1.11.2.min.js"></script>
+      <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
     <script src="/js/vendor/bootstrap.min.js"></script>
     <script src="/js/isotope.pkgd.min.js"></script>
     <script src="/js/owl.carousel.min.js"></script>
     <script src="/js/wow.min.js"></script>
     <script src="/js/custom.js"></script>
+    <!-- 아임포트 -->
+
+
+      <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+
+
   </head>
 
   <body>
@@ -48,10 +54,10 @@
             <div class="header-top-menu">
               <ul class="nav nav-pills navbar-right">
                 <!-- member/read 링크 삽입해야함 -->
-                <li><a href="#">My Account</a></li>
-                <li><a th:href="@{/cart/cartList}">Cart</a></li>
+                <li><a th:href="@{/member/info(id=${#authentication.name})}">My Account</a></li>
+                <li><a th:href="@{/orders/ordersList}">Order Details</a></li>
                 <li><a href="/logout">Logout</a></li>
-                <li class="k-font"><a th:href="@{/member/read(id=${#authentication.name})}"><i class="pe-7s-lock" th:text="${#authentication.name}"></i></a></li>
+                <li><a th:href="@{/member/info(id=${#authentication.name})}"><i class="pe-7s-lock" th:text="${#authentication.name}"></i></a></li>
                             </ul>
                         </div>
                     </div>

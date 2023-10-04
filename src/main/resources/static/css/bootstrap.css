@@ -6356,4 +6356,10 @@ button.close {
   }
 }
 
+.orderBtn{
+    color: #white;
+    background-color: #1abc9c;
+    border-color; #1abc9c;
+}
+
 /*# sourceMappingURL=bootstrap.css.map */
