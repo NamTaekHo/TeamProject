@@ -41,7 +41,7 @@
                         <div class="col-md-3 col-sm-6 col-xs-12 cat-3 featured-items isotope-item">
                             <div class="product-item">
                                 <!-- 이미지 링크, 크기 -->
-                                <img th:src="@{'/aa/' + ${dto.image}}" class="img-responsive" width="255" height="322" alt="">
+                                <img style="height: 88%;" th:src="@{'/aa/' + ${dto.image}}" class="img-responsive" width="255" height="322" alt="">
 
                                 <!-- 상품 div 왼쪽, 오른쪽 위에 달리는 new, sell 부분 쓸거면 쓰고 없애도 됨 -->
                                 <div class="sell-meta">
@@ -58,7 +58,7 @@
 
                                 <!-- 상품 정보 div (상품이름, 가격) -->
                                 <div class="product-title">
-                                    <a href="#">
+                                    <a th:href="@{/item/read(itemNo = ${dto.itemNo})}">
                                         <h3 th:text="${dto.itemName}"></h3>
                                         <span th:text="${#numbers.formatDecimal(dto.price, 0, 'COMMA', 0, 'POINT')} + ' 원'"></span>
                                     </a>

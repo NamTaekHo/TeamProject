@@ -13,7 +13,7 @@
         </div><br>
         <div class="form-group">
             <label >공지내용</label>
-            <textarea class="form-control" rows="5" readonly>[[${dto.content}]]</textarea>
+            <textarea class="form-control" rows="15" style="resize: none;" readonly>[[${dto.content}]]</textarea>
         </div><br>
         <div class="form-group">
             <label >등록일</label>
@@ -27,7 +27,7 @@
         <br>
 
         <a th:href="@{/notice/modify(no = ${dto.no})}">
-        	<button type="button" class="btn btn-primary">공지 수정하기</button>
+        	<button type="button" class="btn btn-primary" sec:authorize="hasAnyRole('ROLE_ADMIN')">공지 수정하기</button>
         </a>
 
         <!-- 목록페이지 링크 수정 -->

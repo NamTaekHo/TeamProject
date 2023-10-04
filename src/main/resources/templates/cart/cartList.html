@@ -28,10 +28,13 @@
                     </a>
                 </td>
                 <td>
-                    <div style="display: flex; align-items: center;">
-        				<input class="form-control text-center me-1 inputQuantity" th:id="inputQuantity + ${dto.no}" type="number" style="max-width: 3.5rem" min="1">
-        				<button type="button" class="btn btn-outline-primary modifyBtn" th:onclick="modifyQuantity([[${dto.no}]])" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')">수량 수정하기</button>
-				    </div>
+                    
+					<div style="display: flex; align-items: center;">
+    					<input class="form-control text-center me-1 inputQuantity" th:id="inputQuantity + ${dto.no}" type="number" style="width: 5rem; min-width: 3.5rem; margin-right: 10px;" min="1">
+    					<button type="button" class="btn btn-outline-primary modifyBtn" th:onclick="modifyQuantity([[${dto.no}]])" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')">수량 수정하기</button>
+					</div>
+
+
                 </td>
                 <td>
                     <span>[[${dto.count}]]</span>
