@@ -5,6 +5,8 @@
 
 	<th:block th:fragment="content">
 
+
+
 		<h1>주문 상품 목록</h1>
 
 		<table class="table table-striped">
@@ -72,7 +74,7 @@
 
 
 			
-			<button type="submit" class="btn btn-primary registerBtn">결제하기(등록)</button>
+			<button type="submit" onclick="requestPay()" class="btn btn-primary registerBtn">결제하기</button>
 			
 
 		</form>
@@ -96,16 +98,80 @@
 
 				var payElement = document.getElementById("paymentAmount");
 				payElement.value = total;
-
-
-
 			}
-			
-			$(".registerBtn").click(function(){
-				if(!confirm("결제하시겠습니까?")){
-					return;
-				}
-			})
+
+
+
+
+<!--			function requestPay(){-->
+<!--				const userCode = "imp52184744";-->
+<!--				var IMP = window.IMP;-->
+<!--				IMP.init(userCode);-->
+<!--				var totalPrice = document.getElementById("paymentAmount");-->
+
+
+<!--				IMP.request_pay({-->
+<!--					pg: "html5_inicis",-->
+<!--					pay_method: "card",-->
+<!--					merchant_uid: 1234,-->
+<!--					name: '결제테스트',-->
+<!--					amount: 2000,-->
+<!--					buyer_email: 'yoyt12@naver.com',-->
+<!--					buyer_name: 'aa',-->
+<!--					buyer_tel: '010-5555-6666',-->
+<!--					buyer_addr: 'aaa',-->
+
+<!--				}, function (rsp) {-->
+<!--					console.log(rsp);-->
+<!--					if (rsp.success){-->
+<!--						var msg = '결제가 완료되었습니다.';-->
+<!--						alert(msg);-->
+<!--						location.href = "@{orders/ordersList}"-->
+<!--					} else {-->
+<!--						var msg = '결제에 실패하였습니다.';-->
+<!--						msg += rsp.error_msg;-->
+<!--						alert(msg);-->
+<!--					}-->
+<!--				});-->
+<!--			}-->
+
+			$(".registerBtn").click(function () {
+        var IMP = window.IMP;
+        IMP.init('imp52184744');
+        IMP.request_pay({
+            pg: 'html5_inicis.INIPayTest',
+
+            pay_method: 'card',
+
+            merchant_uid: 'merchant_' + new Date().getTime(),
+
+
+            name: '주문명:결제테스트',
+
+            amount: 1000,
+
+            buyer_email: 'iamport@siot.do',
+            buyer_name: '구매자이름',
+            buyer_tel: '010-1234-5678',
+            buyer_addr: '서울특별시 강남구 삼성동',
+            buyer_postcode: '123-456',
+
+        }, function (rsp) {
+            console.log(rsp);
+            if (rsp.success) {
+                var msg = '결제가 완료되었습니다.';
+                msg += '고유ID : ' + rsp.imp_uid;
+                msg += '상점 거래ID : ' + rsp.merchant_uid;
+                msg += '결제 금액 : ' + rsp.paid_amount;
+                msg += '카드 승인번호 : ' + rsp.apply_num;
+            } else {
+                var msg = '결제에 실패하였습니다.';
+                msg += '에러내용 : ' + rsp.error_msg;
+            }
+            alert(msg);
+        });
+    });
+
 		</script>
 
 		<a th:href="@{cart/cartList}">
