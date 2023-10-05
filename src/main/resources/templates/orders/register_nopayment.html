@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<th:block th:replace="~{layout/basic2 :: setContent(~{this::content} )}">
+
+    <th:block th:fragment="content">
+
+        <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+
+        <h1>주문 상품 목록</h1>
+
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">상품명</th>
+                <th scope="col">수량</th>
+                <th scope="col">상품금액</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="cartDTO : ${cartList}">
+
+
+                <th scope="row">
+                    <a th:href="@{/item/read(itemNo = ${cartDTO.itemNo})}">
+                        [[${cartDTO.itemName}]]
+                    </a>
+                </th>
+                <td>[[${cartDTO.count}]]</td>
+                <td>[[${cartDTO.price}]]</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <div>
+
+            <p>총 주문금액</p>
+            <p id="totalPrice"></p>
+
+
+
+        </div>
+
+
+
+        <br><br>
+        <h1 class="mt-4">주문자 정보</h1>
+
+        <form th:action="@{/orders/register}" th:method="post">
+            <div class="form-group">
+                <label>주문자 아이디</label>
+                <input type="text" class="form-control" name="id" th:value="${memberDTO.id}" readonly>
+            </div>
+
+            <div class="form-group">
+                <label>수령인</label>
+                <input type="text" class="form-control" name="receiverName" th:value="${memberDTO.name}">
+            </div>
+
+            <div class="form-group">
+                <label>연락처</label>
+                <input type="text" class="form-control" name="receiverPhone" th:value="${memberDTO.pNumber}">
+            </div>
+            <div class="form-group">
+                <label>배송지</label>
+                <textarea class="form-control" rows="3" name="shipAddress">[[${memberDTO.address}]]</textarea>
+            </div>
+            <h2 class="mt-4">총 결제금액</h2>
+
+            <div class="form-group">
+                <label>결제금액</label>
+                <input type="text" id="paymentAmount" class="form-control" name="totalPrice" readonly>
+            </div>
+
+
+
+            <button type="submit" class="btn btn-primary registerBtn">결제하기</button>
+
+
+        </form>
+
+
+        <script th:inline="javascript">
+            $(document).ready(function () {
+                priceSum();
+            })
+
+            function priceSum() {
+
+                var cartList = [[${cartList}]];
+                var total = 0;
+                cartList.forEach(function (cart) {
+                    total += cart.price*cart.count;
+
+                });
+                var totalElement = document.getElementById("totalPrice");
+                totalElement.textContent = "총 주문금액: " + total + " 원";
+
+                var payElement = document.getElementById("paymentAmount");
+                payElement.value = total;
+
+
+
+            }
+
+            $(".registerBtn").click(function(){
+                if(!confirm("결제하시겠습니까?")){
+                    return;
+                }
+            })
+        </script>
+
+        <a th:href="@{cart/cartList}">
+            <button type="button" class="btn btn-info listBtn">취소</button>
+        </a>
+
+
+
+
+
+
+
+
+
+    </th:block>
+</th:block>

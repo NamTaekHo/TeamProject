@@ -48,13 +48,19 @@
             </tr>
         </tbody>
     </table><br>
-    
+
     <div style="text-align: center;">
-    	<button type="button" class="btn btn-outline-primary orderBtn" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')">주문하기</button>
-	</div>
+        <button type="button" class="btn orderBtn"
+                th:onclick="redirectToOrdersRegister()"
+                sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')">주문하기</button>
+    </div>
 
     
     <script th:inline="javascript">
+
+        function redirectToOrdersRegister(){
+            window.location.href = '/orders/register';
+        }
 		
 	function deleteBtn(no) {
 		

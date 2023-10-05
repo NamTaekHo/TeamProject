@@ -36,7 +36,7 @@ public class Item extends BaseEntity{
     @Column(length = 100)
     private String image;    
     
-    @Column(length = 200)
+    @Column(length = 1000)
     private String description;
     
     //카테고리 추가해보기
