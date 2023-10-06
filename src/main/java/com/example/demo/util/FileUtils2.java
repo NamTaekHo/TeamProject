@@ -18,7 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class FileUtils2 {
 
 	//이미지 파일을 저장할 경로
-	String filepath = "C:\\Users\\taekh\\Desktop\\image\\";
+	String filepath = "C:\\Users\\Administrator\\Desktop\\uploadedImages\\";
 
 	public String fileUpload(MultipartFile multipartFile) {
 		Path copyOfLocation = null;
