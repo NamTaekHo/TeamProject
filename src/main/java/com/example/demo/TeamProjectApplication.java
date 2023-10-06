@@ -1,4 +1,4 @@
-// 10월 6일 배포
+// 10월 6일 2차 테스트 배포
 
 package com.example.demo;
 
