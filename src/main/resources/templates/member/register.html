@@ -74,13 +74,13 @@
 		                <input type="text" class="form-control" name="birth" required>
 		            </div>
 		            
-		             <div class="form-group">
+		             <div class="form-group" sec:authorize="hasAnyRole('ROLE_ADMIN')">
 		                <label >멤버등급</label>
-		                <input type="text" class="form-control" name="level">
+		                <input type="text" value="1" class="form-control" name="level" >
 		            </div>
 		            
 <!--					 등급 필드 추가  -->
-					<div class="form-group">
+					<div class="form-group" sec:authorize="hasAnyRole('ROLE_ADMIN')">
 						<div class="form-check form-check-solid">
 							<input class="form-check-input"  type="radio" id="user" name="role" value="ROLE_USER" checked>
 							<label class="form-check-label" for="user">일반사용자</label>
