@@ -92,7 +92,7 @@
                             <li><a sec:authorize="hasAnyRole('ROLE_ADMIN')" th:href="@{/member/memberlist}">Member</a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right cart-menu">
-                        <li><a sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')" th:href="@{/cart/cartList}"><span> Cart&nbsp;</span> <span class="shoping-cart">0</span></a></li>
+                        <li><a sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')" th:href="@{/cart/cartList}"><span> Cart&nbsp;</span> <span class="shoping-cart">$</span></a></li>
                     </ul>
                     </div><!-- /.navbar-collapse -->
                 </div><!-- /.container -->
@@ -115,7 +115,7 @@
       <div class="container">
           <div class="row">
               <div class="col-md-12">
-                  <p class="center">Team 1 <i class="fa fa-love"></i><a href="#">footer</a>
+                  <p class="center"><i class="fa fa-love">Team 1</i>
                   </p>
                   <p>남택호 : taekho1225@gmail.com</p>
                   <p>김재모 : jmomo57613@gmail.com</p>
