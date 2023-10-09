@@ -18,10 +18,10 @@ public class SecurityConfig {
 		http.authorizeHttpRequests()
 		.requestMatchers("/css/**", "/fonts/**", "/images/**", "/js/**", "/sidebar_templates/**","/aa/**","/register").permitAll()
 
-		.requestMatchers("/member/read", "member/**", "member/info/**", "/board/**", "/orders/**",
+		.requestMatchers("/member/read", "/member/info", "/member/modify", "/board/**", "/orders/**",
 				"/map/**","/cart/**","/notice/**","/comment/**","/","/item/**").hasAnyRole("ADMIN","USER")
 
-		.requestMatchers("/member/memberlist","/member/modify","/member/remove").hasAnyRole("ADMIN");
+		.requestMatchers("/member/memberlist","/member/remove").hasAnyRole("ADMIN");
 
 
 		
